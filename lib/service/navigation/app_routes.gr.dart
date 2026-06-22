@@ -9,22 +9,22 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i12;
-import 'package:flutter_base/modules/custom_pagination/ui/widget/custom_pagination_page.dart'
+import 'package:factory_erp_lite/modules/custom_pagination/ui/widget/custom_pagination_page.dart'
     as _i2;
-import 'package:flutter_base/modules/dashboard/ui/dashboard_page.dart' as _i3;
-import 'package:flutter_base/modules/force_update_under_maintenance/ui/force_update_under_maintenance_page.dart'
+import 'package:factory_erp_lite/modules/dashboard/ui/dashboard_page.dart' as _i3;
+import 'package:factory_erp_lite/modules/force_update_under_maintenance/ui/force_update_under_maintenance_page.dart'
     as _i4;
-import 'package:flutter_base/modules/login/ui/login_page.dart' as _i5;
-import 'package:flutter_base/modules/page_not_found/ui/page_not_found_page.dart'
+import 'package:factory_erp_lite/modules/login/ui/login_page.dart' as _i5;
+import 'package:factory_erp_lite/modules/page_not_found/ui/page_not_found_page.dart'
     as _i6;
-import 'package:flutter_base/modules/splash/ui/splash_page.dart' as _i7;
-import 'package:flutter_base/modules/tab_one/ui/tab_one_page.dart' as _i9;
-import 'package:flutter_base/modules/tab_one_detail/ui/tab_one_detail_page.dart'
+import 'package:factory_erp_lite/modules/splash/ui/splash_page.dart' as _i7;
+import 'package:factory_erp_lite/modules/tab_one/ui/tab_one_page.dart' as _i9;
+import 'package:factory_erp_lite/modules/tab_one_detail/ui/tab_one_detail_page.dart'
     as _i8;
-import 'package:flutter_base/modules/tab_two/ui/tab_two_page.dart' as _i11;
-import 'package:flutter_base/modules/tab_two_detail/ui/tab_two_detail_page.dart'
+import 'package:factory_erp_lite/modules/tab_two/ui/tab_two_page.dart' as _i11;
+import 'package:factory_erp_lite/modules/tab_two_detail/ui/tab_two_detail_page.dart'
     as _i10;
-import 'package:flutter_base/service/navigation/app_routes.dart' as _i1;
+import 'package:factory_erp_lite/service/navigation/app_routes.dart' as _i1;
 
 abstract class $AppRouter extends _i12.RootStackRouter {
   $AppRouter({super.navigatorKey});
