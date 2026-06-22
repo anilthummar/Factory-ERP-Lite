@@ -1,4 +1,4 @@
-package com.bv.flutter_base
+package com.factoryerplite.app
 
 import io.flutter.embedding.android.FlutterActivity
 
