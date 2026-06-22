@@ -1,0 +1,17 @@
+{
+  "base_url": "https://reqres.in/api/",
+  "envKey": "stage",
+  "androidAppId": "1:233913945264:android:7fbd83fa87f7c19751ff75",
+  "iosAppId": "1:233913945264:ios:7c815c97504fda5851ff75",
+  "webAppId": "1:233913945264:web:fd8e44a8f5d9e56551ff75",
+  "messagingSenderId": "233913945264",
+  "projectId": "brainvire-structure",
+  "iosApiKey": "AIzaSyBGBMZnRSAgfX6u0dqHZq-f0Vd8iAvN39c",
+  "androidApiKey": "AIzaSyBZSQJgUHGEF45Ic6MBCimfadlYbV3d2d8",
+  "webApiKey": "AIzaSyC59wZRnDFxQmMpEsEQt71Eay60V-n5lX4",
+  "authDomain": "brainvire-structure.firebaseapp.com",
+  "storageBucket": "brainvire-structure.appspot.com",
+  "measurementId": "G-55VHN508MV",
+  "sentryDSN": "",
+  "vapidKey": ""
+}
