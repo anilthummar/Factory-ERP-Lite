@@ -1,5 +1,11 @@
-name: flutter_base
-description: A new Flutter project.
+name: factory_erp_lite
+
+description: >
+  Factory ERP Lite is an offline-first enterprise resource planning application
+  for factories and manufacturing businesses. It provides labor management,
+  expense tracking, material purchases, calendar management, factory status
+  monitoring, reporting, analytics, and real-time synchronization using
+  Flutter, Firebase, and Hive.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -80,15 +86,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^2.0.2 # To perform lint operations
-  build_runner: ^2.4.8 # To Run build runner command
-  flutter_gen_runner: ^5.3.1 # To Generate assets path as class formats
-  json_serializable: ^6.7.1 # Generate model class using json
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  flutter_gen_runner: ^5.6.0
+  json_serializable: ^6.8.0
   auto_route_generator: ^8.0.0
 
 flutter_gen:

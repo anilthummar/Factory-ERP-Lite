@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
    <application
-        android:label="flutter_base"
+        android:label="factory_erp_lite"
         android:name="${applicationName}"
        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
