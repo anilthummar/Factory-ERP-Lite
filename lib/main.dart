@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
                       CustomNavigationObserver(),
                       SentryNavigatorObserver(),
                     ]),
-            title: 'Flutter Demo',
+            title: 'Factory ERP Lite',
             locale: state.locale,
             supportedLocales: const <Locale>[
               Locale(AppConstant.en, ''),

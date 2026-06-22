@@ -1,4 +1,4 @@
-# flutter_base
+# factory_erp_lite
 
 A new Flutter project.
 
@@ -138,3 +138,7 @@ caching is only available for GET and POST requests, for more reference check "t
 2. According to your firebase account you have to update "stage_env.json" and "prod_env.json" file
    with the respective keys.
 3. For the sentry you have to create the account in the sentry and update the dsn key in the "stage_env.json" and "prod_env.json" file.
+
+
+
+dart run build_runner build --delete-conflicting-outputs

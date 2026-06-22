@@ -1,5 +1,11 @@
-name: flutter_base
-description: A new Flutter project.
+name: factory_erp_lite
+
+description: >
+  Factory ERP Lite is an offline-first enterprise resource planning application
+  for factories and manufacturing businesses. It provides labor management,
+  expense tracking, material purchases, calendar management, factory status
+  monitoring, reporting, analytics, and real-time synchronization using
+  Flutter, Firebase, and Hive.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
