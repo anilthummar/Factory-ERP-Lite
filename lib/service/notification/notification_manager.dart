@@ -21,8 +21,7 @@ class NotificationManager {
 
   /// Initializes Firebase.
   Future<void> firebaseInitialize() async {
-    await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.instance.currentPlatform);
+    await getIt<FirebaseService>().init();
   }
 
   /// Sets up the background message handler.

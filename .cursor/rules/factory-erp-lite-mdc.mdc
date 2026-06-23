@@ -1,13 +1,8 @@
 ---
-alwaysApply: true
----
-
----
-
 description: Factory ERP Lite Development Rules
 globs: ["lib/**/*.dart"]
 alwaysApply: true
------------------
+---
 
 You are working on Factory ERP Lite.
 
@@ -28,12 +23,14 @@ Before performing any task:
 Offline First Rules:
 
 * Save data to Hive first.
-* Sync to Firebase later.
+* Sync to Firebase Firestore later.
 * Support:
 
   * pending
   * synced
   * failed
+
+* App must work completely without internet (mobile reads/writes Hive).
 
 Implementation Rules:
 
@@ -42,6 +39,8 @@ Implementation Rules:
 * Reuse existing code whenever possible.
 * Follow SOLID principles.
 * Keep code production ready.
+* ERP modules use `FirebaseService.firestore` + `HiveManager` — not Dio.
+* Use `FirestoreCollections` and `HiveBoxNames` for collection/box names.
 
 Before coding:
 
@@ -58,6 +57,6 @@ For bug fixing:
 For new features:
 
 * Use existing feature as template.
-* Maintain folder consistency.
+* Maintain folder consistency (`bloc/`, `model/`, `repository/`, `ui/`).
 
 Output concise responses to minimize token usage.

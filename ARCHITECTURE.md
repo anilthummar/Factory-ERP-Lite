@@ -1,8 +1,45 @@
 # Factory ERP Lite — Architecture
 
-Offline-first Flutter ERP scaffold organized by **feature modules**, **shared services**, and a central **`utils/exports.dart` barrel** that wires the app together.
+Production-grade, **offline-first** Factory ERP for manufacturing businesses.
 
-> **Local persistence:** Business data follows an **offline-first** model — **save to Hive first**, **sync to Firebase later**. Lightweight app preferences (auth flags, locale, user id) use **`get_storage`** via `SharedPref`. See [Offline-First & Local Persistence](#offline-first--local-persistence).
+| Component | Stack |
+|-----------|-------|
+| **Flutter Mobile App** | BLoC, Hive, Firebase sync |
+| **Flutter Web Admin Panel** | Same Firebase backend, real-time Firestore |
+| **Backend** | Firebase (Firestore, Auth, Storage, Remote Config, FCM) |
+| **Offline storage** | Hive (business data) + GetStorage (app prefs) |
+| **Planned integrations** | Google Sheet backup, PDF & Excel export |
+
+> **Local persistence:** Business data follows **save to Hive first → sync to Firebase later**. App preferences (auth, locale, user id) use **`get_storage`** via `SharedPref`. See [Offline-First & Local Persistence](#offline-first--local-persistence).
+
+---
+
+## Architecture Principles
+
+| Principle | Implementation |
+|-----------|----------------|
+| Clean Architecture | UI → BLoC → Repository → Hive / Firestore |
+| Feature-first structure | `lib/modules/<feature>/` per ERP domain |
+| State management | `flutter_bloc` — one BLoC per feature |
+| Data access | Repository pattern with abstract + `*_impl.dart` |
+| Dependency injection | `get_it` — `base/singleton.dart` |
+| UI | Material 3 |
+| SOLID | Interfaces for repos; BLoCs depend on abstractions |
+
+### Clean Architecture layers (per feature)
+
+```
+modules/<feature>/
+├── ui/              # Presentation — widgets, pages
+├── bloc/            # Presentation — events, states, BLoC
+├── repository/      # Data — abstract repo + impl (Hive + Firestore)
+├── model/
+│   ├── local/       # Hive entities (Freezed + syncStatus)
+│   └── remote/      # Firestore DTOs / maps
+└── <feature>.dart   # Barrel export
+```
+
+Use cases may be extracted to `domain/usecases/` when business logic outgrows the BLoC.
 
 ---
 
@@ -33,11 +70,14 @@ FactoryERPLite/
 │   │   ├── base_config.dart
 │   │   ├── main_config.dart
 │   │   └── singleton.dart      # GetIt registrations
+│   ├── core/                   # Shared domain (sync metadata keys)
+│   │   └── domain/
 │   ├── gen/                    # Generated assets/fonts (flutter_gen)
 │   ├── modules/                # Feature modules (see Feature List)
 │   ├── service/                # Cross-cutting infrastructure
-│   │   ├── hive/               # Hive boxes, adapters, init (planned)
-│   │   ├── firebase/           # firebase_options.dart
+│   │   ├── hive/               # HiveManager, box names, init
+│   │   ├── firebase/           # FirebaseService, Firestore collections
+│   │   ├── sync/               # Hive → Firebase sync orchestration
 │   │   ├── navigation/         # go_router (target) + auto_route (current scaffold)
 │   │   ├── network/            # Dio ApiClient, BaseRepository, models
 │   │   ├── notification/       # FCM + Awesome Notifications
@@ -56,9 +96,11 @@ Features that include business logic follow a consistent structure:
 ```
 modules/<feature>/
 ├── bloc/           # Event / State / Bloc (+ bloc.dart barrel)
-├── model/          # local/ (Freezed + Hive/sync fields) and/or response/ (API DTOs)
-├── repository/     # Abstract repo + *_impl.dart (Hive + API/Firebase sync)
-├── ui/             # @RoutePage screens and widgets
+├── model/
+│   ├── local/      # Hive entities (Freezed + syncStatus)
+│   └── remote/     # Firestore DTOs / document maps
+├── repository/     # Abstract repo + *_impl.dart (Hive + Firestore sync)
+├── ui/             # Screens and widgets (@RoutePage or go_router)
 └── <feature>.dart  # Barrel export
 ```
 
@@ -68,23 +110,60 @@ modules/<feature>/
 
 ## Feature List
 
+### Scaffold modules (template)
+
 | Module | Layer | Description |
 |--------|-------|-------------|
 | **splash** | bloc, ui | Initial splash screen; routes onward on startup |
 | **login** | bloc, model/local, ui | Email/password login form with validation |
 | **dashboard** | ui | Shell with `AutoTabsRouter` + bottom navigation |
-| **tab_one** | bloc, model/response, repository, ui | Tab screen with API-backed user details |
-| **tab_one_detail** | ui | Detail view for tab one |
-| **tab_two** | ui | Second dashboard tab |
-| **tab_two_detail** | ui | Detail view for tab two |
-| **custom_pagination** | bloc, model, repository, ui | Paginated list with shimmer/loader |
-| **force_update_under_maintenance** | bloc, model, ui | Force-update & maintenance via Remote Config |
 | **localization** | bloc | App-wide locale switching (`LocaleBloc`) |
+| **force_update_under_maintenance** | bloc, model, ui | Force-update & maintenance via Remote Config |
 | **page_not_found** | ui | 404 / catch-all route |
 
-### Planned scope (from `pubspec.yaml` description)
+### ERP modules (foundation folders — implement per feature)
 
-Labor management, expense tracking, material purchases, calendar, factory status, reporting, analytics, and sync — the current codebase is a **template/scaffold** with representative features above.
+| Module | Hive box | Firestore collection |
+|--------|----------|----------------------|
+| **labor_management** | `labor_management` | `labor_management` |
+| **person_management** | `person_management` | `person_management` |
+| **truck_expenses** | `truck_expenses` | `truck_expenses` |
+| **maintenance_expenses** | `maintenance_expenses` | `maintenance_expenses` |
+| **electricity_expenses** | `electricity_expenses` | `electricity_expenses` |
+| **material_purchases** | `material_purchases` | `material_purchases` |
+| **miscellaneous_expenses** | `miscellaneous_expenses` | `miscellaneous_expenses` |
+| **calendar_management** | `calendar_management` | `calendar_management` |
+| **factory_status** | `factory_status` | `factory_status` |
+| **reports_analytics** | `reports_analytics` | `reports_analytics` |
+| **attachments** | `attachments` | `attachments` |
+| **recurring_expenses** | `recurring_expenses` | `recurring_expenses` |
+
+### Platform scope
+
+| Platform | Backend | Offline | Responsibilities |
+|----------|---------|---------|------------------|
+| **Flutter Mobile** | Firebase (Firestore, Auth, Storage) | Hive | CRUD offline; sync on connectivity; attachments |
+| **Flutter Web Admin** | Same Firebase project | Firestore cache | Dashboard, reports, export, management; real-time sync |
+
+### Web admin rules
+
+- Same Firebase project and Firestore collections as mobile.
+- Reads/writes Firestore directly (no Hive on web).
+- Real-time listeners for dashboard and operational views.
+- Reports, analytics, and export (PDF / Excel) live on web first.
+- Auth via `FirebaseService.auth` with role-based access (future).
+
+### Future scope
+
+| Area | Notes |
+|------|-------|
+| Multi-factory | `factoryId` on every document |
+| Multi-user roles | Firebase Auth + Firestore security rules |
+| Inventory management | New module |
+| Production management | New module |
+| Employee management | Extends person/labor modules |
+| Google Sheet backup | Scheduled export service (planned) |
+| PDF & Excel export | Web admin + mobile share (planned) |
 
 ---
 
@@ -103,11 +182,14 @@ Labor management, expense tracking, material purchases, calendar, factory status
 | `awesome_dio_interceptor` | Request/response logging |
 | `network_cache_interceptor` | Response caching |
 | `connectivity_plus` | Network connectivity checks |
-| `hive` / `hive_flutter` | Offline-first local database (foundation added; not yet in `lib/`) |
+| `hive` / `hive_flutter` | Offline-first local database |
 | `get_storage` | Lightweight key-value prefs (`SharedPref`) |
 | `freezed` / `freezed_annotation` | Immutable models |
 | `json_annotation` | JSON serialization annotations |
 | `firebase_core` | Firebase initialization |
+| `firebase_auth` | User authentication (mobile + web admin) |
+| `cloud_firestore` | Primary cloud database (sync target) |
+| `firebase_storage` | File attachments storage |
 | `firebase_remote_config` | Force-update & maintenance flags |
 | `firebase_messaging` | Push notifications (FCM) |
 | `awesome_notifications` | Local notification display |
@@ -170,15 +252,17 @@ Labor management, expense tracking, material purchases, calendar, factory status
 ┌─────────────┐   dispatch    ┌──────────┐   call    ┌────────────┐   read/write   ┌──────────┐
 │  UI Widget  │ ────────────► │   Bloc   │ ────────► │ Repository │ ─────────────► │   Hive   │
 └─────────────┘ ◄──────────── └──────────┘ ◄──────── └────────────┘ ◄───────────── └──────────┘
-     rebuild      emit state              ResponseHandler<T>              sync (pending/synced/failed)
-                                                    │
-                                                    ▼ HTTP / Firebase
-                                              ┌───────────┐
-                                              │ ApiClient │
-                                              └───────────┘
+     rebuild      emit state                            sync (pending/synced/failed)
+                                                          │
+                                                          ▼
+                                                   ┌─────────────┐
+                                                   │  Firestore  │
+                                                   └─────────────┘
 ```
 
-**Target repository contract (offline-first features):**
+**ERP modules use Firestore as the cloud store.** The legacy `ApiClient` / Dio layer remains for scaffold demo features (`tab_one`, `custom_pagination`) only.
+
+**Offline-first repository contract:**
 
 1. **Write:** persist to Hive immediately; set `syncStatus = pending`.
 2. **Read:** serve from Hive (UI never blocks on network).
@@ -210,12 +294,29 @@ Labor management, expense tracking, material purchases, calendar, factory status
 
 ```dart
 getIt
+  ..registerLazySingleton<FirebaseService>(
+    () => FirebaseService(getIt<DefaultFirebaseOptions>()),
+  )
+  ..registerLazySingleton<HiveManager>(() => HiveManager.instance)
+  ..registerLazySingleton<SyncService>(
+    () => SyncService(hiveManager: getIt<HiveManager>()),
+  )
   ..registerSingleton<ApiClient>(ApiClient())
   ..registerLazySingleton<TabOneRepository>(TabOneRepositoryImpl.new)
-  ..registerLazySingleton<CustomPaginationRepository>(CustomPaginationRepositoryImpl.new);
+  ..registerLazySingleton<CustomPaginationRepository>(
+    CustomPaginationRepositoryImpl.new,
+  );
 ```
 
-### Request flow (API-only features — current scaffold)
+### Request flow (offline-first ERP modules)
+
+1. **UI** dispatches a BLoC event.
+2. **BLoC** calls repository via `getIt<Repository>()`.
+3. **Repository** reads/writes Hive first and returns local data.
+4. **Repository** enqueues sync or calls `SyncService` (`pending` → `synced` / `failed`).
+5. **BLoC** emits state from Hive; UI rebuilds via `BlocBuilder`.
+
+### Request flow (legacy scaffold — Dio/API)
 
 1. **UI** dispatches a BLoC event (e.g. load user details).
 2. **BLoC** sets `BaseStateStatus.loading`, calls repository via `getIt<Repository>()`.
@@ -223,34 +324,47 @@ getIt
 4. **BaseRepository** parses `ResponseHandler<Map>` → `ResponseHandler<T>`.
 5. **BLoC** emits success/failure state; UI rebuilds via `BlocBuilder`.
 
-### Request flow (offline-first features — target)
-
-1. **UI** dispatches a BLoC event.
-2. **BLoC** calls repository via `getIt<Repository>()`.
-3. **Repository** reads/writes Hive first and returns local data.
-4. **Repository** triggers background sync (`pending` → `synced` / `failed`).
-5. **BLoC** emits state from Hive; UI rebuilds via `BlocBuilder`.
-
 ---
 
 ## Firebase Usage
 
-| Service | Where used | Purpose |
-|---------|------------|---------|
-| **Firebase Core** | `NotificationManager`, `exports.dart` | `Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)` |
-| **Firebase Remote Config** | `ForceUpdateUnderMaintenanceBloc` | Force-update version gates & maintenance mode JSON |
-| **Firebase Messaging** | `NotificationManager` | FCM token, foreground/background handlers, `onMessageOpenedApp` |
+| Service | Entry | Purpose |
+|---------|-------|---------|
+| **Firebase Core** | `FirebaseService.init()` | Single bootstrap for all Firebase SDKs |
+| **Cloud Firestore** | `FirebaseService.firestore` | Cloud store for all ERP module data |
+| **Firebase Auth** | `FirebaseService.auth` | Mobile + web admin authentication |
+| **Firebase Storage** | `FirebaseService.storage` | Attachments and file uploads |
+| **Remote Config** | `ForceUpdateUnderMaintenanceBloc` | Force-update & maintenance flags |
+| **FCM** | `NotificationManager` | Push notifications |
 
-### Config files
+### Config & service files
 
-- `lib/service/firebase/firebase_options.dart` — platform-specific Firebase options (generated)
-- `lib/service/firebase/firebase.dart` — barrel export
+| File | Role |
+|------|------|
+| `service/firebase/firebase_options.dart` | Platform-specific Firebase options |
+| `service/firebase/firebase_service.dart` | Init, Firestore/Auth/Storage accessors |
+| `service/firebase/firestore_collections.dart` | Collection name constants per ERP module |
 
 ### Boot order (`AppInitializer`)
 
 ```
-SentryService.init → DeviceInfo/PackageInfo → DebugLog → NotificationManager (Firebase) → GetStorage.init
+SentryService.init
+  → DeviceInfo / PackageInfo
+  → DebugLog
+  → FirebaseService.init + configureFirestore
+  → HiveManager.init
+  → SyncService.startListening
+  → NotificationManager (FCM)
+  → GetStorage.init
 ```
+
+### Firestore data model convention
+
+- One top-level collection per ERP module (see `FirestoreCollections`).
+- Every document includes `factoryId` for multi-factory support.
+- Every syncable document includes `syncStatus`: `pending` | `synced` | `failed`.
+- Mobile writes to Hive first; `SyncService` pushes pending records to Firestore when online.
+- Web admin reads/writes Firestore directly with real-time listeners.
 
 ---
 
@@ -260,7 +374,7 @@ Factory ERP Lite uses **two complementary storage layers**. Do not mix their res
 
 | Layer | Package | Status | Use for |
 |-------|---------|--------|---------|
-| **Hive** | `hive` / `hive_flutter` | Planned (not yet in `lib/`) | Business entities, offline queues, sync metadata |
+| **Hive** | `hive` / `hive_flutter` | **Implemented** | Business entities, sync queue, per-module boxes |
 | **GetStorage** | `get_storage` | Implemented | App prefs: auth flags, locale, user id, lightweight settings |
 
 ### Offline-first rules
@@ -275,17 +389,24 @@ Factory ERP Lite uses **two complementary storage layers**. Do not mix their res
 | `synced` | Local and remote are in agreement |
 | `failed` | Sync attempted but failed; retry eligible |
 
-### Hive (business data — target)
+### Hive (business data — implemented foundation)
 
-**Status:** Planned. No `hive` imports or boxes exist in `lib/` yet. New offline-first features should introduce Hive following the repository pattern.
+| Component | Location | Role |
+|-----------|----------|------|
+| `HiveManager` | `service/hive/hive_manager.dart` | `Hive.initFlutter()`, opens all module boxes |
+| `HiveBoxNames` | `service/hive/hive_box_names.dart` | Box name constants (1:1 with ERP modules) |
+| `SyncStatus` | `app/enums/sync_status.dart` | `pending` / `synced` / `failed` |
+| `SyncMetadataKeys` | `core/domain/sync_metadata_keys.dart` | Shared field keys for Hive maps & Firestore docs |
+| `SyncService` | `service/sync/sync_service.dart` | Connectivity listener; triggers pending sync |
 
 | Concern | Convention |
 |---------|------------|
 | Location | `lib/service/hive/` — init, box names, type adapters |
 | Models | Freezed local models in `modules/<feature>/model/local/` with `syncStatus` field |
 | Access | Feature repositories read/write Hive; BLoCs never access boxes directly |
-| Init | `AppInitializer` — `Hive.initFlutter()` + `openBox()` before repositories run |
-| DI | Register box accessors or local data sources in `base/singleton.dart` |
+| Init | `AppInitializer` → `HiveManager.init()` after Firebase |
+| DI | `HiveManager`, `SyncService`, `FirebaseService` in `base/singleton.dart` |
+| Boxes | `sync_queue`, `meta`, plus one box per ERP module (opened at bootstrap) |
 
 ```
 ┌──────────┐     write      ┌──────────┐    background    ┌───────────┐
@@ -385,7 +506,9 @@ DashboardRoute (/dashboard)
 | Service | Entry point |
 |---------|-------------|
 | **DI** | `base/singleton.dart` — `configureDependencies()` |
-| **Local DB** | `service/hive/` — Hive init & boxes (planned) |
+| **Firebase** | `service/firebase/firebase_service.dart` |
+| **Local DB** | `service/hive/hive_manager.dart` |
+| **Sync** | `service/sync/sync_service.dart` |
 | **App prefs** | `SharedPref` — `get_storage` wrapper |
 | **Networking** | `service/network/network.dart` |
 | **Notifications** | `NotificationManager` → FCM + `AwesomeNotificationManager` |
@@ -409,3 +532,21 @@ dart run build_runner build --delete-conflicting-outputs
 | `json_serializable` | `*.g.dart` |
 | `freezed` | `*.freezed.dart` |
 | `flutter_gen_runner` | `lib/gen/assets.gen.dart`, `fonts.gen.dart` |
+
+> **Hive adapters:** Use `hive_ce` + `hive_ce_generator` when adding `@HiveType` models. The legacy `hive_generator` conflicts with modern `build_runner` on Dart 3.11+.
+
+---
+
+## Foundation status
+
+| Area | Status | Key files |
+|------|--------|-----------|
+| Dependencies | Done | `pubspec.yaml` |
+| Folder structure | Done | `lib/modules/*`, `lib/service/hive`, `lib/service/firebase`, `lib/service/sync`, `lib/core` |
+| Firebase setup | Done | `FirebaseService`, `FirestoreCollections`, `firebase_options.dart` |
+| Hive setup | Done | `HiveManager`, `HiveBoxNames`, `SyncStatus`, `SyncMetadataKeys` |
+| Sync orchestration | Foundation | `SyncService` — module handlers added per feature |
+| ERP module implementation | Pending | 12 module folders with placeholder barrels |
+| Auth flow (Splash → Google Login → Dashboard) | Done | `AuthRepository`, `AuthGuard`, updated BLoCs |
+| GoRouter migration | Pending | `auto_route` still powers current UI |
+| Google Sheet / PDF / Excel | Planned | Not yet in dependencies |

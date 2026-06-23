@@ -1,9 +1,6 @@
 import '../../../utils/exports.dart';
 
-/// A page widget for displaying the splash screen.
-///
-/// This widget initializes the splash bloc and listens for state changes
-/// to navigate to the login page upon success.
+/// Splash screen — routes to login or dashboard based on auth session.
 @RoutePage()
 class SplashPage extends StatelessWidget {
   /// Creates a splash page widget.
@@ -14,12 +11,17 @@ class SplashPage extends StatelessWidget {
     return BlocProvider<SplashBloc>(
       create: (BuildContext ctx) => SplashBloc(),
       child: BlocListener<SplashBloc, SplashState>(
-        listener: (BuildContext context, SplashState state) async {
-          if (state.status == BaseStateStatus.success) {
-            unawaited(context.router.pushNamed(AppPaths.login));
+        listener: (BuildContext context, SplashState state) {
+          if (state.status == BaseStateStatus.success &&
+              state.routeName != null) {
+            unawaited(context.router.replaceNamed(state.routeName!));
           }
         },
-        child: Assets.png.icAppbarLogo.image(),
+        child: Scaffold(
+          body: Center(
+            child: Assets.png.icAppbarLogo.image(height: Dimens.size80),
+          ),
+        ),
       ),
     );
   }

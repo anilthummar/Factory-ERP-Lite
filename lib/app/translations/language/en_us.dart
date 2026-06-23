@@ -3,7 +3,7 @@ import '../../../utils/exports.dart';
 ///englisth strings
 class EnUS extends AppString {
   @override
-  String get appNameKey => "Base Structure";
+  String get appNameKey => "Factory ERP Lite";
 
   @override
   String get cancelKey => "Cancel";
@@ -152,4 +152,20 @@ class EnUS extends AppString {
   @override
   String get detailPageWithOutBottomBarKey =>
       "Tap here to access the detail page without bottom bar navigation.";
+
+  @override
+  String get signInSubtitleKey => "Sign in with your Google account to continue";
+
+  @override
+  String get signInWithGoogleKey => "Sign in with Google";
+
+  @override
+  String get signOutKey => "Sign out";
+
+  @override
+  String get welcomeDashboardKey => "Welcome";
+
+  @override
+  String get dashboardModulesHintKey =>
+      "ERP modules will appear here as they are implemented.";
 }

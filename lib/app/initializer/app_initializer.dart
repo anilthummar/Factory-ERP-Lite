@@ -43,6 +43,10 @@ class AppInitializer {
       await SentryService.instance.init();
       await _getPackageAndDeviceInfo();
       await DebugLog.instance.init();
+      await getIt<FirebaseService>().init();
+      await getIt<FirebaseService>().configureFirestore();
+      await getIt<HiveManager>().init();
+      getIt<SyncService>().startListening();
       await NotificationManager.instance.init();
       await _initStorage();
       _initScreenPreference();

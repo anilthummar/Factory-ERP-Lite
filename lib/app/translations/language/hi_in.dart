@@ -3,7 +3,7 @@ import '../../../utils/exports.dart';
 ///hindi strings
 class HiIN extends AppString {
   @override
-  String get appNameKey => "आधार संरचना";
+  String get appNameKey => "फैक्टरी ERP लाइट";
 
   @override
   String get cancelKey => "रद्द करना";
@@ -153,4 +153,21 @@ class HiIN extends AppString {
   @override
   String get detailPageWithOutBottomBarKey =>
       "नीचे बार नेविगेशन के बिना विवरण पृष्ठ तक पहुंचने के लिए यहां टैप करें।";
+
+  @override
+  String get signInSubtitleKey =>
+      "जारी रखने के लिए अपने Google खाते से साइन इन करें";
+
+  @override
+  String get signInWithGoogleKey => "Google से साइन इन करें";
+
+  @override
+  String get signOutKey => "साइन आउट";
+
+  @override
+  String get welcomeDashboardKey => "स्वागत है";
+
+  @override
+  String get dashboardModulesHintKey =>
+      "ERP मॉड्यूल लागू होने पर यहां दिखाई देंगे।";
 }

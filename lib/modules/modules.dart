@@ -11,3 +11,17 @@ export 'tab_one/tab_one.dart';
 export 'tab_one_detail/tab_one_detail.dart';
 export 'tab_two/tab_two.dart';
 export 'tab_two_detail/tab_two_detail.dart';
+
+// ERP modules (foundation — implement per feature)
+export 'attachments/attachments.dart';
+export 'calendar_management/calendar_management.dart';
+export 'electricity_expenses/electricity_expenses.dart';
+export 'factory_status/factory_status.dart';
+export 'labor_management/labor_management.dart';
+export 'maintenance_expenses/maintenance_expenses.dart';
+export 'material_purchases/material_purchases.dart';
+export 'miscellaneous_expenses/miscellaneous_expenses.dart';
+export 'person_management/person_management.dart';
+export 'recurring_expenses/recurring_expenses.dart';
+export 'reports_analytics/reports_analytics.dart';
+export 'truck_expenses/truck_expenses.dart';

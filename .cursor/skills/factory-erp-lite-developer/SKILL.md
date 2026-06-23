@@ -1,6 +1,6 @@
 ---
 name: factory-erp-lite-developer
-description: Develop, refactor, and fix Factory ERP Lite features following the project's architecture and coding standards. Use when working on Factory ERP Lite tasks, Flutter/Dart feature development, refactors, bug fixes, offline-first behavior, BLoC, repositories, or GetIt DI within this repository.
+description: Develop, refactor, and fix Factory ERP Lite features following the project's architecture and coding standards. Use when working on Factory ERP Lite tasks, Flutter/Dart feature development, refactors, bug fixes, offline-first Hive-to-Firestore sync, BLoC, repositories, Firestore, or GetIt DI within this repository.
 disable-model-invocation: true
 ---
 
@@ -80,5 +80,8 @@ Response Rules:
 
 ## Project notes (Factory ERP Lite specific)
 
-- **Hive vs GetStorage:** See `ARCHITECTURE.md` → *Offline-First & Local Persistence*. Hive is the target for syncable business data (`pending` / `synced` / `failed`); `SharedPref` (`get_storage`) is for lightweight app prefs only. Hive is planned but not yet in `lib/` — introduce it per feature when building offline-first flows.
-
+- **Stack:** Flutter mobile + Flutter web admin; Firebase (Firestore, Auth, Storage); Hive offline; GetStorage for prefs only.
+- **Hive vs GetStorage:** See `ARCHITECTURE.md` → *Offline-First & Local Persistence*. `HiveManager` and module boxes are implemented; `SharedPref` is for auth/locale only.
+- **Cloud store:** ERP modules sync to **Firestore** via `FirebaseService` and `FirestoreCollections` — not Dio.
+- **Core modules:** labor, person, truck/maintenance/electricity/misc expenses, material purchases, calendar, factory status, reports, attachments, recurring expenses.
+- **Foundation services:** `FirebaseService`, `HiveManager`, `SyncService` — registered in `singleton.dart`, initialized in `AppInitializer`.
