@@ -7,22 +7,19 @@ part of 'user_detail_response.dart';
 // **************************************************************************
 
 _$UserDetailResponseImpl _$$UserDetailResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$UserDetailResponseImpl(
-      data: json['data'] == null
-          ? null
-          : UserDetail.fromJson(json['data'] as Map<String, dynamic>),
-      support: json['support'] == null
-          ? null
-          : Support.fromJson(json['support'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => _$UserDetailResponseImpl(
+  data: json['data'] == null
+      ? null
+      : UserDetail.fromJson(json['data'] as Map<String, dynamic>),
+  support: json['support'] == null
+      ? null
+      : Support.fromJson(json['support'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$$UserDetailResponseImplToJson(
-        _$UserDetailResponseImpl instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'support': instance.support,
-    };
+  _$UserDetailResponseImpl instance,
+) => <String, dynamic>{'data': instance.data, 'support': instance.support};
 
 _$UserDetailImpl _$$UserDetailImplFromJson(Map<String, dynamic> json) =>
     _$UserDetailImpl(
@@ -43,13 +40,7 @@ Map<String, dynamic> _$$UserDetailImplToJson(_$UserDetailImpl instance) =>
     };
 
 _$SupportImpl _$$SupportImplFromJson(Map<String, dynamic> json) =>
-    _$SupportImpl(
-      url: json['url'] as String?,
-      text: json['text'] as String?,
-    );
+    _$SupportImpl(url: json['url'] as String?, text: json['text'] as String?);
 
 Map<String, dynamic> _$$SupportImplToJson(_$SupportImpl instance) =>
-    <String, dynamic>{
-      'url': instance.url,
-      'text': instance.text,
-    };
+    <String, dynamic>{'url': instance.url, 'text': instance.text};

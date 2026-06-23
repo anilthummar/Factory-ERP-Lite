@@ -9,17 +9,15 @@ part of 'base_response.dart';
 Map<String, dynamic> _$BaseResponseToJson<T>(
   BaseResponse<T> instance,
   Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      'head': instance.head,
-      'body': _$nullableGenericToJson(instance.body, toJsonT),
-    };
+) => <String, dynamic>{
+  'head': instance.head,
+  'body': _$nullableGenericToJson(instance.body, toJsonT),
+};
 
 Object? _$nullableGenericToJson<T>(
   T? input,
   Object? Function(T value) toJson,
-) =>
-    input == null ? null : toJson(input);
+) => input == null ? null : toJson(input);
 
 Map<String, dynamic> _$HeadResponseToJson(HeadResponse instance) =>
     <String, dynamic>{

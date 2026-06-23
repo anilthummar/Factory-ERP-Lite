@@ -13,7 +13,4 @@ _$LoginLocalImpl _$$LoginLocalImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$LoginLocalImplToJson(_$LoginLocalImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-    };
+    <String, dynamic>{'email': instance.email, 'password': instance.password};

@@ -7,19 +7,19 @@ part of 'pagination_detail_response.dart';
 // **************************************************************************
 
 _$PaginationDetailResponseImpl _$$PaginationDetailResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PaginationDetailResponseImpl(
-      userId: (json['userId'] as num?)?.toInt(),
-      id: (json['id'] as num?)?.toInt(),
-      title: json['title'] as String?,
-      body: json['body'] as String?,
-    );
+  Map<String, dynamic> json,
+) => _$PaginationDetailResponseImpl(
+  userId: (json['userId'] as num?)?.toInt(),
+  id: (json['id'] as num?)?.toInt(),
+  title: json['title'] as String?,
+  body: json['body'] as String?,
+);
 
 Map<String, dynamic> _$$PaginationDetailResponseImplToJson(
-        _$PaginationDetailResponseImpl instance) =>
-    <String, dynamic>{
-      'userId': instance.userId,
-      'id': instance.id,
-      'title': instance.title,
-      'body': instance.body,
-    };
+  _$PaginationDetailResponseImpl instance,
+) => <String, dynamic>{
+  'userId': instance.userId,
+  'id': instance.id,
+  'title': instance.title,
+  'body': instance.body,
+};

@@ -12,7 +12,8 @@ part of 'login_local.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 LoginLocal _$LoginLocalFromJson(Map<String, dynamic> json) {
   return _LoginLocal.fromJson(json);
@@ -23,8 +24,12 @@ mixin _$LoginLocal {
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
 
+  /// Serializes this LoginLocal to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LoginLocal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LoginLocalCopyWith<LoginLocal> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -32,8 +37,9 @@ mixin _$LoginLocal {
 /// @nodoc
 abstract class $LoginLocalCopyWith<$Res> {
   factory $LoginLocalCopyWith(
-          LoginLocal value, $Res Function(LoginLocal) then) =
-      _$LoginLocalCopyWithImpl<$Res, LoginLocal>;
+    LoginLocal value,
+    $Res Function(LoginLocal) then,
+  ) = _$LoginLocalCopyWithImpl<$Res, LoginLocal>;
   @useResult
   $Res call({String? email, String? password});
 }
@@ -48,22 +54,24 @@ class _$LoginLocalCopyWithImpl<$Res, $Val extends LoginLocal>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LoginLocal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
-  }) {
-    return _then(_value.copyWith(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? email = freezed, Object? password = freezed}) {
+    return _then(
+      _value.copyWith(
+            email: freezed == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            password: freezed == password
+                ? _value.password
+                : password // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -71,8 +79,9 @@ class _$LoginLocalCopyWithImpl<$Res, $Val extends LoginLocal>
 abstract class _$$LoginLocalImplCopyWith<$Res>
     implements $LoginLocalCopyWith<$Res> {
   factory _$$LoginLocalImplCopyWith(
-          _$LoginLocalImpl value, $Res Function(_$LoginLocalImpl) then) =
-      __$$LoginLocalImplCopyWithImpl<$Res>;
+    _$LoginLocalImpl value,
+    $Res Function(_$LoginLocalImpl) then,
+  ) = __$$LoginLocalImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? email, String? password});
@@ -83,25 +92,27 @@ class __$$LoginLocalImplCopyWithImpl<$Res>
     extends _$LoginLocalCopyWithImpl<$Res, _$LoginLocalImpl>
     implements _$$LoginLocalImplCopyWith<$Res> {
   __$$LoginLocalImplCopyWithImpl(
-      _$LoginLocalImpl _value, $Res Function(_$LoginLocalImpl) _then)
-      : super(_value, _then);
+    _$LoginLocalImpl _value,
+    $Res Function(_$LoginLocalImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of LoginLocal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? email = freezed,
-    Object? password = freezed,
-  }) {
-    return _then(_$LoginLocalImpl(
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      password: freezed == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? email = freezed, Object? password = freezed}) {
+    return _then(
+      _$LoginLocalImpl(
+        email: freezed == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        password: freezed == password
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
@@ -142,11 +153,13 @@ class _$LoginLocalImpl with DiagnosticableTreeMixin implements _LoginLocal {
                 other.password == password));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LoginLocal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoginLocalImplCopyWith<_$LoginLocalImpl> get copyWith =>
@@ -154,9 +167,7 @@ class _$LoginLocalImpl with DiagnosticableTreeMixin implements _LoginLocal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoginLocalImplToJson(
-      this,
-    );
+    return _$$LoginLocalImplToJson(this);
   }
 }
 
@@ -171,8 +182,11 @@ abstract class _LoginLocal implements LoginLocal {
   String? get email;
   @override
   String? get password;
+
+  /// Create a copy of LoginLocal
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginLocalImplCopyWith<_$LoginLocalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
