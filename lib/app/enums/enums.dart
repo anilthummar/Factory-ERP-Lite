@@ -1,3 +1,5 @@
+export 'sync_status.dart';
+
 /// Defines the available application environments.
 enum Environment {
   /// Staging environment used for testing.

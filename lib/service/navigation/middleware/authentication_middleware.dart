@@ -1,14 +1,11 @@
 import '../../../utils/exports.dart';
 
-/// A middleware for handling authentication during navigation.
-///
-/// This middleware checks if the user is logged in and redirects to the dashboard if true.
+/// Redirects authenticated users away from the login screen.
 class AuthenticationMiddleWare extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    bool isLogin = SharedPref.instance.getBool(SharedPref.isLoggedInKey, false);
-    if (isLogin) {
-      unawaited(router.pushNamed(AppPaths.dashboard));
+    if (getIt<AuthRepository>().isLoggedIn) {
+      unawaited(router.replaceNamed(AppPaths.dashboard));
     } else {
       resolver.next();
     }

@@ -12,7 +12,8 @@ part of 'user_detail_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 UserDetailResponse _$UserDetailResponseFromJson(Map<String, dynamic> json) {
   return _UserDetailResponse.fromJson(json);
@@ -26,8 +27,12 @@ mixin _$UserDetailResponse {
   /// Support information with helpful links and text
   Support? get support => throw _privateConstructorUsedError;
 
+  /// Serializes this UserDetailResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserDetailResponseCopyWith<UserDetailResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -35,8 +40,9 @@ mixin _$UserDetailResponse {
 /// @nodoc
 abstract class $UserDetailResponseCopyWith<$Res> {
   factory $UserDetailResponseCopyWith(
-          UserDetailResponse value, $Res Function(UserDetailResponse) then) =
-      _$UserDetailResponseCopyWithImpl<$Res, UserDetailResponse>;
+    UserDetailResponse value,
+    $Res Function(UserDetailResponse) then,
+  ) = _$UserDetailResponseCopyWithImpl<$Res, UserDetailResponse>;
   @useResult
   $Res call({UserDetail? data, Support? support});
 
@@ -54,24 +60,28 @@ class _$UserDetailResponseCopyWithImpl<$Res, $Val extends UserDetailResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? data = freezed,
-    Object? support = freezed,
-  }) {
-    return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as UserDetail?,
-      support: freezed == support
-          ? _value.support
-          : support // ignore: cast_nullable_to_non_nullable
-              as Support?,
-    ) as $Val);
+  $Res call({Object? data = freezed, Object? support = freezed}) {
+    return _then(
+      _value.copyWith(
+            data: freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                      as UserDetail?,
+            support: freezed == support
+                ? _value.support
+                : support // ignore: cast_nullable_to_non_nullable
+                      as Support?,
+          )
+          as $Val,
+    );
   }
 
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserDetailCopyWith<$Res>? get data {
@@ -84,6 +94,8 @@ class _$UserDetailResponseCopyWithImpl<$Res, $Val extends UserDetailResponse>
     });
   }
 
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SupportCopyWith<$Res>? get support {
@@ -100,9 +112,10 @@ class _$UserDetailResponseCopyWithImpl<$Res, $Val extends UserDetailResponse>
 /// @nodoc
 abstract class _$$UserDetailResponseImplCopyWith<$Res>
     implements $UserDetailResponseCopyWith<$Res> {
-  factory _$$UserDetailResponseImplCopyWith(_$UserDetailResponseImpl value,
-          $Res Function(_$UserDetailResponseImpl) then) =
-      __$$UserDetailResponseImplCopyWithImpl<$Res>;
+  factory _$$UserDetailResponseImplCopyWith(
+    _$UserDetailResponseImpl value,
+    $Res Function(_$UserDetailResponseImpl) then,
+  ) = __$$UserDetailResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({UserDetail? data, Support? support});
@@ -117,26 +130,28 @@ abstract class _$$UserDetailResponseImplCopyWith<$Res>
 class __$$UserDetailResponseImplCopyWithImpl<$Res>
     extends _$UserDetailResponseCopyWithImpl<$Res, _$UserDetailResponseImpl>
     implements _$$UserDetailResponseImplCopyWith<$Res> {
-  __$$UserDetailResponseImplCopyWithImpl(_$UserDetailResponseImpl _value,
-      $Res Function(_$UserDetailResponseImpl) _then)
-      : super(_value, _then);
+  __$$UserDetailResponseImplCopyWithImpl(
+    _$UserDetailResponseImpl _value,
+    $Res Function(_$UserDetailResponseImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? data = freezed,
-    Object? support = freezed,
-  }) {
-    return _then(_$UserDetailResponseImpl(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as UserDetail?,
-      support: freezed == support
-          ? _value.support
-          : support // ignore: cast_nullable_to_non_nullable
-              as Support?,
-    ));
+  $Res call({Object? data = freezed, Object? support = freezed}) {
+    return _then(
+      _$UserDetailResponseImpl(
+        data: freezed == data
+            ? _value.data
+            : data // ignore: cast_nullable_to_non_nullable
+                  as UserDetail?,
+        support: freezed == support
+            ? _value.support
+            : support // ignore: cast_nullable_to_non_nullable
+                  as Support?,
+      ),
+    );
   }
 }
 
@@ -181,43 +196,48 @@ class _$UserDetailResponseImpl
             (identical(other.support, support) || other.support == support));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, data, support);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserDetailResponseImplCopyWith<_$UserDetailResponseImpl> get copyWith =>
       __$$UserDetailResponseImplCopyWithImpl<_$UserDetailResponseImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserDetailResponseImplToJson(
-      this,
-    );
+    return _$$UserDetailResponseImplToJson(this);
   }
 }
 
 abstract class _UserDetailResponse implements UserDetailResponse {
-  const factory _UserDetailResponse(
-      {final UserDetail? data,
-      final Support? support}) = _$UserDetailResponseImpl;
+  const factory _UserDetailResponse({
+    final UserDetail? data,
+    final Support? support,
+  }) = _$UserDetailResponseImpl;
 
   factory _UserDetailResponse.fromJson(Map<String, dynamic> json) =
       _$UserDetailResponseImpl.fromJson;
 
-  @override
-
   /// User detail information including personal data
-  UserDetail? get data;
   @override
+  UserDetail? get data;
 
   /// Support information with helpful links and text
-  Support? get support;
   @override
-  @JsonKey(ignore: true)
+  Support? get support;
+
+  /// Create a copy of UserDetailResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserDetailResponseImplCopyWith<_$UserDetailResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -233,16 +253,24 @@ mixin _$UserDetail {
 
   /// User's email address
   String? get email => throw _privateConstructorUsedError;
+
+  /// User's first name
   @JsonKey(name: 'first_name')
   String? get firstName => throw _privateConstructorUsedError;
+
+  /// User's last name
   @JsonKey(name: 'last_name')
   String? get lastName => throw _privateConstructorUsedError;
 
   /// URL to user's profile picture/avatar
   String? get avatar => throw _privateConstructorUsedError;
 
+  /// Serializes this UserDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserDetailCopyWith<UserDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -250,15 +278,17 @@ mixin _$UserDetail {
 /// @nodoc
 abstract class $UserDetailCopyWith<$Res> {
   factory $UserDetailCopyWith(
-          UserDetail value, $Res Function(UserDetail) then) =
-      _$UserDetailCopyWithImpl<$Res, UserDetail>;
+    UserDetail value,
+    $Res Function(UserDetail) then,
+  ) = _$UserDetailCopyWithImpl<$Res, UserDetail>;
   @useResult
-  $Res call(
-      {int? id,
-      String? email,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? avatar});
+  $Res call({
+    int? id,
+    String? email,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
+    String? avatar,
+  });
 }
 
 /// @nodoc
@@ -271,6 +301,8 @@ class _$UserDetailCopyWithImpl<$Res, $Val extends UserDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,28 +312,31 @@ class _$UserDetailCopyWithImpl<$Res, $Val extends UserDetail>
     Object? lastName = freezed,
     Object? avatar = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id: freezed == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            email: freezed == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            firstName: freezed == firstName
+                ? _value.firstName
+                : firstName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            lastName: freezed == lastName
+                ? _value.lastName
+                : lastName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            avatar: freezed == avatar
+                ? _value.avatar
+                : avatar // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -309,16 +344,18 @@ class _$UserDetailCopyWithImpl<$Res, $Val extends UserDetail>
 abstract class _$$UserDetailImplCopyWith<$Res>
     implements $UserDetailCopyWith<$Res> {
   factory _$$UserDetailImplCopyWith(
-          _$UserDetailImpl value, $Res Function(_$UserDetailImpl) then) =
-      __$$UserDetailImplCopyWithImpl<$Res>;
+    _$UserDetailImpl value,
+    $Res Function(_$UserDetailImpl) then,
+  ) = __$$UserDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      String? email,
-      @JsonKey(name: 'first_name') String? firstName,
-      @JsonKey(name: 'last_name') String? lastName,
-      String? avatar});
+  $Res call({
+    int? id,
+    String? email,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
+    String? avatar,
+  });
 }
 
 /// @nodoc
@@ -326,9 +363,12 @@ class __$$UserDetailImplCopyWithImpl<$Res>
     extends _$UserDetailCopyWithImpl<$Res, _$UserDetailImpl>
     implements _$$UserDetailImplCopyWith<$Res> {
   __$$UserDetailImplCopyWithImpl(
-      _$UserDetailImpl _value, $Res Function(_$UserDetailImpl) _then)
-      : super(_value, _then);
+    _$UserDetailImpl _value,
+    $Res Function(_$UserDetailImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of UserDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -338,40 +378,43 @@ class __$$UserDetailImplCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? avatar = freezed,
   }) {
-    return _then(_$UserDetailImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      firstName: freezed == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastName: freezed == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatar: freezed == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$UserDetailImpl(
+        id: freezed == id
+            ? _value.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        email: freezed == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        firstName: freezed == firstName
+            ? _value.firstName
+            : firstName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        lastName: freezed == lastName
+            ? _value.lastName
+            : lastName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        avatar: freezed == avatar
+            ? _value.avatar
+            : avatar // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserDetailImpl with DiagnosticableTreeMixin implements _UserDetail {
-  const _$UserDetailImpl(
-      {this.id,
-      this.email,
-      @JsonKey(name: 'first_name') this.firstName,
-      @JsonKey(name: 'last_name') this.lastName,
-      this.avatar});
+  const _$UserDetailImpl({
+    this.id,
+    this.email,
+    @JsonKey(name: 'first_name') this.firstName,
+    @JsonKey(name: 'last_name') this.lastName,
+    this.avatar,
+  });
 
   factory _$UserDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDetailImplFromJson(json);
@@ -383,9 +426,13 @@ class _$UserDetailImpl with DiagnosticableTreeMixin implements _UserDetail {
   /// User's email address
   @override
   final String? email;
+
+  /// User's first name
   @override
   @JsonKey(name: 'first_name')
   final String? firstName;
+
+  /// User's last name
   @override
   @JsonKey(name: 'last_name')
   final String? lastName;
@@ -425,12 +472,14 @@ class _$UserDetailImpl with DiagnosticableTreeMixin implements _UserDetail {
             (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, email, firstName, lastName, avatar);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserDetailImplCopyWith<_$UserDetailImpl> get copyWith =>
@@ -438,43 +487,48 @@ class _$UserDetailImpl with DiagnosticableTreeMixin implements _UserDetail {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserDetailImplToJson(
-      this,
-    );
+    return _$$UserDetailImplToJson(this);
   }
 }
 
 abstract class _UserDetail implements UserDetail {
-  const factory _UserDetail(
-      {final int? id,
-      final String? email,
-      @JsonKey(name: 'first_name') final String? firstName,
-      @JsonKey(name: 'last_name') final String? lastName,
-      final String? avatar}) = _$UserDetailImpl;
+  const factory _UserDetail({
+    final int? id,
+    final String? email,
+    @JsonKey(name: 'first_name') final String? firstName,
+    @JsonKey(name: 'last_name') final String? lastName,
+    final String? avatar,
+  }) = _$UserDetailImpl;
 
   factory _UserDetail.fromJson(Map<String, dynamic> json) =
       _$UserDetailImpl.fromJson;
 
-  @override
-
   /// Unique identifier for the user
-  int? get id;
   @override
+  int? get id;
 
   /// User's email address
+  @override
   String? get email;
+
+  /// User's first name
   @override
   @JsonKey(name: 'first_name')
   String? get firstName;
+
+  /// User's last name
   @override
   @JsonKey(name: 'last_name')
   String? get lastName;
-  @override
 
   /// URL to user's profile picture/avatar
-  String? get avatar;
   @override
-  @JsonKey(ignore: true)
+  String? get avatar;
+
+  /// Create a copy of UserDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserDetailImplCopyWith<_$UserDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -491,8 +545,12 @@ mixin _$Support {
   /// Descriptive text about the support or help information
   String? get text => throw _privateConstructorUsedError;
 
+  /// Serializes this Support to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Support
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SupportCopyWith<Support> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -514,30 +572,33 @@ class _$SupportCopyWithImpl<$Res, $Val extends Support>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Support
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? url = freezed,
-    Object? text = freezed,
-  }) {
-    return _then(_value.copyWith(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? url = freezed, Object? text = freezed}) {
+    return _then(
+      _value.copyWith(
+            url: freezed == url
+                ? _value.url
+                : url // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            text: freezed == text
+                ? _value.text
+                : text // ignore: cast_nullable_to_non_nullable
+                      as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$SupportImplCopyWith<$Res> implements $SupportCopyWith<$Res> {
   factory _$$SupportImplCopyWith(
-          _$SupportImpl value, $Res Function(_$SupportImpl) then) =
-      __$$SupportImplCopyWithImpl<$Res>;
+    _$SupportImpl value,
+    $Res Function(_$SupportImpl) then,
+  ) = __$$SupportImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? url, String? text});
@@ -548,25 +609,27 @@ class __$$SupportImplCopyWithImpl<$Res>
     extends _$SupportCopyWithImpl<$Res, _$SupportImpl>
     implements _$$SupportImplCopyWith<$Res> {
   __$$SupportImplCopyWithImpl(
-      _$SupportImpl _value, $Res Function(_$SupportImpl) _then)
-      : super(_value, _then);
+    _$SupportImpl _value,
+    $Res Function(_$SupportImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of Support
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? url = freezed,
-    Object? text = freezed,
-  }) {
-    return _then(_$SupportImpl(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? url = freezed, Object? text = freezed}) {
+    return _then(
+      _$SupportImpl(
+        url: freezed == url
+            ? _value.url
+            : url // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        text: freezed == text
+            ? _value.text
+            : text // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
 
@@ -609,11 +672,13 @@ class _$SupportImpl with DiagnosticableTreeMixin implements _Support {
             (identical(other.text, text) || other.text == text));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, url, text);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Support
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SupportImplCopyWith<_$SupportImpl> get copyWith =>
@@ -621,9 +686,7 @@ class _$SupportImpl with DiagnosticableTreeMixin implements _Support {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SupportImplToJson(
-      this,
-    );
+    return _$$SupportImplToJson(this);
   }
 }
 
@@ -633,16 +696,18 @@ abstract class _Support implements Support {
 
   factory _Support.fromJson(Map<String, dynamic> json) = _$SupportImpl.fromJson;
 
-  @override
-
   /// Support URL or help link for user assistance
-  String? get url;
   @override
+  String? get url;
 
   /// Descriptive text about the support or help information
-  String? get text;
   @override
-  @JsonKey(ignore: true)
+  String? get text;
+
+  /// Create a copy of Support
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SupportImplCopyWith<_$SupportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

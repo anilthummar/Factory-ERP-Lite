@@ -154,4 +154,19 @@ abstract class AppString {
 
   /// Label for a detail page without a bottom navigation bar.
   String get detailPageWithOutBottomBarKey;
+
+  /// Subtitle on the login screen.
+  String get signInSubtitleKey;
+
+  /// Google sign-in button label.
+  String get signInWithGoogleKey;
+
+  /// Sign out action label.
+  String get signOutKey;
+
+  /// Dashboard welcome heading.
+  String get welcomeDashboardKey;
+
+  /// Hint text on the dashboard before modules are added.
+  String get dashboardModulesHintKey;
 }

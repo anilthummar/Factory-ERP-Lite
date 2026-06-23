@@ -1,75 +1,66 @@
 import '../../../../utils/exports.dart';
 
-/// A page that displays the dashboard with tabs.
-///
-/// This page uses [AutoTabsRouter] to manage tab navigation and displays
-/// a [BottomNavigationBar] for switching between tabs.
+/// ERP dashboard home — shown after successful Google sign-in.
 @RoutePage()
 class DashboardPage extends BaseResponsiveView {
   /// The constructor for [DashboardPage].
   const DashboardPage({super.key});
 
-  /// Builds the view for the dashboard page.
-  ///
-  /// [context] is the build context.
   Widget _buildView(BuildContext context) {
-    return AutoTabsRouter(
-      builder: (BuildContext context, Widget child) {
-        final TabsRouter tabsRouter = AutoTabsRouter.of(context);
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: BottomNavigationBar(
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.book_outlined,
-                  color: AppColors.instance.orangeBGColor,
-                ),
-                activeIcon: Icon(
-                  Icons.book,
-                  color: AppColors.instance.orangeBGColor,
-                ),
-                label: context.appString.tab1Key,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.book_outlined,
-                  color: AppColors.instance.orangeBGColor,
-                ),
-                activeIcon:
-                    Icon(Icons.book, color: AppColors.instance.orangeBGColor),
-                label: context.appString.tab2Key,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.pageview_outlined,
-                  color: AppColors.instance.orangeBGColor,
-                ),
-                activeIcon: Icon(Icons.pageview,
-                    color: AppColors.instance.orangeBGColor),
-                label: context.appString.tab3Key,
-              )
-            ],
-            currentIndex: tabsRouter.activeIndex,
-            onTap: tabsRouter.setActiveIndex,
+    final User? user = getIt<AuthRepository>().currentUser;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: CustomTextLabelWidget(
+          label: context.appString.dashboardPageKey,
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => _signOut(context),
+            child: CustomTextLabelWidget(
+              label: context.appString.signOutKey,
+            ),
           ),
-        );
-      },
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(Dimens.padding16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CustomTextLabelWidget(
+              label: context.appString.welcomeDashboardKey,
+              style: AppStyles.instance.textTheme.headlineMedium,
+            ),
+            const SizedBox(height: Dimens.space8),
+            CustomTextLabelWidget(
+              label: user?.displayName ?? user?.email ?? '',
+              style: AppStyles.instance.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: Dimens.space24),
+            CustomTextLabelWidget(
+              label: context.appString.dashboardModulesHintKey,
+              style: AppStyles.instance.textTheme.bodySmall,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  @override
-  Widget buildDesktopWidget(BuildContext context) {
-    return _buildView(context);
+  Future<void> _signOut(BuildContext context) async {
+    await getIt<AuthRepository>().signOut();
+    if (context.mounted) {
+      unawaited(context.router.replaceNamed(AppPaths.login));
+    }
   }
 
   @override
-  Widget buildMobileWidget(BuildContext context) {
-    return _buildView(context);
-  }
+  Widget buildDesktopWidget(BuildContext context) => _buildView(context);
 
   @override
-  Widget buildTabletWidget(BuildContext context) {
-    return _buildView(context);
-  }
+  Widget buildMobileWidget(BuildContext context) => _buildView(context);
+
+  @override
+  Widget buildTabletWidget(BuildContext context) => _buildView(context);
 }

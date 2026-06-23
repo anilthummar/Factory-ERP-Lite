@@ -21,9 +21,28 @@ void setupLocator() {
     ..registerLazySingleton<CustomPaginationRepository>(
       CustomPaginationRepositoryImpl.new,
     )
+    ..registerLazySingleton<GoogleSignIn>(
+      () => GoogleSignIn(
+        scopes: <String>['email', 'profile'],
+        serverClientId: configGoogleWebClientId,
+      ),
+    )
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(
+        firebaseService: getIt<FirebaseService>(),
+        googleSignIn: getIt<GoogleSignIn>(),
+      ),
+    )
     ..registerSingleton<AppStyles>(AppStyles())
     ..registerLazySingleton<AESEncryption>(AESEncryption.new)
     ..registerLazySingleton<DefaultFirebaseOptions>(DefaultFirebaseOptions.new)
+    ..registerLazySingleton<FirebaseService>(
+      () => FirebaseService(getIt<DefaultFirebaseOptions>()),
+    )
+    ..registerLazySingleton<HiveManager>(() => HiveManager.instance)
+    ..registerLazySingleton<SyncService>(
+      () => SyncService(hiveManager: getIt<HiveManager>()),
+    )
     ..registerLazySingleton<RegExpressions>(RegExpressions.new)
     ..registerSingleton<ForceUpdateUnderMaintenanceBloc>(
         ForceUpdateUnderMaintenanceBloc());

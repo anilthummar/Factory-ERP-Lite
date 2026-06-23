@@ -1,0 +1,62 @@
+---
+description: Factory ERP Lite Development Rules
+globs: ["lib/**/*.dart"]
+alwaysApply: true
+---
+
+You are working on Factory ERP Lite.
+
+Before performing any task:
+
+1. Read ARCHITECTURE.md first.
+2. Follow the existing architecture.
+3. Do not create new patterns if an existing pattern already exists.
+4. Follow:
+
+   * Clean Architecture
+   * Feature First Structure
+   * BLoC Pattern
+   * Repository Pattern
+   * GetIt Dependency Injection
+   * Material 3
+
+Offline First Rules:
+
+* Save data to Hive first.
+* Sync to Firebase Firestore later.
+* Support:
+
+  * pending
+  * synced
+  * failed
+
+* App must work completely without internet (mobile reads/writes Hive).
+
+Implementation Rules:
+
+* Analyze only files related to the task.
+* Do not scan the entire project.
+* Reuse existing code whenever possible.
+* Follow SOLID principles.
+* Keep code production ready.
+* ERP modules use `FirebaseService.firestore` + `HiveManager` — not Dio.
+* Use `FirestoreCollections` and `HiveBoxNames` for collection/box names.
+
+Before coding:
+
+1. Show implementation plan.
+2. List files to create.
+3. List files to modify.
+
+For bug fixing:
+
+* Find root cause first.
+* Fix only affected files.
+* Avoid unnecessary refactoring.
+
+For new features:
+
+* Use existing feature as template.
+* Maintain folder consistency (`bloc/`, `model/`, `repository/`, `ui/`).
+
+Output concise responses to minimize token usage.

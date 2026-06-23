@@ -47,6 +47,9 @@ const String _measurementId = 'measurementId';
 /// Key for the VAPID key used in web push notifications.
 const String _vapidKey = 'vapidKey';
 
+/// Key for the Google OAuth Web client ID (required for Android Google Sign-In).
+const String _googleWebClientId = 'googleWebClientId';
+
 // -----------------------------
 // Public Config Accessors
 // -----------------------------
@@ -124,4 +127,9 @@ String get configMeasurementId {
 /// Returns the VAPID key used for Web push notifications.
 String get configVapidKey {
   return const String.fromEnvironment(_vapidKey);
+}
+
+/// Returns the Google OAuth Web client ID for Firebase Google Sign-In on Android.
+String get configGoogleWebClientId {
+  return const String.fromEnvironment(_googleWebClientId);
 }

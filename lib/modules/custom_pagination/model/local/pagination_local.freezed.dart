@@ -12,7 +12,8 @@ part of 'pagination_local.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 PaginationLocal _$PaginationLocalFromJson(Map<String, dynamic> json) {
   return _PaginationLocal.fromJson(json);
@@ -26,8 +27,12 @@ mixin _$PaginationLocal {
   bool? get isLoadMore => throw _privateConstructorUsedError;
   bool? get isRequiredLoadMore => throw _privateConstructorUsedError;
 
+  /// Serializes this PaginationLocal to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PaginationLocal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaginationLocalCopyWith<PaginationLocal> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -35,14 +40,16 @@ mixin _$PaginationLocal {
 /// @nodoc
 abstract class $PaginationLocalCopyWith<$Res> {
   factory $PaginationLocalCopyWith(
-          PaginationLocal value, $Res Function(PaginationLocal) then) =
-      _$PaginationLocalCopyWithImpl<$Res, PaginationLocal>;
+    PaginationLocal value,
+    $Res Function(PaginationLocal) then,
+  ) = _$PaginationLocalCopyWithImpl<$Res, PaginationLocal>;
   @useResult
-  $Res call(
-      {List<PaginationDetailResponse>? data,
-      int? page,
-      bool? isLoadMore,
-      bool? isRequiredLoadMore});
+  $Res call({
+    List<PaginationDetailResponse>? data,
+    int? page,
+    bool? isLoadMore,
+    bool? isRequiredLoadMore,
+  });
 }
 
 /// @nodoc
@@ -55,6 +62,8 @@ class _$PaginationLocalCopyWithImpl<$Res, $Val extends PaginationLocal>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaginationLocal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,40 +72,45 @@ class _$PaginationLocalCopyWithImpl<$Res, $Val extends PaginationLocal>
     Object? isLoadMore = freezed,
     Object? isRequiredLoadMore = freezed,
   }) {
-    return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<PaginationDetailResponse>?,
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isLoadMore: freezed == isLoadMore
-          ? _value.isLoadMore
-          : isLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isRequiredLoadMore: freezed == isRequiredLoadMore
-          ? _value.isRequiredLoadMore
-          : isRequiredLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            data: freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                      as List<PaginationDetailResponse>?,
+            page: freezed == page
+                ? _value.page
+                : page // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            isLoadMore: freezed == isLoadMore
+                ? _value.isLoadMore
+                : isLoadMore // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+            isRequiredLoadMore: freezed == isRequiredLoadMore
+                ? _value.isRequiredLoadMore
+                : isRequiredLoadMore // ignore: cast_nullable_to_non_nullable
+                      as bool?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$PaginationLocalImplCopyWith<$Res>
     implements $PaginationLocalCopyWith<$Res> {
-  factory _$$PaginationLocalImplCopyWith(_$PaginationLocalImpl value,
-          $Res Function(_$PaginationLocalImpl) then) =
-      __$$PaginationLocalImplCopyWithImpl<$Res>;
+  factory _$$PaginationLocalImplCopyWith(
+    _$PaginationLocalImpl value,
+    $Res Function(_$PaginationLocalImpl) then,
+  ) = __$$PaginationLocalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<PaginationDetailResponse>? data,
-      int? page,
-      bool? isLoadMore,
-      bool? isRequiredLoadMore});
+  $Res call({
+    List<PaginationDetailResponse>? data,
+    int? page,
+    bool? isLoadMore,
+    bool? isRequiredLoadMore,
+  });
 }
 
 /// @nodoc
@@ -104,9 +118,12 @@ class __$$PaginationLocalImplCopyWithImpl<$Res>
     extends _$PaginationLocalCopyWithImpl<$Res, _$PaginationLocalImpl>
     implements _$$PaginationLocalImplCopyWith<$Res> {
   __$$PaginationLocalImplCopyWithImpl(
-      _$PaginationLocalImpl _value, $Res Function(_$PaginationLocalImpl) _then)
-      : super(_value, _then);
+    _$PaginationLocalImpl _value,
+    $Res Function(_$PaginationLocalImpl) _then,
+  ) : super(_value, _then);
 
+  /// Create a copy of PaginationLocal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,24 +132,26 @@ class __$$PaginationLocalImplCopyWithImpl<$Res>
     Object? isLoadMore = freezed,
     Object? isRequiredLoadMore = freezed,
   }) {
-    return _then(_$PaginationLocalImpl(
-      data: freezed == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<PaginationDetailResponse>?,
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isLoadMore: freezed == isLoadMore
-          ? _value.isLoadMore
-          : isLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      isRequiredLoadMore: freezed == isRequiredLoadMore
-          ? _value.isRequiredLoadMore
-          : isRequiredLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
+    return _then(
+      _$PaginationLocalImpl(
+        data: freezed == data
+            ? _value._data
+            : data // ignore: cast_nullable_to_non_nullable
+                  as List<PaginationDetailResponse>?,
+        page: freezed == page
+            ? _value.page
+            : page // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        isLoadMore: freezed == isLoadMore
+            ? _value.isLoadMore
+            : isLoadMore // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        isRequiredLoadMore: freezed == isRequiredLoadMore
+            ? _value.isRequiredLoadMore
+            : isRequiredLoadMore // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+      ),
+    );
   }
 }
 
@@ -141,12 +160,12 @@ class __$$PaginationLocalImplCopyWithImpl<$Res>
 class _$PaginationLocalImpl
     with DiagnosticableTreeMixin
     implements _PaginationLocal {
-  const _$PaginationLocalImpl(
-      {final List<PaginationDetailResponse>? data,
-      this.page,
-      this.isLoadMore,
-      this.isRequiredLoadMore})
-      : _data = data;
+  const _$PaginationLocalImpl({
+    final List<PaginationDetailResponse>? data,
+    this.page,
+    this.isLoadMore,
+    this.isRequiredLoadMore,
+  }) : _data = data;
 
   factory _$PaginationLocalImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaginationLocalImplFromJson(json);
@@ -197,36 +216,40 @@ class _$PaginationLocalImpl
                 other.isRequiredLoadMore == isRequiredLoadMore));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_data),
-      page,
-      isLoadMore,
-      isRequiredLoadMore);
+    runtimeType,
+    const DeepCollectionEquality().hash(_data),
+    page,
+    isLoadMore,
+    isRequiredLoadMore,
+  );
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginationLocal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginationLocalImplCopyWith<_$PaginationLocalImpl> get copyWith =>
       __$$PaginationLocalImplCopyWithImpl<_$PaginationLocalImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaginationLocalImplToJson(
-      this,
-    );
+    return _$$PaginationLocalImplToJson(this);
   }
 }
 
 abstract class _PaginationLocal implements PaginationLocal {
-  const factory _PaginationLocal(
-      {final List<PaginationDetailResponse>? data,
-      final int? page,
-      final bool? isLoadMore,
-      final bool? isRequiredLoadMore}) = _$PaginationLocalImpl;
+  const factory _PaginationLocal({
+    final List<PaginationDetailResponse>? data,
+    final int? page,
+    final bool? isLoadMore,
+    final bool? isRequiredLoadMore,
+  }) = _$PaginationLocalImpl;
 
   factory _PaginationLocal.fromJson(Map<String, dynamic> json) =
       _$PaginationLocalImpl.fromJson;
@@ -239,8 +262,11 @@ abstract class _PaginationLocal implements PaginationLocal {
   bool? get isLoadMore;
   @override
   bool? get isRequiredLoadMore;
+
+  /// Create a copy of PaginationLocal
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginationLocalImplCopyWith<_$PaginationLocalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

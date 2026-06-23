@@ -248,7 +248,6 @@ linter:
     flutter_style_todos: true
     unnecessary_parenthesis: true
     use_enums: true
-    use_if_null_to_convert_nulls_to_bools: true
     use_named_constants: true
     use_setters_to_change_properties: true
     avoid_slow_async_io: true
