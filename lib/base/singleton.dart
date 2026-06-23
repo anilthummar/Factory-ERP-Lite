@@ -22,7 +22,10 @@ void setupLocator() {
       CustomPaginationRepositoryImpl.new,
     )
     ..registerLazySingleton<GoogleSignIn>(
-      () => GoogleSignIn(scopes: <String>['email', 'profile']),
+      () => GoogleSignIn(
+        scopes: <String>['email', 'profile'],
+        serverClientId: configGoogleWebClientId,
+      ),
     )
     ..registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(

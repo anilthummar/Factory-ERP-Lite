@@ -29,18 +29,16 @@ class CustomSnackBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        icon != null
-            ? Padding(
-                padding: const EdgeInsets.only(right: Dimens.padding8),
-                child: icon?.svg(
-                  height: Dimens.size16,
-                  width: Dimens.size16,
-                ),
-              )
-            : Container(),
-        Flexible(
+        if (icon != null)
+          Padding(
+            padding: const EdgeInsets.only(right: Dimens.padding8),
+            child: icon!.svg(
+              height: Dimens.size16,
+              width: Dimens.size16,
+            ),
+          ),
+        Expanded(
           child: CustomTextLabelWidget(
             textAlign: icon != null ? TextAlign.left : TextAlign.center,
             maxLines: Dimens.maxLines02,
@@ -48,7 +46,7 @@ class CustomSnackBarWidget extends StatelessWidget {
             style: context.textTheme.bodyMedium
                 ?.copyWith(fontSize: Dimens.fontSize14),
           ),
-        )
+        ),
       ],
     );
   }
@@ -69,19 +67,26 @@ void displaySnackBar(String message, BuildContext context,
     Function()? onButtonClick,
     Duration? duration,
     bool? isDismissible}) {
-  context.scaffoldMessenger.showSnackBar(SnackBar(
-    margin: const EdgeInsets.only(
-        left: Dimens.space28, right: Dimens.space28, bottom: Dimens.space28),
-    duration: duration ?? const Duration(seconds: Dimens.duration3),
-    shape: RoundedRectangleBorder(borderRadius: Dimens.radius10.borderRadius),
-    content: CustomSnackBarWidget(
-      message: message,
-      icon: icon,
-      buttonText: buttonText,
-      onButtonClick: onButtonClick,
+  if (message.trim().isEmpty) {
+    return;
+  }
+
+  context.scaffoldMessenger.clearSnackBars();
+  context.scaffoldMessenger.showSnackBar(
+    SnackBar(
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.all(Dimens.padding16),
+      duration: duration ?? const Duration(seconds: Dimens.duration3),
+      shape: RoundedRectangleBorder(borderRadius: Dimens.radius10.borderRadius),
+      content: CustomSnackBarWidget(
+        message: message,
+        icon: icon,
+        buttonText: buttonText,
+        onButtonClick: onButtonClick,
+      ),
+      backgroundColor: AppColors.instance.lightGrayBGColor,
     ),
-    backgroundColor: AppColors.instance.lightGrayBGColor,
-  ));
+  );
 }
 
 /// Extension on [BuildContext] to show the app snack bar from context.

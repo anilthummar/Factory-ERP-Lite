@@ -25,6 +25,11 @@ class LoginForm extends BaseResponsiveView {
           context.showAppSnackBar(state.errorMessage!);
         }
       },
+      listenWhen: (LoginState previous, LoginState current) =>
+          (current.status == BaseStateStatus.success &&
+              current.routeName != null) ||
+          (current.status == BaseStateStatus.failure &&
+              current.errorMessage != null),
       builder: (BuildContext context, LoginState state) {
         final bool isLoading = state.status == BaseStateStatus.loading;
 

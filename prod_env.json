@@ -1,11 +1,15 @@
 {
   "base_url": "",
   "envKey": "prod",
-  "androidAppId": "1:233913945264:android:3fe27ad9e746eda651ff75",
-  "iosAppId": "1:233913945264:ios:bcc18fffc1a71f1451ff75",
-  "messagingSenderId": "233913945264",
-  "projectId": "brainvire-structure",
-  "iosApiKey": "AIzaSyBGBMZnRSAgfX6u0dqHZq-f0Vd8iAvN39c",
-  "androidApiKey": "AIzaSyBZSQJgUHGEF45Ic6MBCimfadlYbV3d2d8",
+  "androidAppId": "1:485649865712:android:daaec9078cc22b5c881b35",
+  "iosAppId": "1:485649865712:ios:PLACEHOLDER_UPDATE_FROM_FIREBASE",
+  "messagingSenderId": "485649865712",
+  "projectId": "factory-erp-lite",
+  "iosApiKey": "AIzaSyD6W-eoO3VuhD9USyFecSwKc-uG3MzMscU",
+  "androidApiKey": "AIzaSyD6W-eoO3VuhD9USyFecSwKc-uG3MzMscU",
+  "webApiKey": "AIzaSyD6W-eoO3VuhD9USyFecSwKc-uG3MzMscU",
+  "authDomain": "factory-erp-lite.firebaseapp.com",
+  "storageBucket": "factory-erp-lite.firebasestorage.app",
+  "googleWebClientId": "485649865712-sucss2o135s1om404htgnvfcf62pj3ob.apps.googleusercontent.com",
   "sentryDSN": ""
 }

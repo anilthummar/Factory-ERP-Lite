@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "485649865712-5aq7gp63rbr0ir4dj274c861km1k3lv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.factoryerplite.app",
+            "certificate_hash": "45124d3b1299cf97079838a95903758761effbab"
+          }
+        },
+        {
           "client_id": "485649865712-sucss2o135s1om404htgnvfcf62pj3ob.apps.googleusercontent.com",
           "client_type": 3
         }

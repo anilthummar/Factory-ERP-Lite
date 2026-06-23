@@ -61,6 +61,14 @@ class AuthRepositoryImpl implements AuthRepository {
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
+    if (googleAuth.idToken == null) {
+      throw FirebaseAuthException(
+        code: 'invalid-credential',
+        message:
+            'Google ID token is missing. Check googleWebClientId and SHA-1 in Firebase.',
+      );
+    }
+
     final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
