@@ -14,7 +14,7 @@ class MiscellaneousExpenseFormPage extends StatelessWidget {
         strings,
         pageTitleAdd: strings.miscExpensesKey,
       ),
-      onSave: () => Navigator.of(context).pop(),
+      onSave: () => context.router.maybePop(),
     );
   }
 }

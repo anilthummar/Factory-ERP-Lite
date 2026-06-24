@@ -1,6 +1,8 @@
+import '../../../../core/domain/entities/factory_status_entity.dart';
 import '../../../../utils/exports.dart';
+import '../mapper/factory_status_ui_mapper.dart';
 
-/// Full status history screen (UI only).
+/// Full status history screen.
 @RoutePage()
 class FactoryStatusHistoryPage extends StatelessWidget {
   /// Creates [FactoryStatusHistoryPage].
@@ -8,10 +10,23 @@ class FactoryStatusHistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<FactoryStatusBloc>(
+      create: (BuildContext context) => FactoryStatusBloc(
+        getHistoryUseCase: getIt<GetFactoryStatusHistoryUseCase>(),
+        changeStatusUseCase: getIt<ChangeFactoryStatusUseCase>(),
+      ),
+      child: const _FactoryStatusHistoryView(),
+    );
+  }
+}
+
+class _FactoryStatusHistoryView extends StatelessWidget {
+  const _FactoryStatusHistoryView();
+
+  @override
+  Widget build(BuildContext context) {
     final AppString strings = context.appString;
     final ColorScheme colorScheme = context.theme.colorScheme;
-    const List<FactoryStatusHistoryData> history =
-        <FactoryStatusHistoryData>[];
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -21,13 +36,33 @@ class FactoryStatusHistoryPage extends StatelessWidget {
           textAlign: TextAlign.start,
         ),
       ),
-      body: CustomResponsiveContent(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Dimens.padding16),
-          child: history.isEmpty
-              ? const FactoryStatusHistoryEmptyView()
-              : const FactoryStatusHistoryTimeline(history: history),
-        ),
+      body: BlocBuilder<FactoryStatusBloc, FactoryStatusState>(
+        builder: (BuildContext context, FactoryStatusState state) {
+          if (state.status == FactoryStatusBlocStatus.loading &&
+              state.history.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final List<FactoryStatusHistoryData> history = state.history
+              .map(
+                (FactoryStatusEntity status) => FactoryStatusHistoryData(
+                  id: status.id,
+                  status: status.status.toUi(),
+                  changedAt: status.updatedAt,
+                  notes: status.notes,
+                ),
+              )
+              .toList(growable: false);
+
+          return CustomResponsiveContent(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Dimens.padding16),
+              child: history.isEmpty
+                  ? const FactoryStatusHistoryEmptyView()
+                  : FactoryStatusHistoryTimeline(history: history),
+            ),
+          );
+        },
       ),
     );
   }

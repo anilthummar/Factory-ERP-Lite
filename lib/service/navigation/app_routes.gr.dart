@@ -9,7 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i25;
+import 'package:auto_route/auto_route.dart' as _i26;
 import 'package:factory_erp_lite/modules/custom_pagination/ui/widget/custom_pagination_page.dart'
     as _i1;
 import 'package:factory_erp_lite/modules/electricity_expenses/ui/electricity_expenses_page.dart'
@@ -46,24 +46,26 @@ import 'package:factory_erp_lite/modules/reports_analytics/ui/monthly_summary_re
 import 'package:factory_erp_lite/modules/reports_analytics/ui/person_report_page.dart'
     as _i17;
 import 'package:factory_erp_lite/modules/splash/ui/splash_page.dart' as _i19;
-import 'package:factory_erp_lite/modules/tab_one/ui/tab_one_page.dart' as _i21;
-import 'package:factory_erp_lite/modules/tab_one_detail/ui/tab_one_detail_page.dart'
+import 'package:factory_erp_lite/modules/sync_diagnostics/ui/sync_diagnostics_page.dart'
     as _i20;
-import 'package:factory_erp_lite/modules/tab_two/ui/tab_two_page.dart' as _i23;
+import 'package:factory_erp_lite/modules/tab_one/ui/tab_one_page.dart' as _i22;
+import 'package:factory_erp_lite/modules/tab_one_detail/ui/tab_one_detail_page.dart'
+    as _i21;
+import 'package:factory_erp_lite/modules/tab_two/ui/tab_two_page.dart' as _i24;
 import 'package:factory_erp_lite/modules/tab_two_detail/ui/tab_two_detail_page.dart'
-    as _i22;
+    as _i23;
 import 'package:factory_erp_lite/modules/truck_expenses/ui/truck_expenses_page.dart'
-    as _i24;
+    as _i25;
 
 /// generated route for
 /// [_i1.CustomPaginationPage]
-class CustomPaginationRoute extends _i25.PageRouteInfo<void> {
-  const CustomPaginationRoute({List<_i25.PageRouteInfo>? children})
+class CustomPaginationRoute extends _i26.PageRouteInfo<void> {
+  const CustomPaginationRoute({List<_i26.PageRouteInfo>? children})
     : super(CustomPaginationRoute.name, initialChildren: children);
 
   static const String name = 'CustomPaginationRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i1.CustomPaginationPage();
@@ -73,13 +75,13 @@ class CustomPaginationRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.ElectricityExpensesPage]
-class ElectricityExpensesRoute extends _i25.PageRouteInfo<void> {
-  const ElectricityExpensesRoute({List<_i25.PageRouteInfo>? children})
+class ElectricityExpensesRoute extends _i26.PageRouteInfo<void> {
+  const ElectricityExpensesRoute({List<_i26.PageRouteInfo>? children})
     : super(ElectricityExpensesRoute.name, initialChildren: children);
 
   static const String name = 'ElectricityExpensesRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i2.ElectricityExpensesPage();
@@ -89,13 +91,13 @@ class ElectricityExpensesRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ExpenseReportPage]
-class ExpenseReportRoute extends _i25.PageRouteInfo<void> {
-  const ExpenseReportRoute({List<_i25.PageRouteInfo>? children})
+class ExpenseReportRoute extends _i26.PageRouteInfo<void> {
+  const ExpenseReportRoute({List<_i26.PageRouteInfo>? children})
     : super(ExpenseReportRoute.name, initialChildren: children);
 
   static const String name = 'ExpenseReportRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i3.ExpenseReportPage();
@@ -105,13 +107,13 @@ class ExpenseReportRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.FactoryStatusHistoryPage]
-class FactoryStatusHistoryRoute extends _i25.PageRouteInfo<void> {
-  const FactoryStatusHistoryRoute({List<_i25.PageRouteInfo>? children})
+class FactoryStatusHistoryRoute extends _i26.PageRouteInfo<void> {
+  const FactoryStatusHistoryRoute({List<_i26.PageRouteInfo>? children})
     : super(FactoryStatusHistoryRoute.name, initialChildren: children);
 
   static const String name = 'FactoryStatusHistoryRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i4.FactoryStatusHistoryPage();
@@ -121,13 +123,13 @@ class FactoryStatusHistoryRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.FactoryStatusOverviewPage]
-class FactoryStatusOverviewRoute extends _i25.PageRouteInfo<void> {
-  const FactoryStatusOverviewRoute({List<_i25.PageRouteInfo>? children})
+class FactoryStatusOverviewRoute extends _i26.PageRouteInfo<void> {
+  const FactoryStatusOverviewRoute({List<_i26.PageRouteInfo>? children})
     : super(FactoryStatusOverviewRoute.name, initialChildren: children);
 
   static const String name = 'FactoryStatusOverviewRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i5.FactoryStatusOverviewPage();
@@ -137,13 +139,13 @@ class FactoryStatusOverviewRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ForceUpdateUnderMaintenancePage]
-class ForceUpdateUnderMaintenanceRoute extends _i25.PageRouteInfo<void> {
-  const ForceUpdateUnderMaintenanceRoute({List<_i25.PageRouteInfo>? children})
+class ForceUpdateUnderMaintenanceRoute extends _i26.PageRouteInfo<void> {
+  const ForceUpdateUnderMaintenanceRoute({List<_i26.PageRouteInfo>? children})
     : super(ForceUpdateUnderMaintenanceRoute.name, initialChildren: children);
 
   static const String name = 'ForceUpdateUnderMaintenanceRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i6.ForceUpdateUnderMaintenancePage();
@@ -153,13 +155,13 @@ class ForceUpdateUnderMaintenanceRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.LaborPage]
-class LaborRoute extends _i25.PageRouteInfo<void> {
-  const LaborRoute({List<_i25.PageRouteInfo>? children})
+class LaborRoute extends _i26.PageRouteInfo<void> {
+  const LaborRoute({List<_i26.PageRouteInfo>? children})
     : super(LaborRoute.name, initialChildren: children);
 
   static const String name = 'LaborRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i7.LaborPage();
@@ -169,13 +171,13 @@ class LaborRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.LaborReportPage]
-class LaborReportRoute extends _i25.PageRouteInfo<void> {
-  const LaborReportRoute({List<_i25.PageRouteInfo>? children})
+class LaborReportRoute extends _i26.PageRouteInfo<void> {
+  const LaborReportRoute({List<_i26.PageRouteInfo>? children})
     : super(LaborReportRoute.name, initialChildren: children);
 
   static const String name = 'LaborReportRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i8.LaborReportPage();
@@ -185,13 +187,13 @@ class LaborReportRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.LoginPage]
-class LoginRoute extends _i25.PageRouteInfo<void> {
-  const LoginRoute({List<_i25.PageRouteInfo>? children})
+class LoginRoute extends _i26.PageRouteInfo<void> {
+  const LoginRoute({List<_i26.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
 
   static const String name = 'LoginRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i9.LoginPage();
@@ -201,13 +203,13 @@ class LoginRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.MainNavigationPage]
-class MainNavigationRoute extends _i25.PageRouteInfo<void> {
-  const MainNavigationRoute({List<_i25.PageRouteInfo>? children})
+class MainNavigationRoute extends _i26.PageRouteInfo<void> {
+  const MainNavigationRoute({List<_i26.PageRouteInfo>? children})
     : super(MainNavigationRoute.name, initialChildren: children);
 
   static const String name = 'MainNavigationRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i10.MainNavigationPage();
@@ -217,13 +219,13 @@ class MainNavigationRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.MaintenanceExpensesPage]
-class MaintenanceExpensesRoute extends _i25.PageRouteInfo<void> {
-  const MaintenanceExpensesRoute({List<_i25.PageRouteInfo>? children})
+class MaintenanceExpensesRoute extends _i26.PageRouteInfo<void> {
+  const MaintenanceExpensesRoute({List<_i26.PageRouteInfo>? children})
     : super(MaintenanceExpensesRoute.name, initialChildren: children);
 
   static const String name = 'MaintenanceExpensesRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i11.MaintenanceExpensesPage();
@@ -233,13 +235,13 @@ class MaintenanceExpensesRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.MaterialPurchasePage]
-class MaterialPurchaseRoute extends _i25.PageRouteInfo<void> {
-  const MaterialPurchaseRoute({List<_i25.PageRouteInfo>? children})
+class MaterialPurchaseRoute extends _i26.PageRouteInfo<void> {
+  const MaterialPurchaseRoute({List<_i26.PageRouteInfo>? children})
     : super(MaterialPurchaseRoute.name, initialChildren: children);
 
   static const String name = 'MaterialPurchaseRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i12.MaterialPurchasePage();
@@ -249,13 +251,13 @@ class MaterialPurchaseRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.MiscellaneousExpensesPage]
-class MiscellaneousExpensesRoute extends _i25.PageRouteInfo<void> {
-  const MiscellaneousExpensesRoute({List<_i25.PageRouteInfo>? children})
+class MiscellaneousExpensesRoute extends _i26.PageRouteInfo<void> {
+  const MiscellaneousExpensesRoute({List<_i26.PageRouteInfo>? children})
     : super(MiscellaneousExpensesRoute.name, initialChildren: children);
 
   static const String name = 'MiscellaneousExpensesRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i13.MiscellaneousExpensesPage();
@@ -265,13 +267,13 @@ class MiscellaneousExpensesRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.MonthlySummaryReportPage]
-class MonthlySummaryReportRoute extends _i25.PageRouteInfo<void> {
-  const MonthlySummaryReportRoute({List<_i25.PageRouteInfo>? children})
+class MonthlySummaryReportRoute extends _i26.PageRouteInfo<void> {
+  const MonthlySummaryReportRoute({List<_i26.PageRouteInfo>? children})
     : super(MonthlySummaryReportRoute.name, initialChildren: children);
 
   static const String name = 'MonthlySummaryReportRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i14.MonthlySummaryReportPage();
@@ -281,13 +283,13 @@ class MonthlySummaryReportRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.PageNotFound]
-class RouteNotFound extends _i25.PageRouteInfo<void> {
-  const RouteNotFound({List<_i25.PageRouteInfo>? children})
+class RouteNotFound extends _i26.PageRouteInfo<void> {
+  const RouteNotFound({List<_i26.PageRouteInfo>? children})
     : super(RouteNotFound.name, initialChildren: children);
 
   static const String name = 'RouteNotFound';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i15.PageNotFound();
@@ -297,13 +299,13 @@ class RouteNotFound extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.PersonPage]
-class PersonRoute extends _i25.PageRouteInfo<void> {
-  const PersonRoute({List<_i25.PageRouteInfo>? children})
+class PersonRoute extends _i26.PageRouteInfo<void> {
+  const PersonRoute({List<_i26.PageRouteInfo>? children})
     : super(PersonRoute.name, initialChildren: children);
 
   static const String name = 'PersonRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i16.PersonPage();
@@ -313,13 +315,13 @@ class PersonRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.PersonReportPage]
-class PersonReportRoute extends _i25.PageRouteInfo<void> {
-  const PersonReportRoute({List<_i25.PageRouteInfo>? children})
+class PersonReportRoute extends _i26.PageRouteInfo<void> {
+  const PersonReportRoute({List<_i26.PageRouteInfo>? children})
     : super(PersonReportRoute.name, initialChildren: children);
 
   static const String name = 'PersonReportRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i17.PersonReportPage();
@@ -329,13 +331,13 @@ class PersonReportRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.RecurringExpensesPage]
-class RecurringExpensesRoute extends _i25.PageRouteInfo<void> {
-  const RecurringExpensesRoute({List<_i25.PageRouteInfo>? children})
+class RecurringExpensesRoute extends _i26.PageRouteInfo<void> {
+  const RecurringExpensesRoute({List<_i26.PageRouteInfo>? children})
     : super(RecurringExpensesRoute.name, initialChildren: children);
 
   static const String name = 'RecurringExpensesRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i18.RecurringExpensesPage();
@@ -345,13 +347,13 @@ class RecurringExpensesRoute extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i19.SplashPage]
-class SplashRoute extends _i25.PageRouteInfo<void> {
-  const SplashRoute({List<_i25.PageRouteInfo>? children})
+class SplashRoute extends _i26.PageRouteInfo<void> {
+  const SplashRoute({List<_i26.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
       return const _i19.SplashPage();
@@ -360,81 +362,97 @@ class SplashRoute extends _i25.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.TabOneDetailPage]
-class TabOneDetailRoute extends _i25.PageRouteInfo<void> {
-  const TabOneDetailRoute({List<_i25.PageRouteInfo>? children})
+/// [_i20.SyncDiagnosticsPage]
+class SyncDiagnosticsRoute extends _i26.PageRouteInfo<void> {
+  const SyncDiagnosticsRoute({List<_i26.PageRouteInfo>? children})
+    : super(SyncDiagnosticsRoute.name, initialChildren: children);
+
+  static const String name = 'SyncDiagnosticsRoute';
+
+  static _i26.PageInfo page = _i26.PageInfo(
+    name,
+    builder: (data) {
+      return const _i20.SyncDiagnosticsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i21.TabOneDetailPage]
+class TabOneDetailRoute extends _i26.PageRouteInfo<void> {
+  const TabOneDetailRoute({List<_i26.PageRouteInfo>? children})
     : super(TabOneDetailRoute.name, initialChildren: children);
 
   static const String name = 'TabOneDetailRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
-      return const _i20.TabOneDetailPage();
+      return const _i21.TabOneDetailPage();
     },
   );
 }
 
 /// generated route for
-/// [_i21.TabOnePage]
-class TabOneRoute extends _i25.PageRouteInfo<void> {
-  const TabOneRoute({List<_i25.PageRouteInfo>? children})
+/// [_i22.TabOnePage]
+class TabOneRoute extends _i26.PageRouteInfo<void> {
+  const TabOneRoute({List<_i26.PageRouteInfo>? children})
     : super(TabOneRoute.name, initialChildren: children);
 
   static const String name = 'TabOneRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
-      return const _i21.TabOnePage();
+      return const _i22.TabOnePage();
     },
   );
 }
 
 /// generated route for
-/// [_i22.TabTwoDetailPage]
-class TabTwoDetailRoute extends _i25.PageRouteInfo<void> {
-  const TabTwoDetailRoute({List<_i25.PageRouteInfo>? children})
+/// [_i23.TabTwoDetailPage]
+class TabTwoDetailRoute extends _i26.PageRouteInfo<void> {
+  const TabTwoDetailRoute({List<_i26.PageRouteInfo>? children})
     : super(TabTwoDetailRoute.name, initialChildren: children);
 
   static const String name = 'TabTwoDetailRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
-      return const _i22.TabTwoDetailPage();
+      return const _i23.TabTwoDetailPage();
     },
   );
 }
 
 /// generated route for
-/// [_i23.TabTwoPage]
-class TabTwoRoute extends _i25.PageRouteInfo<void> {
-  const TabTwoRoute({List<_i25.PageRouteInfo>? children})
+/// [_i24.TabTwoPage]
+class TabTwoRoute extends _i26.PageRouteInfo<void> {
+  const TabTwoRoute({List<_i26.PageRouteInfo>? children})
     : super(TabTwoRoute.name, initialChildren: children);
 
   static const String name = 'TabTwoRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
-      return const _i23.TabTwoPage();
+      return const _i24.TabTwoPage();
     },
   );
 }
 
 /// generated route for
-/// [_i24.TruckExpensesPage]
-class TruckExpensesRoute extends _i25.PageRouteInfo<void> {
-  const TruckExpensesRoute({List<_i25.PageRouteInfo>? children})
+/// [_i25.TruckExpensesPage]
+class TruckExpensesRoute extends _i26.PageRouteInfo<void> {
+  const TruckExpensesRoute({List<_i26.PageRouteInfo>? children})
     : super(TruckExpensesRoute.name, initialChildren: children);
 
   static const String name = 'TruckExpensesRoute';
 
-  static _i25.PageInfo page = _i25.PageInfo(
+  static _i26.PageInfo page = _i26.PageInfo(
     name,
     builder: (data) {
-      return const _i24.TruckExpensesPage();
+      return const _i25.TruckExpensesPage();
     },
   );
 }

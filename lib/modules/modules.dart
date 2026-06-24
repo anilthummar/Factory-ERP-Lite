@@ -21,6 +21,7 @@ export 'person_management/person_management.dart';
 export 'recurring_expenses/recurring_expenses.dart';
 export 'reports_analytics/reports_analytics.dart';
 export 'splash/splash.dart';
+export 'sync_diagnostics/sync_diagnostics.dart';
 export 'tab_one/tab_one.dart';
 export 'tab_one_detail/tab_one_detail.dart';
 export 'tab_two/tab_two.dart';

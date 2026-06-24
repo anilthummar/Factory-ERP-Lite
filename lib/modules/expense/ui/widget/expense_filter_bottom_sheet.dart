@@ -100,6 +100,20 @@ class _ExpenseFilterBottomSheetState extends State<ExpenseFilterBottomSheet> {
     super.dispose();
   }
 
+  Future<void> _pickFromDate() async {
+    await pickAppDateIntoController(context, _fromDateController);
+  }
+
+  Future<void> _pickToDate() async {
+    await pickAppDateIntoController(
+      context,
+      _toDateController,
+      firstDate: _fromDateController.text.trim().isEmpty
+          ? null
+          : stringToDate(_fromDateController.text.trim()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = context.theme.colorScheme;
@@ -127,15 +141,17 @@ class _ExpenseFilterBottomSheetState extends State<ExpenseFilterBottomSheet> {
           CustomTextFormFieldWithLabelWidget(
             title: config.fromDateLabel,
             controller: _fromDateController,
-            hint: context.appString.writeSomethingKey,
+            hint: context.appString.selectDateKey,
             readOnly: true,
+            onTap: _pickFromDate,
           ),
           const SizedBox(height: Dimens.space16),
           CustomTextFormFieldWithLabelWidget(
             title: config.toDateLabel,
             controller: _toDateController,
-            hint: context.appString.writeSomethingKey,
+            hint: context.appString.selectDateKey,
             readOnly: true,
+            onTap: _pickToDate,
           ),
           const SizedBox(height: Dimens.space24),
           Row(

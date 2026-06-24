@@ -1,19 +1,23 @@
+import '../../../service/network/response_handler.dart';
 import '../entities/expense_entity.dart';
+import '../enums/expense_category.dart';
 
 /// Contract for expense data access (domain layer only).
 abstract class ExpenseRepository {
-  /// Persists a new expense record.
-  Future<ExpenseEntity> create(ExpenseEntity expense);
+  Future<ResponseHandler<ExpenseEntity>> create(ExpenseEntity expense);
 
-  /// Returns an expense by [id], or null if not found.
-  Future<ExpenseEntity?> getById(String id);
+  Future<ResponseHandler<ExpenseEntity?>> getById(String id);
 
-  /// Returns all expense records.
-  Future<List<ExpenseEntity>> getAll();
+  Future<ResponseHandler<List<ExpenseEntity>>> getAll({
+    ExpenseCategory? category,
+  });
 
-  /// Updates an existing expense record.
-  Future<ExpenseEntity> update(ExpenseEntity expense);
+  Future<ResponseHandler<ExpenseEntity>> update(ExpenseEntity expense);
 
-  /// Deletes an expense record by [id].
-  Future<void> delete(String id);
+  Future<ResponseHandler<void>> delete(String id);
+
+  Future<ResponseHandler<List<ExpenseEntity>>> search(
+    String query, {
+    ExpenseCategory? category,
+  });
 }

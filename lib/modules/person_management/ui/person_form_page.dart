@@ -24,7 +24,7 @@ class PersonFormLabels {
   factory PersonFormLabels.of(AppString strings) {
     return PersonFormLabels(
       titleAdd: strings.addPersonKey,
-      titleEdit: strings.addPersonKey,
+      titleEdit: strings.editPersonKey,
       nameLabel: strings.nameKey,
       mobileLabel: strings.emailIdKey,
       addressLabel: strings.customerAndLocationKey,
@@ -83,7 +83,15 @@ class PersonFormLabels {
   final String saveLabel;
 }
 
-/// Add / edit person form screen (UI only).
+/// Save button callback with validated form values.
+typedef PersonFormSubmitCallback = void Function({
+  required String name,
+  required String mobile,
+  String? address,
+  String? notes,
+});
+
+/// Add / edit person form screen.
 class PersonFormPage extends StatefulWidget {
   /// Creates [PersonFormPage].
   const PersonFormPage({
@@ -93,7 +101,7 @@ class PersonFormPage extends StatefulWidget {
     this.initialAddress,
     this.initialNotes,
     this.labels,
-    this.onSave,
+    this.onSubmit,
     super.key,
   });
 
@@ -115,8 +123,8 @@ class PersonFormPage extends StatefulWidget {
   /// Optional localized labels override.
   final PersonFormLabels? labels;
 
-  /// Save button callback placeholder.
-  final VoidCallback? onSave;
+  /// Called with validated form values when save is pressed.
+  final PersonFormSubmitCallback? onSubmit;
 
   @override
   State<PersonFormPage> createState() => _PersonFormPageState();
@@ -156,23 +164,20 @@ class _PersonFormPageState extends State<PersonFormPage> {
   }
 
   String? _validateMobile(String? value, PersonFormLabels labels) {
-    final String? requiredError =
-        _validateRequired(value, labels.mobileRequiredMessage);
-    if (requiredError != null) {
-      return requiredError;
-    }
-
-    final String digits = value!.replaceAll(RegExp(r'\D'), '');
-    if (digits.length < 10) {
-      return labels.mobileInvalidMessage;
-    }
-    return null;
+    return _validateRequired(value, labels.mobileRequiredMessage);
   }
 
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       context.hideKeyboard();
-      widget.onSave?.call();
+      final String address = _addressController.text.trim();
+      final String notes = _notesController.text.trim();
+      widget.onSubmit?.call(
+        name: _nameController.text.trim(),
+        mobile: _mobileController.text.trim(),
+        address: address.isEmpty ? null : address,
+        notes: notes.isEmpty ? null : notes,
+      );
     }
   }
 

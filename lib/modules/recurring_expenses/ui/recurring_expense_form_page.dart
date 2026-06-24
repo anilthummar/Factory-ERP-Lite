@@ -1,4 +1,5 @@
 import '../../../../utils/exports.dart';
+import 'widget/recurring_expense_frequency.dart';
 
 /// Localized labels for [RecurringExpenseFormPage].
 class RecurringExpenseFormLabels {
@@ -38,8 +39,8 @@ class RecurringExpenseFormLabels {
       notesLabel: strings.valuationAndRemarksKey,
       titleHint: strings.writeSomethingKey,
       amountHint: strings.writeSomethingKey,
-      startDateHint: strings.writeSomethingKey,
-      endDateHint: strings.writeSomethingKey,
+      startDateHint: strings.selectDateKey,
+      endDateHint: strings.selectDateKey,
       notesHint: strings.writeSomethingKey,
       frequencyHint: strings.writeSomethingKey,
       titleRequiredMessage: strings.expenseTitleRequiredKey,
@@ -71,7 +72,17 @@ class RecurringExpenseFormLabels {
   final String saveLabel;
 }
 
-/// Add / edit recurring expense form screen (UI only).
+/// Save callback with validated recurring expense form values.
+typedef RecurringExpenseFormSubmitCallback = void Function({
+  required String title,
+  required double amount,
+  required RecurringExpenseFrequency frequency,
+  required DateTime startDate,
+  DateTime? endDate,
+  String? notes,
+});
+
+/// Add / edit recurring expense form screen.
 class RecurringExpenseFormPage extends StatefulWidget {
   /// Creates [RecurringExpenseFormPage].
   const RecurringExpenseFormPage({
@@ -84,6 +95,7 @@ class RecurringExpenseFormPage extends StatefulWidget {
     this.initialNotes,
     this.labels,
     this.onSave,
+    this.onSubmit,
     super.key,
   });
 
@@ -113,6 +125,9 @@ class RecurringExpenseFormPage extends StatefulWidget {
 
   /// Save button callback placeholder.
   final VoidCallback? onSave;
+
+  /// Called with validated form values when save is pressed.
+  final RecurringExpenseFormSubmitCallback? onSubmit;
 
   @override
   State<RecurringExpenseFormPage> createState() =>
@@ -159,9 +174,36 @@ class _RecurringExpenseFormPageState extends State<RecurringExpenseFormPage> {
     return null;
   }
 
+  Future<void> _pickStartDate() async {
+    await pickAppDateIntoController(context, _startDateController);
+  }
+
+  Future<void> _pickEndDate() async {
+    await pickAppDateIntoController(
+      context,
+      _endDateController,
+      firstDate: _startDateController.text.trim().isEmpty
+          ? null
+          : stringToDate(_startDateController.text.trim()),
+    );
+  }
+
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
+      if (_selectedFrequency == null) {
+        return;
+      }
       context.hideKeyboard();
+      final String notes = _notesController.text.trim();
+      final String endDateText = _endDateController.text.trim();
+      widget.onSubmit?.call(
+        title: _titleController.text.trim(),
+        amount: double.parse(_amountController.text.trim()),
+        frequency: _selectedFrequency!,
+        startDate: stringToDate(_startDateController.text.trim()),
+        endDate: endDateText.isEmpty ? null : stringToDate(endDateText),
+        notes: notes.isEmpty ? null : notes,
+      );
       widget.onSave?.call();
     }
   }
@@ -208,9 +250,14 @@ class _RecurringExpenseFormPageState extends State<RecurringExpenseFormPage> {
                 title: labels.amountLabel,
                 controller: _amountController,
                 hint: labels.amountHint,
-                validator: (dynamic value) => _validateRequired(
+                textInputType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                inputFormatters: FormInputUtils.decimalAmountFormatters,
+                validator: (dynamic value) => FormInputUtils.validateAmount(
                   value as String?,
-                  labels.amountRequiredMessage,
+                  requiredMessage: labels.amountRequiredMessage,
+                  invalidMessage: strings.expenseAmountInvalidKey,
                 ),
               ),
               const SizedBox(height: Dimens.space16),
@@ -230,7 +277,8 @@ class _RecurringExpenseFormPageState extends State<RecurringExpenseFormPage> {
                 controller: _startDateController,
                 hint: labels.startDateHint,
                 readOnly: true,
-                validator: (dynamic value) => _validateRequired(
+                onTap: _pickStartDate,
+                validator: (dynamic value) => FormInputUtils.validateRequired(
                   value as String?,
                   labels.startDateRequiredMessage,
                 ),
@@ -241,6 +289,7 @@ class _RecurringExpenseFormPageState extends State<RecurringExpenseFormPage> {
                 controller: _endDateController,
                 hint: labels.endDateHint,
                 readOnly: true,
+                onTap: _pickEndDate,
               ),
               const SizedBox(height: Dimens.space16),
               CustomTextFormFieldWithLabelWidget(

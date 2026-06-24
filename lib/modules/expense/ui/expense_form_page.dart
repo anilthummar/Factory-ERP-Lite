@@ -1,3 +1,5 @@
+import 'package:file_picker/file_picker.dart';
+
 import '../../../../utils/exports.dart';
 
 /// Localized configuration for [ExpenseFormPage].
@@ -18,6 +20,7 @@ class ExpenseFormUiConfig {
     required this.notesHint,
     required this.titleRequiredMessage,
     required this.amountRequiredMessage,
+    required this.amountInvalidMessage,
     required this.dateRequiredMessage,
     required this.saveLabel,
   });
@@ -39,10 +42,11 @@ class ExpenseFormUiConfig {
       addAttachmentLabel: strings.addAttachmentKey,
       titleHint: strings.writeSomethingKey,
       amountHint: strings.writeSomethingKey,
-      dateHint: strings.writeSomethingKey,
+      dateHint: strings.selectDateKey,
       notesHint: strings.writeSomethingKey,
       titleRequiredMessage: strings.expenseTitleRequiredKey,
       amountRequiredMessage: strings.expenseAmountRequiredKey,
+      amountInvalidMessage: strings.expenseAmountInvalidKey,
       dateRequiredMessage: strings.expenseDateRequiredKey,
       saveLabel: strings.saveKey,
     );
@@ -62,9 +66,19 @@ class ExpenseFormUiConfig {
   final String notesHint;
   final String titleRequiredMessage;
   final String amountRequiredMessage;
+  final String amountInvalidMessage;
   final String dateRequiredMessage;
   final String saveLabel;
 }
+
+/// Save callback with validated expense form values.
+typedef ExpenseFormSubmitCallback = void Function({
+  required String title,
+  required double amount,
+  required DateTime date,
+  String? notes,
+  String? attachmentPath,
+});
 
 /// Reusable expense add/edit form for all expense modules.
 class ExpenseFormPage extends StatefulWidget {
@@ -76,6 +90,8 @@ class ExpenseFormPage extends StatefulWidget {
     this.initialAmount,
     this.initialDate,
     this.initialNotes,
+    this.initialAttachmentPath,
+    this.onSubmit,
     this.onSave,
     this.onAddAttachment,
     super.key,
@@ -99,10 +115,16 @@ class ExpenseFormPage extends StatefulWidget {
   /// Initial notes value.
   final String? initialNotes;
 
-  /// Save button callback placeholder.
+  /// Initial attachment file path.
+  final String? initialAttachmentPath;
+
+  /// Called with validated values when save succeeds.
+  final ExpenseFormSubmitCallback? onSubmit;
+
+  /// Legacy save callback when [onSubmit] is not provided.
   final VoidCallback? onSave;
 
-  /// Attachment action callback placeholder.
+  /// Optional custom attachment handler.
   final VoidCallback? onAddAttachment;
 
   @override
@@ -117,6 +139,9 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
   late final TextEditingController _dateController;
   late final TextEditingController _notesController;
 
+  String? _attachmentPath;
+  String? _attachmentName;
+
   @override
   void initState() {
     super.initState();
@@ -124,6 +149,10 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     _amountController = TextEditingController(text: widget.initialAmount);
     _dateController = TextEditingController(text: widget.initialDate);
     _notesController = TextEditingController(text: widget.initialNotes);
+    _attachmentPath = widget.initialAttachmentPath;
+    if (_attachmentPath != null) {
+      _attachmentName = _attachmentPath!.split('/').last;
+    }
   }
 
   @override
@@ -135,18 +164,60 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     super.dispose();
   }
 
-  String? _validateRequired(String? value, String message) {
-    if (value == null || value.trim().isEmpty) {
-      return message;
+  Future<void> _pickDate() async {
+    await pickAppDateIntoController(context, _dateController);
+  }
+
+  Future<void> _pickAttachment() async {
+    if (widget.onAddAttachment != null) {
+      widget.onAddAttachment!.call();
+      return;
     }
-    return null;
+
+    final FilePickerResult? result = await FilePicker.pickFiles();
+    if (!mounted || result == null || result.files.isEmpty) {
+      return;
+    }
+
+    final PlatformFile file = result.files.first;
+    if (file.path == null) {
+      return;
+    }
+
+    setState(() {
+      _attachmentPath = file.path;
+      _attachmentName = file.name;
+    });
+  }
+
+  void _removeAttachment() {
+    setState(() {
+      _attachmentPath = null;
+      _attachmentName = null;
+    });
   }
 
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       context.hideKeyboard();
-      widget.onSave?.call();
+      final ExpenseFormSubmitCallback? onSubmit = widget.onSubmit;
+      if (onSubmit != null) {
+        onSubmit(
+          title: _titleController.text.trim(),
+          amount: double.parse(_amountController.text.trim()),
+          date: stringToDate(_dateController.text.trim()),
+          notes: _nullableText(_notesController.text),
+          attachmentPath: _attachmentPath,
+        );
+      } else {
+        widget.onSave?.call();
+      }
     }
+  }
+
+  String? _nullableText(String value) {
+    final String trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
   }
 
   @override
@@ -179,7 +250,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                 title: config.titleLabel,
                 controller: _titleController,
                 hint: config.titleHint,
-                validator: (dynamic value) => _validateRequired(
+                validator: (dynamic value) => FormInputUtils.validateRequired(
                   value as String?,
                   config.titleRequiredMessage,
                 ),
@@ -189,9 +260,14 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                 title: config.amountLabel,
                 controller: _amountController,
                 hint: config.amountHint,
-                validator: (dynamic value) => _validateRequired(
+                textInputType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                inputFormatters: FormInputUtils.decimalAmountFormatters,
+                validator: (dynamic value) => FormInputUtils.validateAmount(
                   value as String?,
-                  config.amountRequiredMessage,
+                  requiredMessage: config.amountRequiredMessage,
+                  invalidMessage: config.amountInvalidMessage,
                 ),
               ),
               const SizedBox(height: Dimens.space16),
@@ -200,7 +276,8 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                 controller: _dateController,
                 hint: config.dateHint,
                 readOnly: true,
-                validator: (dynamic value) => _validateRequired(
+                onTap: _pickDate,
+                validator: (dynamic value) => FormInputUtils.validateRequired(
                   value as String?,
                   config.dateRequiredMessage,
                 ),
@@ -220,13 +297,30 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
               ),
               const SizedBox(height: Dimens.space10),
               OutlinedButton.icon(
-                onPressed: widget.onAddAttachment,
+                onPressed: _pickAttachment,
                 icon: const Icon(Icons.attach_file_outlined),
                 label: CustomTextLabelWidget(
                   label: config.addAttachmentLabel,
                   style: AppStyles.instance.textTheme.labelMedium,
                 ),
               ),
+              if (_attachmentName != null) ...<Widget>[
+                const SizedBox(height: Dimens.space8),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.insert_drive_file_outlined),
+                  title: CustomTextLabelWidget(
+                    label: _attachmentName!,
+                    maxLines: Dimens.maxLines01,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.start,
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: _removeAttachment,
+                  ),
+                ),
+              ],
               const SizedBox(height: Dimens.space32),
               CustomButtonWidget(
                 text: config.saveLabel,

@@ -68,9 +68,17 @@ class LaborFormLabels {
   final String saveLabel;
 }
 
-/// Add / edit labor form screen (UI only).
+/// Save callback with validated labor form values.
+typedef LaborFormSubmitCallback = void Function({
+  required String name,
+  required String mobile,
+  required String skill,
+  required double dailyWage,
+  String? notes,
+});
+
+/// Add / edit labor form screen.
 class LaborFormPage extends StatefulWidget {
-  /// Creates [LaborFormPage].
   const LaborFormPage({
     this.isEdit = false,
     this.initialName,
@@ -79,7 +87,7 @@ class LaborFormPage extends StatefulWidget {
     this.initialDailyWage,
     this.initialNotes,
     this.labels,
-    this.onSave,
+    this.onSubmit,
     super.key,
   });
 
@@ -90,7 +98,7 @@ class LaborFormPage extends StatefulWidget {
   final String? initialDailyWage;
   final String? initialNotes;
   final LaborFormLabels? labels;
-  final VoidCallback? onSave;
+  final LaborFormSubmitCallback? onSubmit;
 
   @override
   State<LaborFormPage> createState() => _LaborFormPageState();
@@ -133,23 +141,23 @@ class _LaborFormPageState extends State<LaborFormPage> {
   }
 
   String? _validateMobile(String? value, LaborFormLabels labels) {
-    final String? requiredError =
-        _validateRequired(value, labels.mobileRequiredMessage);
-    if (requiredError != null) {
-      return requiredError;
-    }
-
-    final String digits = value!.replaceAll(RegExp(r'\D'), '');
-    if (digits.length < 10) {
-      return labels.mobileInvalidMessage;
-    }
-    return null;
+    return FormInputUtils.validateRequired(
+      value,
+      labels.mobileRequiredMessage,
+    );
   }
 
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       context.hideKeyboard();
-      widget.onSave?.call();
+      final String notes = _notesController.text.trim();
+      widget.onSubmit?.call(
+        name: _nameController.text.trim(),
+        mobile: _mobileController.text.trim(),
+        skill: _skillController.text.trim(),
+        dailyWage: double.parse(_dailyWageController.text.trim()),
+        notes: notes.isEmpty ? null : notes,
+      );
     }
   }
 
@@ -212,9 +220,14 @@ class _LaborFormPageState extends State<LaborFormPage> {
                 title: labels.dailyWageLabel,
                 controller: _dailyWageController,
                 hint: labels.dailyWageHint,
-                validator: (dynamic value) => _validateRequired(
+                textInputType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                inputFormatters: FormInputUtils.decimalAmountFormatters,
+                validator: (dynamic value) => FormInputUtils.validateAmount(
                   value as String?,
-                  labels.dailyWageRequiredMessage,
+                  requiredMessage: labels.dailyWageRequiredMessage,
+                  invalidMessage: context.appString.expenseAmountInvalidKey,
                 ),
               ),
               const SizedBox(height: Dimens.space16),

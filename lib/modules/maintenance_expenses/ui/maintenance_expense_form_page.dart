@@ -14,7 +14,7 @@ class MaintenanceExpenseFormPage extends StatelessWidget {
         strings,
         pageTitleAdd: strings.maintenanceExpensesKey,
       ),
-      onSave: () => Navigator.of(context).pop(),
+      onSave: () => context.router.maybePop(),
     );
   }
 }

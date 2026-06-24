@@ -14,7 +14,7 @@ class ElectricityExpenseFormPage extends StatelessWidget {
         strings,
         pageTitleAdd: strings.electricityExpensesKey,
       ),
-      onSave: () => Navigator.of(context).pop(),
+      onSave: () => context.router.maybePop(),
     );
   }
 }

@@ -1,9 +1,32 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../../utils/exports.dart';
 
-/// Profile tab placeholder.
-class ProfileTabPage extends StatelessWidget {
+/// Profile tab with hidden developer entry to sync diagnostics.
+class ProfileTabPage extends StatefulWidget {
   /// Creates [ProfileTabPage].
   const ProfileTabPage({super.key});
+
+  @override
+  State<ProfileTabPage> createState() => _ProfileTabPageState();
+}
+
+class _ProfileTabPageState extends State<ProfileTabPage> {
+  static const int _developerTapThreshold = 7;
+
+  int _avatarTapCount = 0;
+
+  void _onAvatarTap() {
+    if (!kDebugMode) {
+      return;
+    }
+
+    _avatarTapCount++;
+    if (_avatarTapCount >= _developerTapThreshold) {
+      _avatarTapCount = 0;
+      unawaited(context.router.push(const SyncDiagnosticsRoute()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +46,16 @@ class ProfileTabPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CircleAvatar(
-                radius: Dimens.radius34,
-                backgroundColor: colorScheme.primaryContainer,
-                child: Icon(
-                  Icons.person_outline,
-                  size: Dimens.size40,
-                  color: colorScheme.onPrimaryContainer,
+              GestureDetector(
+                onTap: _onAvatarTap,
+                child: CircleAvatar(
+                  radius: Dimens.radius34,
+                  backgroundColor: colorScheme.primaryContainer,
+                  child: Icon(
+                    Icons.person_outline,
+                    size: Dimens.size40,
+                    color: colorScheme.onPrimaryContainer,
+                  ),
                 ),
               ),
               const SizedBox(height: Dimens.space16),

@@ -52,8 +52,8 @@ class FactoryStatusChangePage extends StatefulWidget {
   /// Optional localized labels override.
   final FactoryStatusChangeLabels? labels;
 
-  /// Save callback placeholder.
-  final VoidCallback? onSave;
+  /// Save callback with selected status and notes.
+  final void Function(FactoryStatusType status, String? notes)? onSave;
 
   @override
   State<FactoryStatusChangePage> createState() =>
@@ -81,7 +81,7 @@ class _FactoryStatusChangePageState extends State<FactoryStatusChangePage> {
   void _handleSave() {
     if (_formKey.currentState?.validate() ?? false) {
       context.hideKeyboard();
-      widget.onSave?.call();
+      widget.onSave?.call(_selectedStatus!, _notesController.text);
     }
   }
 

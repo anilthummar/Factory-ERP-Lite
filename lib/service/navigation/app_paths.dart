@@ -50,6 +50,9 @@ abstract class AppPaths {
   /// The path for the monthly summary report page.
   static const String monthlySummaryReport = '/reports/monthly-summary';
 
+  /// Hidden developer path for sync diagnostics.
+  static const String syncDiagnostics = '/dev/sync-diagnostics';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

@@ -117,6 +117,12 @@ class AppRouter extends RootStackRouter {
           guards: <AutoRouteGuard>[AuthGuard()],
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute<void>(
+          page: SyncDiagnosticsRoute.page,
+          path: AppPaths.syncDiagnostics,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
         CustomRoute<void>(path: '*', page: RouteNotFound.page),
       ];
 }

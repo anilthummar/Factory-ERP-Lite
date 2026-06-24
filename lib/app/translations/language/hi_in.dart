@@ -327,6 +327,12 @@ class HiIN extends AppString {
   String get totalExpensesKey => "कुल खर्च";
 
   @override
+  String get totalPersonsKey => "कुल व्यक्ति";
+
+  @override
+  String get totalLaborKey => "कुल श्रम";
+
+  @override
   String get activeLaborKey => "सक्रिय श्रम";
 
   @override
@@ -334,6 +340,42 @@ class HiIN extends AppString {
 
   @override
   String get pendingSyncKey => "लंबित सिंक";
+
+  @override
+  String get lastSyncTimeKey => "अंतिम सिंक";
+
+  @override
+  String get neverSyncedKey => "कभी नहीं";
+
+  @override
+  String get syncDiagnosticsTitleKey => "सिंक डायग्नोस्टिक्स";
+
+  @override
+  String get syncDiagnosticsPendingQueueKey => "लंबित कतार";
+
+  @override
+  String get syncDiagnosticsFailedQueueKey => "विफल कतार";
+
+  @override
+  String get syncDiagnosticsConnectivityKey => "कनेक्टिविटी";
+
+  @override
+  String get syncDiagnosticsOnlineKey => "ऑनलाइन";
+
+  @override
+  String get syncDiagnosticsOfflineKey => "ऑफलाइन";
+
+  @override
+  String get syncDiagnosticsBluetoothKey => "ब्लूटूथ";
+
+  @override
+  String get syncDiagnosticsVpnKey => "VPN";
+
+  @override
+  String get syncDiagnosticsRetryKey => "सिंक पुनः प्रयास";
+
+  @override
+  String get syncDiagnosticsRefreshKey => "रीफ़्रेश";
 
   @override
   String get factoryStatusKey => "फ़ैक्टरी स्थिति";
@@ -427,6 +469,16 @@ class HiIN extends AppString {
   String get addPersonKey => "व्यक्ति जोड़ें";
 
   @override
+  String get editPersonKey => "व्यक्ति संपादित करें";
+
+  @override
+  String get deletePersonKey => "हटाएं";
+
+  @override
+  String get deletePersonConfirmKey =>
+      "क्या इस व्यक्ति को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
   String get personEmptyTitleKey => "अभी कोई व्यक्ति नहीं";
 
   @override
@@ -494,6 +546,12 @@ class HiIN extends AppString {
 
   @override
   String get expenseAmountRequiredKey => "कृपया राशि दर्ज करें";
+
+  @override
+  String get expenseAmountInvalidKey => "कृपया मान्य राशि दर्ज करें";
+
+  @override
+  String get selectDateKey => "तारीख चुनने के लिए टैप करें";
 
   @override
   String get expenseDateRequiredKey => "कृपया तारीख चुनें";

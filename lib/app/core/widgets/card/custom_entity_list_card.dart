@@ -74,7 +74,24 @@ class CustomEntityListCard extends StatelessWidget {
               ),
               if (trailing != null) ...<Widget>[
                 const SizedBox(width: Dimens.space8),
-                trailing!,
+                Flexible(
+                  child: LayoutBuilder(
+                    builder: (
+                      BuildContext context,
+                      BoxConstraints constraints,
+                    ) {
+                      return Align(
+                        alignment: Alignment.centerRight,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth,
+                          ),
+                          child: trailing!,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ],
           ),

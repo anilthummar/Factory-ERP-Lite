@@ -14,7 +14,7 @@ class TruckExpenseFormPage extends StatelessWidget {
         strings,
         pageTitleAdd: strings.truckExpensesKey,
       ),
-      onSave: () => Navigator.of(context).pop(),
+      onSave: () => context.router.maybePop(),
     );
   }
 }

@@ -317,6 +317,12 @@ abstract class AppString {
   /// Dashboard total expenses metric.
   String get totalExpensesKey;
 
+  /// Dashboard total persons metric.
+  String get totalPersonsKey;
+
+  /// Dashboard total labor metric.
+  String get totalLaborKey;
+
   /// Dashboard active labor metric.
   String get activeLaborKey;
 
@@ -325,6 +331,42 @@ abstract class AppString {
 
   /// Dashboard pending sync metric.
   String get pendingSyncKey;
+
+  /// Dashboard last successful sync metric.
+  String get lastSyncTimeKey;
+
+  /// Shown when no sync has completed yet.
+  String get neverSyncedKey;
+
+  /// Sync diagnostics screen title.
+  String get syncDiagnosticsTitleKey;
+
+  /// Pending sync queue metric on diagnostics screen.
+  String get syncDiagnosticsPendingQueueKey;
+
+  /// Failed sync queue metric on diagnostics screen.
+  String get syncDiagnosticsFailedQueueKey;
+
+  /// Connectivity status metric on diagnostics screen.
+  String get syncDiagnosticsConnectivityKey;
+
+  /// Online connectivity label.
+  String get syncDiagnosticsOnlineKey;
+
+  /// Offline connectivity label.
+  String get syncDiagnosticsOfflineKey;
+
+  /// Bluetooth connectivity label.
+  String get syncDiagnosticsBluetoothKey;
+
+  /// VPN connectivity label.
+  String get syncDiagnosticsVpnKey;
+
+  /// Retry sync button on diagnostics screen.
+  String get syncDiagnosticsRetryKey;
+
+  /// Refresh diagnostics action label.
+  String get syncDiagnosticsRefreshKey;
 
   /// Factory status section title.
   String get factoryStatusKey;
@@ -413,6 +455,15 @@ abstract class AppString {
   /// Add person FAB label.
   String get addPersonKey;
 
+  /// Edit person screen title.
+  String get editPersonKey;
+
+  /// Delete person action label.
+  String get deletePersonKey;
+
+  /// Delete person confirmation message.
+  String get deletePersonConfirmKey;
+
   /// Empty persons list title.
   String get personEmptyTitleKey;
 
@@ -478,6 +529,12 @@ abstract class AppString {
 
   /// Expense amount required validation message.
   String get expenseAmountRequiredKey;
+
+  /// Expense amount invalid validation message.
+  String get expenseAmountInvalidKey;
+
+  /// Hint for tappable date fields.
+  String get selectDateKey;
 
   /// Expense date required validation message.
   String get expenseDateRequiredKey;

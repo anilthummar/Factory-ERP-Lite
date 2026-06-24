@@ -325,6 +325,12 @@ class EnUS extends AppString {
   String get totalExpensesKey => "Total Expenses";
 
   @override
+  String get totalPersonsKey => "Total Persons";
+
+  @override
+  String get totalLaborKey => "Total Labor";
+
+  @override
   String get activeLaborKey => "Active Labor";
 
   @override
@@ -332,6 +338,42 @@ class EnUS extends AppString {
 
   @override
   String get pendingSyncKey => "Pending Sync";
+
+  @override
+  String get lastSyncTimeKey => "Last Sync";
+
+  @override
+  String get neverSyncedKey => "Never";
+
+  @override
+  String get syncDiagnosticsTitleKey => "Sync Diagnostics";
+
+  @override
+  String get syncDiagnosticsPendingQueueKey => "Pending Queue";
+
+  @override
+  String get syncDiagnosticsFailedQueueKey => "Failed Queue";
+
+  @override
+  String get syncDiagnosticsConnectivityKey => "Connectivity";
+
+  @override
+  String get syncDiagnosticsOnlineKey => "Online";
+
+  @override
+  String get syncDiagnosticsOfflineKey => "Offline";
+
+  @override
+  String get syncDiagnosticsBluetoothKey => "Bluetooth";
+
+  @override
+  String get syncDiagnosticsVpnKey => "VPN";
+
+  @override
+  String get syncDiagnosticsRetryKey => "Retry Sync";
+
+  @override
+  String get syncDiagnosticsRefreshKey => "Refresh";
 
   @override
   String get factoryStatusKey => "Factory Status";
@@ -423,6 +465,16 @@ class EnUS extends AppString {
   String get addPersonKey => "Add Person";
 
   @override
+  String get editPersonKey => "Edit Person";
+
+  @override
+  String get deletePersonKey => "Delete";
+
+  @override
+  String get deletePersonConfirmKey =>
+      "Delete this person? This cannot be undone.";
+
+  @override
   String get personEmptyTitleKey => "No persons yet";
 
   @override
@@ -490,6 +542,12 @@ class EnUS extends AppString {
 
   @override
   String get expenseAmountRequiredKey => "Please enter an amount";
+
+  @override
+  String get expenseAmountInvalidKey => "Please enter a valid amount";
+
+  @override
+  String get selectDateKey => "Tap to select date";
 
   @override
   String get expenseDateRequiredKey => "Please select a date";

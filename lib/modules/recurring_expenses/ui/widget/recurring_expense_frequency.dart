@@ -1,19 +1,6 @@
+export '../../../../core/domain/enums/recurring_expense_frequency.dart';
+import '../../../../core/domain/enums/recurring_expense_frequency.dart';
 import '../../../../utils/exports.dart';
-
-/// Recurring expense billing frequency (UI only).
-enum RecurringExpenseFrequency {
-  /// Daily recurrence.
-  daily,
-
-  /// Weekly recurrence.
-  weekly,
-
-  /// Monthly recurrence.
-  monthly,
-
-  /// Yearly recurrence.
-  yearly,
-}
 
 /// Localized labels for [RecurringExpenseFrequency].
 extension RecurringExpenseFrequencyLabels on RecurringExpenseFrequency {

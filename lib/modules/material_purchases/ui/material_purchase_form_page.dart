@@ -14,7 +14,7 @@ class MaterialPurchaseFormPage extends StatelessWidget {
         strings,
         pageTitleAdd: strings.materialPurchaseKey,
       ),
-      onSave: () => Navigator.of(context).pop(),
+      onSave: () => context.router.maybePop(),
     );
   }
 }

@@ -1,1 +1,2 @@
-// Foundation placeholder — implement in feature phase.
+export 'person_bloc.dart';
+export 'person_event.dart';
