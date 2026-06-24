@@ -30,7 +30,9 @@ class MyAppTheme {
     onErrorContainer: AppColors.instance.redColor,
     surface: AppColors.instance.surface,
     onSurface: AppColors.instance.onSurface,
-    outline: AppColors.instance.lightGrayBGColor,
+    outline: AppColors.figmaGrayE0,
+    outlineVariant: AppColors.figmaGrayE6,
+    surfaceContainerHighest: AppColors.figmaGrayEE,
     shadow: AppColors.instance.blackBGColor,
   );
 
@@ -68,6 +70,9 @@ class MyAppTheme {
       progressIndicatorTheme: getProgressIndicatorThemeData(),
       popupMenuTheme: getPopupMenuThemeData(),
       useMaterial3: true,
+      extensions: const <ThemeExtension<dynamic>>[
+        AppThemeColors.light,
+      ],
     );
   }
 

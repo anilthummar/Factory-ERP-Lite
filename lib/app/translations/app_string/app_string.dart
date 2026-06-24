@@ -169,4 +169,37 @@ abstract class AppString {
 
   /// Hint text on the dashboard before modules are added.
   String get dashboardModulesHintKey;
+
+  /// Login screen section title.
+  String get createAccountKey;
+
+  /// Login screen email instruction.
+  String get enterEmailToSignUpKey;
+
+  /// Login email field placeholder.
+  String get emailPlaceholderKey;
+
+  /// Continue button label.
+  String get continueKey;
+
+  /// Divider label between auth methods.
+  String get orKey;
+
+  /// Google social login button label.
+  String get continueWithGoogleKey;
+
+  /// Apple social login button label.
+  String get continueWithAppleKey;
+
+  /// Terms footer prefix text.
+  String get termsAgreementPrefixKey;
+
+  /// Terms of service link label.
+  String get termsOfServiceKey;
+
+  /// Conjunction between legal links.
+  String get termsAndKey;
+
+  /// Privacy policy link label.
+  String get privacyPolicyKey;
 }

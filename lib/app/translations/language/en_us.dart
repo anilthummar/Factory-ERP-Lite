@@ -168,4 +168,39 @@ class EnUS extends AppString {
   @override
   String get dashboardModulesHintKey =>
       "ERP modules will appear here as they are implemented.";
+
+  @override
+  String get createAccountKey => "Create an account";
+
+  @override
+  String get enterEmailToSignUpKey =>
+      "Enter your email to sign up for this app";
+
+  @override
+  String get emailPlaceholderKey => "email@domain.com";
+
+  @override
+  String get continueKey => "Continue";
+
+  @override
+  String get orKey => "or";
+
+  @override
+  String get continueWithGoogleKey => "Continue with Google";
+
+  @override
+  String get continueWithAppleKey => "Continue with Apple";
+
+  @override
+  String get termsAgreementPrefixKey =>
+      "By clicking continue, you agree to our ";
+
+  @override
+  String get termsOfServiceKey => "Terms of Service";
+
+  @override
+  String get termsAndKey => " and ";
+
+  @override
+  String get privacyPolicyKey => "Privacy Policy";
 }

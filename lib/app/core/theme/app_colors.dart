@@ -8,12 +8,43 @@ class AppColors {
   /// Singleton instance of [AppColors]
   static AppColors instance = getIt<AppColors>();
 
+  // Figma selection palette
+  /// #000000
+  static const Color figmaBlack = Color(0xFF000000);
+
+  /// #828282
+  static const Color figmaGray828 = Color(0xFF828282);
+
+  /// #FFFFFF
+  static const Color figmaWhite = Color(0xFFFFFFFF);
+
+  /// #E6E6E6
+  static const Color figmaGrayE6 = Color(0xFFE6E6E6);
+
+  /// #EEEEEE
+  static const Color figmaGrayEE = Color(0xFFEEEEEE);
+
+  /// #E0E0E0
+  static const Color figmaGrayE0 = Color(0xFFE0E0E0);
+
+  /// #4285F4
+  static const Color googleBlue = Color(0xFF4285F4);
+
+  /// #34A853
+  static const Color googleGreen = Color(0xFF34A853);
+
+  /// #EB4335
+  static const Color googleRed = Color(0xFFEB4335);
+
+  /// #FBBC05
+  static const Color googleYellow = Color(0xFFFBBC05);
+
   // Base Colors
   /// Pure white color
-  static const Color whiteColor = Colors.white;
+  static const Color whiteColor = figmaWhite;
 
   /// Standard black color for text and icons
-  static const Color blackColor = Color(0xFF2F2F2F);
+  static const Color blackColor = figmaBlack;
 
   /// Deep blue color for primary elements
   static const Color darkBlueColor = Color(0xFF1F1C57);
@@ -22,10 +53,10 @@ class AppColors {
   static const Color lightGreyColor = Color(0xFFD3D3D3);
 
   /// Medium grey for secondary text
-  static const Color normalGreyColor = Color(0xFF878893);
+  static const Color normalGreyColor = figmaGray828;
 
   /// Very light grey for backgrounds
-  static const Color extraLightGreyColor = Color(0xFFF5F5F5);
+  static const Color extraLightGreyColor = figmaGrayEE;
 
   /// Brand orange color
   static const Color orangeColor = Color(0xFFF56E28);
@@ -44,16 +75,16 @@ class AppColors {
   Color errorContainer = Colors.redAccent.shade100;
 
   /// Primary brand color
-  Color primary = orangeColor;
+  Color primary = figmaBlack;
 
   /// Color for content on primary color
-  Color onPrimary = whiteColor;
+  Color onPrimary = figmaWhite;
 
   /// Container with primary color
-  Color primaryContainer = orangeColor;
+  Color primaryContainer = figmaBlack;
 
   /// Color for content on primary container
-  Color onPrimaryContainer = whiteColor;
+  Color onPrimaryContainer = figmaWhite;
 
   /// Secondary brand color
   Color secondary = orangeColor;
@@ -65,19 +96,19 @@ class AppColors {
   Color onSecondaryContainer = orangeColor;
 
   /// Background color for secondary containers
-  Color secondaryContainer = whiteColor;
+  Color secondaryContainer = figmaGrayEE;
 
   /// Main background color
-  Color background = whiteColor;
+  Color background = figmaWhite;
 
   /// Color for content on background
-  Color onBackground = whiteColor;
+  Color onBackground = figmaBlack;
 
   /// Surface color for cards and elevated elements
-  Color surface = whiteColor;
+  Color surface = figmaWhite;
 
   /// Color for content on surface
-  Color onSurface = blackColor;
+  Color onSurface = figmaBlack;
 
   /// Alert color for error states and warnings
   Color redColor = normalRedColor;
@@ -90,10 +121,10 @@ class AppColors {
   Color blackTextColor = blackColor;
 
   /// Color for subtle/disabled text
-  Color lightGrayTextColor = lightGreyColor;
+  Color lightGrayTextColor = figmaGrayE0;
 
   /// Color for secondary text
-  Color mediumGrayTextColor = normalGreyColor;
+  Color mediumGrayTextColor = figmaGray828;
 
   /// Color for emphasized blue text
   Color blueTextColor = darkBlueColor;
@@ -121,10 +152,10 @@ class AppColors {
   Color blackBGColor = blackColor;
 
   /// Light grey background for subtle separation
-  Color lightGrayBGColor = lightGreyColor;
+  Color lightGrayBGColor = figmaGrayE0;
 
   /// Very light grey background for subtle containers
-  Color extraLightGreyBGColor = extraLightGreyColor;
+  Color extraLightGreyBGColor = figmaGrayEE;
 
   /// Light red background for warnings
   Color lightRedBGColor = lightRedColor;

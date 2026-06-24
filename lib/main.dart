@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LocaleBloc, ChangeLocaleState>(
         builder: (BuildContext context, ChangeLocaleState state) {
           return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             builder: EasyLoading.init(
                 builder: (BuildContext context, Widget? child) {
               configLoader();

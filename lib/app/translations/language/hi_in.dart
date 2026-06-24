@@ -170,4 +170,39 @@ class HiIN extends AppString {
   @override
   String get dashboardModulesHintKey =>
       "ERP मॉड्यूल लागू होने पर यहां दिखाई देंगे।";
+
+  @override
+  String get createAccountKey => "खाता बनाएं";
+
+  @override
+  String get enterEmailToSignUpKey =>
+      "इस ऐप के लिए साइन अप करने हेतु अपना ईमेल दर्ज करें";
+
+  @override
+  String get emailPlaceholderKey => "email@domain.com";
+
+  @override
+  String get continueKey => "जारी रखें";
+
+  @override
+  String get orKey => "या";
+
+  @override
+  String get continueWithGoogleKey => "Google के साथ जारी रखें";
+
+  @override
+  String get continueWithAppleKey => "Apple के साथ जारी रखें";
+
+  @override
+  String get termsAgreementPrefixKey =>
+      "जारी रखें पर क्लिक करके, आप हमारी ";
+
+  @override
+  String get termsOfServiceKey => "सेवा की शर्तों";
+
+  @override
+  String get termsAndKey => " और ";
+
+  @override
+  String get privacyPolicyKey => "गोपनीयता नीति";
 }
