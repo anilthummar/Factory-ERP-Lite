@@ -12,6 +12,7 @@ class FactoryStatusOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<FactoryStatusBloc>(
       create: (BuildContext context) => FactoryStatusBloc(
+        getCurrentStatusUseCase: getIt<GetCurrentFactoryStatusUseCase>(),
         getHistoryUseCase: getIt<GetFactoryStatusHistoryUseCase>(),
         changeStatusUseCase: getIt<ChangeFactoryStatusUseCase>(),
       ),
@@ -64,9 +65,8 @@ class _FactoryStatusOverviewView extends StatelessWidget {
       },
       builder: (BuildContext context, FactoryStatusState state) {
         final FactoryStatusBloc bloc = context.read<FactoryStatusBloc>();
-        final FactoryStatusType currentUiStatus =
-            state.currentStatus?.status.toUi() ??
-                FactoryStatusType.operational;
+        final FactoryStatusType? currentUiStatus =
+            state.currentStatus?.status.toUi();
         final List<FactoryStatusHistoryData> recentHistory =
             state.recentHistory
                 .map(

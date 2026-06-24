@@ -14,4 +14,7 @@ abstract final class HiveTypeIds {
 
   /// Factory status hive model adapter type ID.
   static const int factoryStatusHiveModel = 14;
+
+  /// Attachment hive model adapter type ID.
+  static const int attachmentHiveModel = 15;
 }

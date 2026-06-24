@@ -26,6 +26,9 @@ enum SyncModuleType {
 
   /// Factory status records.
   factoryStatus,
+
+  /// File attachments metadata.
+  attachments,
 }
 
 /// Parses [SyncModuleType] from persisted queue values.

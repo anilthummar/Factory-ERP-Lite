@@ -1,5 +1,3 @@
-import 'package:file_picker/file_picker.dart';
-
 import '../../../../utils/exports.dart';
 
 /// Localized configuration for [ExpenseFormPage].
@@ -174,20 +172,40 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       return;
     }
 
-    final FilePickerResult? result = await FilePicker.pickFiles();
-    if (!mounted || result == null || result.files.isEmpty) {
-      return;
-    }
+    try {
+      final AttachmentEntity? attachment =
+          await getIt<PickAndSaveAttachmentUseCase>().pickAndSave(
+        attachmentType: AttachmentType.receipt,
+      );
+      if (!mounted || attachment == null) {
+        return;
+      }
 
-    final PlatformFile file = result.files.first;
-    if (file.path == null) {
-      return;
+      setState(() {
+        _attachmentPath = attachment.localPath;
+        _attachmentName = attachment.fileName;
+      });
+    } on UnsupportedAttachmentTypeException {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomTextLabelWidget(
+            label: context.appString.unsupportedAttachmentTypeKey,
+          ),
+        ),
+      );
+    } on Object catch (error) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomTextLabelWidget(label: error.toString()),
+        ),
+      );
     }
-
-    setState(() {
-      _attachmentPath = file.path;
-      _attachmentName = file.name;
-    });
   }
 
   void _removeAttachment() {

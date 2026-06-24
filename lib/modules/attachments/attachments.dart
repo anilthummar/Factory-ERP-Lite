@@ -1,4 +1,9 @@
 export 'bloc/bloc.dart';
+export 'datasource/datasource.dart';
+export 'domain/usecases/usecases.dart';
 export 'model/model.dart';
 export 'repository/repository.dart';
-export 'ui/ui.dart';
+export 'service/attachment_file_service.dart';
+export '../../../core/domain/entities/attachment_entity.dart';
+export '../../../core/domain/enums/attachment_type.dart';
+export '../../../core/domain/repositories/attachment_repository.dart';

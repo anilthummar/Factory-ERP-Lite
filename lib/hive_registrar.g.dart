@@ -3,6 +3,7 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
+import 'package:factory_erp_lite/modules/attachments/model/local/attachment_hive_model.dart';
 import 'package:factory_erp_lite/modules/expense/model/local/expense_hive_model.dart';
 import 'package:factory_erp_lite/modules/factory_status/model/local/factory_status_hive_model.dart';
 import 'package:factory_erp_lite/modules/labor_management/model/local/labor_hive_model.dart';
@@ -11,6 +12,7 @@ import 'package:factory_erp_lite/modules/recurring_expenses/model/local/recurrin
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(AttachmentHiveModelAdapter());
     registerAdapter(ExpenseHiveModelAdapter());
     registerAdapter(FactoryStatusHiveModelAdapter());
     registerAdapter(LaborHiveModelAdapter());
@@ -21,6 +23,7 @@ extension HiveRegistrar on HiveInterface {
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
+    registerAdapter(AttachmentHiveModelAdapter());
     registerAdapter(ExpenseHiveModelAdapter());
     registerAdapter(FactoryStatusHiveModelAdapter());
     registerAdapter(LaborHiveModelAdapter());

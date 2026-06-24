@@ -1,6 +1,9 @@
 import '../../core/sync/sync_module_type.dart';
+import '../../modules/attachments/datasource/attachment_storage_remote_data_source.dart';
+import '../firebase/firebase_service.dart';
 import '../hive/hive_manager.dart';
 import '../../modules/expense/foundation/expense_module_config.dart';
+import 'handlers/attachment_sync_module_handler.dart';
 import 'handlers/factory_status_sync_module_handler.dart';
 import 'handlers/expense_sync_module_handler.dart';
 import 'handlers/labor_sync_module_handler.dart';
@@ -10,7 +13,10 @@ import 'handlers/sync_handler_registry.dart';
 import 'handlers/sync_module_handler.dart';
 
 /// Registers default module sync handlers for implemented ERP modules.
-SyncHandlerRegistry createDefaultSyncHandlerRegistry({HiveManager? hiveManager}) {
+SyncHandlerRegistry createDefaultSyncHandlerRegistry({
+  HiveManager? hiveManager,
+  FirebaseService? firebaseService,
+}) {
   final SyncHandlerRegistry registry = SyncHandlerRegistry();
   final HiveManager manager = hiveManager ?? HiveManager.instance;
 
@@ -45,6 +51,17 @@ SyncHandlerRegistry createDefaultSyncHandlerRegistry({HiveManager? hiveManager})
     RecurringExpenseSyncModuleHandler(hiveManager: manager),
     FactoryStatusSyncModuleHandler(hiveManager: manager),
   ];
+
+  if (firebaseService != null) {
+    handlers.add(
+      AttachmentSyncModuleHandler(
+        storageDataSource: AttachmentStorageRemoteDataSource(
+          firebaseService: firebaseService,
+        ),
+        hiveManager: manager,
+      ),
+    );
+  }
 
   for (final SyncModuleHandler handler in handlers) {
     registry.register(handler);

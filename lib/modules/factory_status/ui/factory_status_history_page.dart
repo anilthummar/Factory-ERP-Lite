@@ -12,6 +12,7 @@ class FactoryStatusHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<FactoryStatusBloc>(
       create: (BuildContext context) => FactoryStatusBloc(
+        getCurrentStatusUseCase: getIt<GetCurrentFactoryStatusUseCase>(),
         getHistoryUseCase: getIt<GetFactoryStatusHistoryUseCase>(),
         changeStatusUseCase: getIt<ChangeFactoryStatusUseCase>(),
       ),

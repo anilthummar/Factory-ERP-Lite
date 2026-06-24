@@ -536,6 +536,9 @@ abstract class AppString {
   /// Add attachment placeholder label.
   String get addAttachmentKey;
 
+  /// Shown when a picked file type is not supported.
+  String get unsupportedAttachmentTypeKey;
+
   /// Expense title required validation message.
   String get expenseTitleRequiredKey;
 

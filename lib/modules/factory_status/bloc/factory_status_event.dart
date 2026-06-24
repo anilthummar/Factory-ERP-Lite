@@ -10,10 +10,16 @@ sealed class FactoryStatusEvent extends Equatable {
   List<Object?> get props => <Object?>[];
 }
 
-/// Loads current status and recent history.
+/// Loads current status and full history.
 final class FactoryStatusLoadRequested extends FactoryStatusEvent {
   /// Creates [FactoryStatusLoadRequested].
   const FactoryStatusLoadRequested();
+}
+
+/// Reloads status data without clearing existing state.
+final class FactoryStatusRefreshRequested extends FactoryStatusEvent {
+  /// Creates [FactoryStatusRefreshRequested].
+  const FactoryStatusRefreshRequested();
 }
 
 /// Records a new factory status change.

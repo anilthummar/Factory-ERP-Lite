@@ -1,3 +1,4 @@
+export 'handlers/attachment_sync_module_handler.dart';
 export 'handlers/factory_status_sync_module_handler.dart';
 export 'handlers/expense_sync_module_handler.dart';
 export 'handlers/labor_sync_module_handler.dart';

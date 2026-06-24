@@ -1,3 +1,4 @@
+export 'attachment_entity.dart';
 export 'expense_entity.dart';
 export 'factory_status_entity.dart';
 export 'labor_entity.dart';

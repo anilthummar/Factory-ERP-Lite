@@ -79,7 +79,7 @@ class FactoryStatusRepositoryImpl implements FactoryStatusRepository {
     return statuses.first;
   }
 
-  /// Appends a new status change to history.
+  @override
   Future<FactoryStatusEntity> changeStatus({
     required FactoryStatusEntity status,
   }) async {

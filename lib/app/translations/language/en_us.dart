@@ -551,6 +551,10 @@ class EnUS extends AppString {
   String get addAttachmentKey => "Add attachment";
 
   @override
+  String get unsupportedAttachmentTypeKey =>
+      "Only JPG, PNG, and PDF files are supported";
+
+  @override
   String get expenseTitleRequiredKey => "Please enter a title";
 
   @override

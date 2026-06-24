@@ -556,6 +556,10 @@ class HiIN extends AppString {
   String get addAttachmentKey => "संलग्नक जोड़ें";
 
   @override
+  String get unsupportedAttachmentTypeKey =>
+      "केवल JPG, PNG और PDF फ़ाइलें समर्थित हैं";
+
+  @override
   String get expenseTitleRequiredKey => "कृपया शीर्षक दर्ज करें";
 
   @override

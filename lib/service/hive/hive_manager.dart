@@ -4,6 +4,7 @@ import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import '../../core/hive/hive_type_ids.dart';
 import '../../modules/expense/model/local/expense_hive_model.dart';
 import '../../modules/factory_status/model/local/factory_status_hive_model.dart';
+import '../../modules/attachments/model/local/attachment_hive_model.dart';
 import '../../modules/labor_management/model/local/labor_hive_model.dart';
 import '../../modules/person_management/model/local/person_hive_model.dart';
 import '../../modules/recurring_expenses/model/local/recurring_expense_hive_model.dart';
@@ -27,6 +28,7 @@ class HiveManager {
     HiveBoxNames.miscellaneousExpenses,
     HiveBoxNames.recurringExpenses,
     HiveBoxNames.factoryStatus,
+    HiveBoxNames.attachments,
   };
 
   static const List<String> _expenseModuleBoxNames = <String>[
@@ -55,6 +57,7 @@ class HiveManager {
     await _openExpenseModuleBoxes();
     await _openRecurringExpenseBox();
     await _openFactoryStatusBox();
+    await _openAttachmentsBox();
 
     for (final String boxName in HiveBoxNames.moduleBoxes) {
       if (_typedBoxes.contains(boxName)) {
@@ -66,7 +69,7 @@ class HiveManager {
     _initialized = true;
   }
 
-  /// Opens only sync/meta boxes using a temp path — for automated sync tests.
+  /// Opens sync/meta boxes and typed boxes needed by module tests.
   @visibleForTesting
   Future<void> initForTests(String storagePath) async {
     if (_initialized) {
@@ -74,8 +77,11 @@ class HiveManager {
     }
 
     Hive.init(storagePath);
+    _registerAdapters();
     await _openMapBox(HiveBoxNames.syncQueue);
     await _openMapBox(HiveBoxNames.meta);
+    await _openFactoryStatusBox();
+    await _openAttachmentsBox();
     _initialized = true;
   }
 
@@ -149,6 +155,13 @@ class HiveManager {
   Box<FactoryStatusHiveModel> get factoryStatusBox =>
       Hive.box<FactoryStatusHiveModel>(HiveBoxNames.factoryStatus);
 
+  /// Whether the typed attachments box is open.
+  bool get isAttachmentsBoxOpen => Hive.isBoxOpen(HiveBoxNames.attachments);
+
+  /// Typed Hive box for attachment metadata records.
+  Box<AttachmentHiveModel> get attachmentsBox =>
+      Hive.box<AttachmentHiveModel>(HiveBoxNames.attachments);
+
   /// Pending sync operations queue (maps until typed adapters are added).
   Box<Map<dynamic, dynamic>> get syncQueue =>
       Hive.box<Map<dynamic, dynamic>>(HiveBoxNames.syncQueue);
@@ -176,6 +189,9 @@ class HiveManager {
     }
     if (!Hive.isAdapterRegistered(HiveTypeIds.factoryStatusHiveModel)) {
       Hive.registerAdapter(FactoryStatusHiveModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(HiveTypeIds.attachmentHiveModel)) {
+      Hive.registerAdapter(AttachmentHiveModelAdapter());
     }
   }
 
@@ -210,6 +226,12 @@ class HiveManager {
   Future<void> _openFactoryStatusBox() async {
     if (!Hive.isBoxOpen(HiveBoxNames.factoryStatus)) {
       await Hive.openBox<FactoryStatusHiveModel>(HiveBoxNames.factoryStatus);
+    }
+  }
+
+  Future<void> _openAttachmentsBox() async {
+    if (!Hive.isBoxOpen(HiveBoxNames.attachments)) {
+      await Hive.openBox<AttachmentHiveModel>(HiveBoxNames.attachments);
     }
   }
 

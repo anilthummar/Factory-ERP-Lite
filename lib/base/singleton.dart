@@ -1,4 +1,5 @@
 import '../../../utils/exports.dart';
+import '../../core/domain/repositories/attachment_repository.dart';
 import '../../core/domain/repositories/dashboard_repository.dart';
 import '../../core/domain/repositories/factory_status_repository.dart';
 import '../../core/domain/repositories/labor_repository.dart';
@@ -59,7 +60,10 @@ void setupLocator() {
       ),
     )
     ..registerLazySingleton<SyncHandlerRegistry>(
-      () => createDefaultSyncHandlerRegistry(hiveManager: getIt<HiveManager>()),
+      () => createDefaultSyncHandlerRegistry(
+        hiveManager: getIt<HiveManager>(),
+        firebaseService: getIt<FirebaseService>(),
+      ),
     )
     ..registerLazySingleton<SyncEngine>(
       () => SyncEngine(
@@ -311,7 +315,45 @@ void setupLocator() {
       () => GetFactoryStatusHistoryUseCase(getIt<FactoryStatusRepository>()),
     )
     ..registerLazySingleton<ChangeFactoryStatusUseCase>(
-      () => ChangeFactoryStatusUseCase(getIt<FactoryStatusRepositoryImpl>()),
+      () => ChangeFactoryStatusUseCase(getIt<FactoryStatusRepository>()),
+    )
+    ..registerLazySingleton<AttachmentFileService>(AttachmentFileService.new)
+    ..registerLazySingleton<AttachmentLocalDataSource>(
+      AttachmentLocalDataSourceImpl.new,
+    )
+    ..registerLazySingleton<AttachmentStorageRemoteDataSource>(
+      () => AttachmentStorageRemoteDataSource(
+        firebaseService: getIt<FirebaseService>(),
+      ),
+    )
+    ..registerLazySingleton<AttachmentRepository>(
+      () => AttachmentRepositoryImpl(
+        localDataSource: getIt<AttachmentLocalDataSource>(),
+        fileService: getIt<AttachmentFileService>(),
+        syncSupport: getIt<OfflineFirstSyncSupport>(),
+      ),
+    )
+    ..registerLazySingleton<PickAndSaveAttachmentUseCase>(
+      () => PickAndSaveAttachmentUseCase(
+        getIt<AttachmentRepository>(),
+        getIt<AttachmentFileService>(),
+      ),
+    )
+    ..registerLazySingleton<GetAttachmentsUseCase>(
+      () => GetAttachmentsUseCase(getIt<AttachmentRepository>()),
+    )
+    ..registerLazySingleton<GetAttachmentByIdUseCase>(
+      () => GetAttachmentByIdUseCase(getIt<AttachmentRepository>()),
+    )
+    ..registerLazySingleton<DeleteAttachmentUseCase>(
+      () => DeleteAttachmentUseCase(getIt<AttachmentRepository>()),
+    )
+    ..registerLazySingleton<RetryFailedAttachmentUploadsUseCase>(
+      () => RetryFailedAttachmentUploadsUseCase(
+        getIt<AttachmentRepository>(),
+        getIt<OfflineFirstSyncSupport>(),
+        getIt<SyncService>(),
+      ),
     )
     ..registerLazySingleton<DashboardRepository>(
       () => DashboardRepositoryImpl(

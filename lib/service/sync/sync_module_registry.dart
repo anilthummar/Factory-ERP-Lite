@@ -74,4 +74,9 @@ const Map<SyncModuleType, SyncModuleDescriptor> syncModuleDescriptors =
     hiveBoxName: HiveBoxNames.factoryStatus,
     firestoreCollection: FirestoreCollections.factoryStatus,
   ),
+  SyncModuleType.attachments: SyncModuleDescriptor(
+    module: SyncModuleType.attachments,
+    hiveBoxName: HiveBoxNames.attachments,
+    firestoreCollection: FirestoreCollections.attachments,
+  ),
 };

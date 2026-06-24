@@ -9,8 +9,8 @@ class FactoryStatusCurrentCard extends StatelessWidget {
     super.key,
   });
 
-  /// Current factory status.
-  final FactoryStatusType status;
+  /// Current factory status, or null when no status has been recorded.
+  final FactoryStatusType? status;
 
   /// Formatted last-updated text.
   final String? lastUpdated;
@@ -35,10 +35,14 @@ class FactoryStatusCurrentCard extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   radius: Dimens.radius24,
-                  backgroundColor: status.backgroundColor(colorScheme),
+                  backgroundColor: status == null
+                      ? colorScheme.surfaceContainerHighest
+                      : status!.backgroundColor(colorScheme),
                   child: Icon(
                     Icons.factory_outlined,
-                    color: status.foregroundColor(colorScheme),
+                    color: status == null
+                        ? colorScheme.onSurfaceVariant
+                        : status!.foregroundColor(colorScheme),
                     size: Dimens.size28,
                   ),
                 ),
@@ -56,7 +60,18 @@ class FactoryStatusCurrentCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: Dimens.space4),
-                      FactoryStatusBadge(status: status),
+                      if (status == null)
+                        CustomTextLabelWidget(
+                          label: strings.noFactoryStatusSetKey,
+                          textAlign: TextAlign.start,
+                          style: AppStyles.instance.textTheme.titleMedium
+                              ?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        )
+                      else
+                        FactoryStatusBadge(status: status!),
                     ],
                   ),
                 ),
