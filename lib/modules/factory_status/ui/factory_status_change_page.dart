@@ -150,9 +150,8 @@ class _StatusSelectorField extends FormField<FactoryStatusType> {
     required AppString strings,
     required String requiredMessage,
     required ValueChanged<FactoryStatusType?> onChanged,
-    FactoryStatusType? initialValue,
+    super.initialValue,
   }) : super(
-          initialValue: initialValue,
           validator: (FactoryStatusType? value) {
             if (value == null) {
               return requiredMessage;

@@ -1,5 +1,11 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
+import '../../core/hive/hive_type_ids.dart';
+import '../../modules/expense/model/local/expense_hive_model.dart';
+import '../../modules/factory_status/model/local/factory_status_hive_model.dart';
+import '../../modules/labor_management/model/local/labor_hive_model.dart';
+import '../../modules/person_management/model/local/person_hive_model.dart';
+import '../../modules/recurring_expenses/model/local/recurring_expense_hive_model.dart';
 import 'hive_box_names.dart';
 
 /// Initializes Hive and provides access to offline-first module boxes.
@@ -20,6 +26,7 @@ class HiveManager {
     }
 
     await Hive.initFlutter();
+    _registerAdapters();
     await _openBox(HiveBoxNames.syncQueue);
     await _openBox(HiveBoxNames.meta);
 
@@ -41,6 +48,24 @@ class HiveManager {
   /// Returns an opened module box by [boxName].
   Box<Map<dynamic, dynamic>> moduleBox(String boxName) =>
       Hive.box<Map<dynamic, dynamic>>(boxName);
+
+  void _registerAdapters() {
+    if (!Hive.isAdapterRegistered(HiveTypeIds.personHiveModel)) {
+      Hive.registerAdapter(PersonHiveModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(HiveTypeIds.laborHiveModel)) {
+      Hive.registerAdapter(LaborHiveModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(HiveTypeIds.expenseHiveModel)) {
+      Hive.registerAdapter(ExpenseHiveModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(HiveTypeIds.recurringExpenseHiveModel)) {
+      Hive.registerAdapter(RecurringExpenseHiveModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(HiveTypeIds.factoryStatusHiveModel)) {
+      Hive.registerAdapter(FactoryStatusHiveModelAdapter());
+    }
+  }
 
   Future<void> _openBox(String boxName) async {
     if (!Hive.isBoxOpen(boxName)) {
