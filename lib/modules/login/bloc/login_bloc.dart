@@ -18,8 +18,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(
         status: BaseStateStatus.loading,
-        errorMessage: null,
-        routeName: null,
       ),
     );
 

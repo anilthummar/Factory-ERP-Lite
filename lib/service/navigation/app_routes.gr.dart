@@ -12,11 +12,11 @@
 import 'package:auto_route/auto_route.dart' as _i11;
 import 'package:factory_erp_lite/modules/custom_pagination/ui/widget/custom_pagination_page.dart'
     as _i1;
-import 'package:factory_erp_lite/modules/dashboard/ui/dashboard_page.dart'
-    as _i2;
 import 'package:factory_erp_lite/modules/force_update_under_maintenance/ui/force_update_under_maintenance_page.dart'
-    as _i3;
-import 'package:factory_erp_lite/modules/login/ui/login_page.dart' as _i4;
+    as _i2;
+import 'package:factory_erp_lite/modules/login/ui/login_page.dart' as _i3;
+import 'package:factory_erp_lite/modules/main_navigation/ui/main_navigation_page.dart'
+    as _i4;
 import 'package:factory_erp_lite/modules/page_not_found/ui/page_not_found_page.dart'
     as _i5;
 import 'package:factory_erp_lite/modules/splash/ui/splash_page.dart' as _i6;
@@ -44,23 +44,7 @@ class CustomPaginationRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.DashboardPage]
-class DashboardRoute extends _i11.PageRouteInfo<void> {
-  const DashboardRoute({List<_i11.PageRouteInfo>? children})
-    : super(DashboardRoute.name, initialChildren: children);
-
-  static const String name = 'DashboardRoute';
-
-  static _i11.PageInfo page = _i11.PageInfo(
-    name,
-    builder: (data) {
-      return const _i2.DashboardPage();
-    },
-  );
-}
-
-/// generated route for
-/// [_i3.ForceUpdateUnderMaintenancePage]
+/// [_i2.ForceUpdateUnderMaintenancePage]
 class ForceUpdateUnderMaintenanceRoute extends _i11.PageRouteInfo<void> {
   const ForceUpdateUnderMaintenanceRoute({List<_i11.PageRouteInfo>? children})
     : super(ForceUpdateUnderMaintenanceRoute.name, initialChildren: children);
@@ -70,13 +54,13 @@ class ForceUpdateUnderMaintenanceRoute extends _i11.PageRouteInfo<void> {
   static _i11.PageInfo page = _i11.PageInfo(
     name,
     builder: (data) {
-      return const _i3.ForceUpdateUnderMaintenancePage();
+      return const _i2.ForceUpdateUnderMaintenancePage();
     },
   );
 }
 
 /// generated route for
-/// [_i4.LoginPage]
+/// [_i3.LoginPage]
 class LoginRoute extends _i11.PageRouteInfo<void> {
   const LoginRoute({List<_i11.PageRouteInfo>? children})
     : super(LoginRoute.name, initialChildren: children);
@@ -86,7 +70,23 @@ class LoginRoute extends _i11.PageRouteInfo<void> {
   static _i11.PageInfo page = _i11.PageInfo(
     name,
     builder: (data) {
-      return const _i4.LoginPage();
+      return const _i3.LoginPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i4.MainNavigationPage]
+class MainNavigationRoute extends _i11.PageRouteInfo<void> {
+  const MainNavigationRoute({List<_i11.PageRouteInfo>? children})
+    : super(MainNavigationRoute.name, initialChildren: children);
+
+  static const String name = 'MainNavigationRoute';
+
+  static _i11.PageInfo page = _i11.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.MainNavigationPage();
     },
   );
 }

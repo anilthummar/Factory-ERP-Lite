@@ -1,0 +1,97 @@
+import '../../../../utils/exports.dart';
+
+/// Entries tab — responsive grid of ERP modules.
+class EntriesTabPage extends BaseResponsiveView {
+  /// Creates [EntriesTabPage].
+  const EntriesTabPage({super.key});
+
+  @override
+  Widget buildMobileWidget(BuildContext context) => _buildBody(context, 2);
+
+  @override
+  Widget buildTabletWidget(BuildContext context) => _buildBody(context, 3);
+
+  @override
+  Widget buildDesktopWidget(BuildContext context) => _buildBody(context, 4);
+
+  List<EntryModuleItem> _modules(BuildContext context) {
+    final AppString strings = context.appString;
+
+    return <EntryModuleItem>[
+      EntryModuleItem(
+        title: strings.laborManagementKey,
+        icon: Icons.engineering_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.personManagementKey,
+        icon: Icons.person_outline,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.materialPurchaseKey,
+        icon: Icons.inventory_2_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.truckExpensesKey,
+        icon: Icons.local_shipping_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.maintenanceExpensesKey,
+        icon: Icons.build_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.electricityExpensesKey,
+        icon: Icons.bolt_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.miscExpensesKey,
+        icon: Icons.receipt_long_outlined,
+        onTap: () {},
+      ),
+      EntryModuleItem(
+        title: strings.recurringExpensesKey,
+        icon: Icons.autorenew,
+        onTap: () {},
+      ),
+    ];
+  }
+
+  Widget _buildBody(BuildContext context, int crossAxisCount) {
+    final AppString strings = context.appString;
+    final List<EntryModuleItem> modules = _modules(context);
+
+    return Scaffold(
+      backgroundColor: context.theme.colorScheme.surface,
+      appBar: AppBar(
+        title: CustomTextLabelWidget(
+          label: strings.navEntriesKey,
+          textAlign: TextAlign.start,
+        ),
+      ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(Dimens.padding16),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: Dimens.space12,
+          mainAxisSpacing: Dimens.space12,
+          childAspectRatio: 0.95,
+        ),
+        itemCount: modules.length,
+        itemBuilder: (BuildContext context, int index) {
+          final EntryModuleItem module = modules[index];
+
+          return EntryModuleCard(
+            title: module.title,
+            icon: module.icon,
+            onTap: module.onTap,
+          );
+        },
+      ),
+    );
+  }
+}

@@ -61,6 +61,7 @@ class MyAppTheme {
       dialogTheme: getDialogTheme(),
       bottomSheetTheme: getBottomSheetThemeData(),
       bottomNavigationBarTheme: getBottomNavigationBarThemeData(),
+      navigationBarTheme: getNavigationBarThemeData(),
       dividerColor: appColorScheme.outline,
       drawerTheme: getDrawerThemeData(),
       tabBarTheme: getTabBarTheme(),
@@ -82,35 +83,36 @@ class MyAppTheme {
   /// and icon themes for application bars.
   AppBarTheme getAppBarTheme() {
     return AppBarTheme(
-      backgroundColor: appColorScheme.primary,
-      centerTitle: true,
-      actionsIconTheme:
-          IconThemeData(color: appColorScheme.onPrimary, size: Dimens.size25),
-      shadowColor: AppColors.instance.lightGrayBGColor,
-      shape: Border(
-        bottom: BorderSide(
-          color: AppColors.instance.lightGrayBGColor,
-        ),
+      backgroundColor: appColorScheme.surface,
+      foregroundColor: appColorScheme.onSurface,
+      elevation: Dimens.elevation0,
+      scrolledUnderElevation: Dimens.elevation0,
+      surfaceTintColor: AppColors.instance.transparent,
+      centerTitle: false,
+      actionsIconTheme: IconThemeData(
+        color: appColorScheme.onSurface,
+        size: Dimens.size25,
       ),
-      iconTheme: IconThemeData(color: appColorScheme.onPrimary),
-      titleTextStyle: AppStyles.instance.textTheme.titleLarge?.copyWith(
-          fontSize: Dimens.fontSize20, color: appColorScheme.primary),
+      shadowColor: AppColors.instance.transparent,
+      iconTheme: IconThemeData(color: appColorScheme.onSurface),
+      titleTextStyle: AppStyles.instance.textTheme.titleMedium?.copyWith(
+        color: appColorScheme.onSurface,
+      ),
       systemOverlayStyle: systemOverlay(),
     );
   }
 
   /// Returns the system overlay style configuration.
   ///
-  /// Configures the appearance of system UI overlays like the status bar
-  /// and navigation bar to match the app's theme.
+  /// Light surfaces use a transparent status bar with dark system icons.
   SystemUiOverlayStyle systemOverlay() {
-    return SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
-      statusBarColor: appColorScheme.primary,
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: appColorScheme.primary,
-      systemNavigationBarDividerColor: appColorScheme.surface,
-      systemNavigationBarIconBrightness: Brightness.light,
+    return const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: AppColors.figmaWhite,
+      systemNavigationBarDividerColor: AppColors.figmaGrayE0,
+      systemNavigationBarIconBrightness: Brightness.dark,
     );
   }
 
@@ -402,16 +404,58 @@ class MyAppTheme {
       elevation: Dimens.space4,
       backgroundColor: appColorScheme.surface,
       selectedIconTheme:
-          IconThemeData(color: appColorScheme.surface, size: Dimens.size28),
-      selectedItemColor: appColorScheme.surface,
+          IconThemeData(color: appColorScheme.onSurface, size: Dimens.size28),
+      selectedItemColor: appColorScheme.onSurface,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      unselectedIconTheme: IconThemeData(color: appColorScheme.tertiary),
-      unselectedItemColor: appColorScheme.tertiary,
+      unselectedIconTheme:
+          IconThemeData(color: appColorScheme.onSurface.withValues(alpha: 0.6)),
+      unselectedItemColor: appColorScheme.onSurface.withValues(alpha: 0.6),
       selectedLabelStyle: AppStyles.instance.textTheme.bodyMedium
           ?.copyWith(fontSize: Dimens.fontSize12),
       unselectedLabelStyle: AppStyles.instance.textTheme.bodyMedium
           ?.copyWith(fontSize: Dimens.fontSize12),
+    );
+  }
+
+  /// Material 3 [NavigationBar] — neutral black/gray selection (no orange).
+  NavigationBarThemeData getNavigationBarThemeData() {
+    return NavigationBarThemeData(
+      backgroundColor: appColorScheme.surface,
+      indicatorColor: AppColors.figmaGrayEE,
+      elevation: Dimens.elevation0,
+      height: Dimens.buttonSize50 + Dimens.space28,
+      labelTextStyle: WidgetStateProperty.resolveWith<TextStyle?>(
+        (Set<WidgetState> states) {
+          final TextStyle? base =
+              AppStyles.instance.textTheme.labelSmall?.copyWith(
+            fontSize: Dimens.fontSize12,
+          );
+          if (states.contains(WidgetState.selected)) {
+            return base?.copyWith(
+              color: appColorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            );
+          }
+          return base?.copyWith(
+            color: appColorScheme.onSurface.withValues(alpha: 0.6),
+          );
+        },
+      ),
+      iconTheme: WidgetStateProperty.resolveWith<IconThemeData?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            return IconThemeData(
+              color: appColorScheme.onSurface,
+              size: Dimens.size25,
+            );
+          }
+          return IconThemeData(
+            color: appColorScheme.onSurface.withValues(alpha: 0.6),
+            size: Dimens.size25,
+          );
+        },
+      ),
     );
   }
 

@@ -202,4 +202,85 @@ abstract class AppString {
 
   /// Privacy policy link label.
   String get privacyPolicyKey;
+
+  /// Bottom navigation — Dashboard tab.
+  String get navDashboardKey;
+
+  /// Bottom navigation — Entries tab.
+  String get navEntriesKey;
+
+  /// Bottom navigation — Reports tab.
+  String get navReportsKey;
+
+  /// Bottom navigation — Calendar tab.
+  String get navCalendarKey;
+
+  /// Bottom navigation — Profile tab.
+  String get navProfileKey;
+
+  /// Entries page title.
+  String get entriesPageKey;
+
+  /// Reports page placeholder.
+  String get reportsPageKey;
+
+  /// Calendar page placeholder.
+  String get calendarPageKey;
+
+  /// Profile page placeholder.
+  String get profilePageKey;
+
+  /// Dashboard overview subtitle.
+  String get dashboardOverviewKey;
+
+  /// Dashboard total expenses metric.
+  String get totalExpensesKey;
+
+  /// Dashboard active labor metric.
+  String get activeLaborKey;
+
+  /// Dashboard materials metric.
+  String get materialsKey;
+
+  /// Dashboard pending sync metric.
+  String get pendingSyncKey;
+
+  /// Factory status section title.
+  String get factoryStatusKey;
+
+  /// Factory operational status label.
+  String get operationalKey;
+
+  /// Recent activity section title.
+  String get recentActivityKey;
+
+  /// Empty recent activity message.
+  String get noRecentActivityKey;
+
+  /// Profile settings hint.
+  String get profileSettingsHintKey;
+
+  /// Labor management module title.
+  String get laborManagementKey;
+
+  /// Person management module title.
+  String get personManagementKey;
+
+  /// Material purchase module title.
+  String get materialPurchaseKey;
+
+  /// Truck expenses module title.
+  String get truckExpensesKey;
+
+  /// Maintenance expenses module title.
+  String get maintenanceExpensesKey;
+
+  /// Electricity expenses module title.
+  String get electricityExpensesKey;
+
+  /// Miscellaneous expenses module title.
+  String get miscExpensesKey;
+
+  /// Recurring expenses module title.
+  String get recurringExpensesKey;
 }

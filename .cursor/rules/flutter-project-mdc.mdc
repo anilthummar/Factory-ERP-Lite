@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+
+# Flutter Project Rules
+
+Always analyze existing code before generating code.
+
+## Architecture
+
+- Follow Clean Architecture
+- Follow Feature First Structure
+- Follow existing project conventions
+
+## Reusability
+
+- Reuse existing Theme
+- Reuse AppColors
+- Reuse AppTextStyles
+- Reuse AppDimensions
+- Reuse AppSpacing
+- Reuse shared widgets
+- Reuse extensions and utilities
+
+## Localization
+
+- Never hardcode user-facing strings
+- Use AppStrings only
+- Add keys in app_strings.dart
+- Add English translation in en_us.dart
+- Add Hindi translation in hi_in.dart
+
+## Code Quality
+
+- Production-ready code
+- Const constructors where possible
+- Avoid duplication
+- Generate only requested files
+- Do not modify unrelated files

@@ -1,6 +1,5 @@
 ---
-description: Factory ERP Lite Development Rules
-globs: ["lib/**/*.dart"]
+description: 
 alwaysApply: true
 ---
 

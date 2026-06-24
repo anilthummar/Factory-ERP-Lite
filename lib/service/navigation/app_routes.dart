@@ -28,7 +28,7 @@ class AppRouter extends RootStackRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
         CustomRoute<void>(
-          page: DashboardRoute.page,
+          page: MainNavigationRoute.page,
           path: AppPaths.dashboard,
           guards: <AutoRouteGuard>[AuthGuard()],
           transitionsBuilder: TransitionsBuilders.fadeIn,

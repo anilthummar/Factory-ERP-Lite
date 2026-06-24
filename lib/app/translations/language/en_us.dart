@@ -203,4 +203,87 @@ class EnUS extends AppString {
 
   @override
   String get privacyPolicyKey => "Privacy Policy";
+
+  @override
+  String get navDashboardKey => "Dashboard";
+
+  @override
+  String get navEntriesKey => "Entries";
+
+  @override
+  String get navReportsKey => "Reports";
+
+  @override
+  String get navCalendarKey => "Calendar";
+
+  @override
+  String get navProfileKey => "Profile";
+
+  @override
+  String get entriesPageKey => "Entries";
+
+  @override
+  String get reportsPageKey => "Reports & analytics coming soon";
+
+  @override
+  String get calendarPageKey => "Calendar coming soon";
+
+  @override
+  String get profilePageKey => "Profile";
+
+  @override
+  String get dashboardOverviewKey =>
+      "Factory overview and key metrics at a glance";
+
+  @override
+  String get totalExpensesKey => "Total Expenses";
+
+  @override
+  String get activeLaborKey => "Active Labor";
+
+  @override
+  String get materialsKey => "Materials";
+
+  @override
+  String get pendingSyncKey => "Pending Sync";
+
+  @override
+  String get factoryStatusKey => "Factory Status";
+
+  @override
+  String get operationalKey => "Operational";
+
+  @override
+  String get recentActivityKey => "Recent Activity";
+
+  @override
+  String get noRecentActivityKey => "No recent activity yet";
+
+  @override
+  String get profileSettingsHintKey =>
+      "Account and settings will appear here";
+
+  @override
+  String get laborManagementKey => "Labor Management";
+
+  @override
+  String get personManagementKey => "Person Management";
+
+  @override
+  String get materialPurchaseKey => "Material Purchase";
+
+  @override
+  String get truckExpensesKey => "Truck Expenses";
+
+  @override
+  String get maintenanceExpensesKey => "Maintenance Expenses";
+
+  @override
+  String get electricityExpensesKey => "Electricity Expenses";
+
+  @override
+  String get miscExpensesKey => "Misc Expenses";
+
+  @override
+  String get recurringExpensesKey => "Recurring Expenses";
 }

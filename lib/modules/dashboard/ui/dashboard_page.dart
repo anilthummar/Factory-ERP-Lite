@@ -1,7 +1,6 @@
 import '../../../../utils/exports.dart';
 
-/// ERP dashboard home — shown after successful Google sign-in.
-@RoutePage()
+/// Legacy dashboard placeholder — shell moved to [MainNavigationPage].
 class DashboardPage extends BaseResponsiveView {
   /// The constructor for [DashboardPage].
   const DashboardPage({super.key});

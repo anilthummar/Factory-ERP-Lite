@@ -58,12 +58,20 @@ class $AssetsSvgsGen {
   SvgGenImage get icAppbarLogoBlue =>
       const SvgGenImage('assets/svgs/ic_appbar_logo_blue.svg');
 
+  /// File path: assets/svgs/ic_apple_sign_in.svg
+  SvgGenImage get icAppleSignIn =>
+      const SvgGenImage('assets/svgs/ic_apple_sign_in.svg');
+
   /// File path: assets/svgs/ic_big_bubble_bg_right.svg
   SvgGenImage get icBigBubbleBgRight =>
       const SvgGenImage('assets/svgs/ic_big_bubble_bg_right.svg');
 
   /// File path: assets/svgs/ic_check.svg
   SvgGenImage get icCheck => const SvgGenImage('assets/svgs/ic_check.svg');
+
+  /// File path: assets/svgs/ic_google_sign_in.svg
+  SvgGenImage get icGoogleSignIn =>
+      const SvgGenImage('assets/svgs/ic_google_sign_in.svg');
 
   /// File path: assets/svgs/ic_home_tab.svg
   SvgGenImage get icHomeTab => const SvgGenImage('assets/svgs/ic_home_tab.svg');
@@ -98,8 +106,10 @@ class $AssetsSvgsGen {
   List<SvgGenImage> get values => [
     icAppbarLogo,
     icAppbarLogoBlue,
+    icAppleSignIn,
     icBigBubbleBgRight,
     icCheck,
+    icGoogleSignIn,
     icHomeTab,
     icLoanSelected,
     icMenu,

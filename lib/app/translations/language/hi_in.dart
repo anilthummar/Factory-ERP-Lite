@@ -205,4 +205,87 @@ class HiIN extends AppString {
 
   @override
   String get privacyPolicyKey => "गोपनीयता नीति";
+
+  @override
+  String get navDashboardKey => "डैशबोर्ड";
+
+  @override
+  String get navEntriesKey => "प्रविष्टियाँ";
+
+  @override
+  String get navReportsKey => "रिपोर्ट";
+
+  @override
+  String get navCalendarKey => "कैलेंडर";
+
+  @override
+  String get navProfileKey => "प्रोफ़ाइल";
+
+  @override
+  String get entriesPageKey => "प्रविष्टियाँ";
+
+  @override
+  String get reportsPageKey => "रिपोर्ट और विश्लेषण जल्द आ रहे हैं";
+
+  @override
+  String get calendarPageKey => "कैलेंडर जल्द आ रहा है";
+
+  @override
+  String get profilePageKey => "प्रोफ़ाइल";
+
+  @override
+  String get dashboardOverviewKey =>
+      "फ़ैक्टरी अवलोकन और मुख्य मेट्रिक्स एक नज़र में";
+
+  @override
+  String get totalExpensesKey => "कुल खर्च";
+
+  @override
+  String get activeLaborKey => "सक्रिय श्रम";
+
+  @override
+  String get materialsKey => "सामग्री";
+
+  @override
+  String get pendingSyncKey => "लंबित सिंक";
+
+  @override
+  String get factoryStatusKey => "फ़ैक्टरी स्थिति";
+
+  @override
+  String get operationalKey => "संचालन";
+
+  @override
+  String get recentActivityKey => "हाल की गतिविधि";
+
+  @override
+  String get noRecentActivityKey => "अभी कोई हाल की गतिविधि नहीं";
+
+  @override
+  String get profileSettingsHintKey =>
+      "खाता और सेटिंग्स यहाँ दिखाई देंगी";
+
+  @override
+  String get laborManagementKey => "श्रम प्रबंधन";
+
+  @override
+  String get personManagementKey => "व्यक्ति प्रबंधन";
+
+  @override
+  String get materialPurchaseKey => "सामग्री खरीद";
+
+  @override
+  String get truckExpensesKey => "ट्रक खर्च";
+
+  @override
+  String get maintenanceExpensesKey => "रखरखाव खर्च";
+
+  @override
+  String get electricityExpensesKey => "बिजली खर्च";
+
+  @override
+  String get miscExpensesKey => "विविध खर्च";
+
+  @override
+  String get recurringExpensesKey => "आवर्ती खर्च";
 }
