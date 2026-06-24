@@ -46,4 +46,21 @@ class FirebaseService {
       cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
     );
   }
+
+  /// Connects Firestore to the local emulator for integration / manual E2E testing.
+  ///
+  /// Call after [init] and before any reads or writes. On Android emulators use
+  /// host `10.0.2.2` instead of `localhost`.
+  Future<void> connectFirestoreEmulator({
+    String host = 'localhost',
+    int port = 8080,
+  }) async {
+    if (_emulatorConnected) {
+      return;
+    }
+    firestore.useFirestoreEmulator(host, port);
+    _emulatorConnected = true;
+  }
+
+  bool _emulatorConnected = false;
 }

@@ -326,6 +326,12 @@ class EnUS extends AppString {
       "Tap to view or change factory status";
 
   @override
+  String get dashboardFactoryStatusNoNotesKey => "No notes for current status";
+
+  @override
+  String get noFactoryStatusSetKey => "Not set";
+
+  @override
   String get dashboardActivityExpenseKey => "Expense";
 
   @override

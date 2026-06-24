@@ -6,76 +6,75 @@ import '../../../core/domain/entities/labor_entity.dart';
 import '../../../core/domain/entities/person_entity.dart';
 import '../../../core/domain/entities/recurring_expense_entity.dart';
 import '../../../core/domain/repositories/dashboard_repository.dart';
-import '../../../core/domain/repositories/expense_module_repository.dart';
-import '../../../core/domain/repositories/factory_status_repository.dart';
-import '../../../core/domain/repositories/labor_repository.dart';
-import '../../../core/domain/repositories/person_repository.dart';
-import '../../../core/domain/repositories/recurring_expense_repository.dart';
 import '../../../service/network/response_handler.dart';
 import '../../../service/sync/sync_service.dart';
+import '../../electricity_expenses/domain/usecases/electricity_expense_use_cases.dart';
+import '../../factory_status/domain/usecases/get_current_factory_status_use_case.dart';
+import '../../factory_status/domain/usecases/get_factory_status_history_use_case.dart';
+import '../../labor_management/domain/usecases/get_labor_use_case.dart';
+import '../../maintenance_expenses/domain/usecases/maintenance_expense_use_cases.dart';
+import '../../material_purchases/domain/usecases/material_purchase_use_cases.dart';
+import '../../miscellaneous_expenses/domain/usecases/miscellaneous_expense_use_cases.dart';
+import '../../person_management/domain/usecases/get_persons_use_case.dart';
+import '../../recurring_expenses/domain/usecases/recurring_expense_use_cases.dart';
+import '../../truck_expenses/domain/usecases/truck_expense_use_cases.dart';
 
-/// Hive-backed dashboard aggregator.
+/// Hive-backed dashboard aggregator using existing module use cases.
 class DashboardRepositoryImpl implements DashboardRepository {
   /// Creates [DashboardRepositoryImpl].
   DashboardRepositoryImpl({
-    required PersonRepository personRepository,
-    required LaborRepository laborRepository,
-    required ExpenseModuleRepository materialPurchaseRepository,
-    required ExpenseModuleRepository truckExpenseRepository,
-    required ExpenseModuleRepository maintenanceExpenseRepository,
-    required ExpenseModuleRepository electricityExpenseRepository,
-    required ExpenseModuleRepository miscellaneousExpenseRepository,
-    required RecurringExpenseRepository recurringExpenseRepository,
-    required FactoryStatusRepository factoryStatusRepository,
+    required GetPersonsUseCase getPersonsUseCase,
+    required GetLaborUseCase getLaborUseCase,
+    required GetMaterialPurchasesUseCase getMaterialPurchasesUseCase,
+    required GetTruckExpensesUseCase getTruckExpensesUseCase,
+    required GetMaintenanceExpensesUseCase getMaintenanceExpensesUseCase,
+    required GetElectricityExpensesUseCase getElectricityExpensesUseCase,
+    required GetMiscellaneousExpensesUseCase getMiscellaneousExpensesUseCase,
+    required GetRecurringExpensesUseCase getRecurringExpensesUseCase,
+    required GetCurrentFactoryStatusUseCase getCurrentFactoryStatusUseCase,
+    required GetFactoryStatusHistoryUseCase getFactoryStatusHistoryUseCase,
     required SyncService syncService,
-  })  : _personRepository = personRepository,
-        _laborRepository = laborRepository,
-        _materialPurchaseRepository = materialPurchaseRepository,
-        _truckExpenseRepository = truckExpenseRepository,
-        _maintenanceExpenseRepository = maintenanceExpenseRepository,
-        _electricityExpenseRepository = electricityExpenseRepository,
-        _miscellaneousExpenseRepository = miscellaneousExpenseRepository,
-        _recurringExpenseRepository = recurringExpenseRepository,
-        _factoryStatusRepository = factoryStatusRepository,
+  })  : _getPersonsUseCase = getPersonsUseCase,
+        _getLaborUseCase = getLaborUseCase,
+        _getMaterialPurchasesUseCase = getMaterialPurchasesUseCase,
+        _getTruckExpensesUseCase = getTruckExpensesUseCase,
+        _getMaintenanceExpensesUseCase = getMaintenanceExpensesUseCase,
+        _getElectricityExpensesUseCase = getElectricityExpensesUseCase,
+        _getMiscellaneousExpensesUseCase = getMiscellaneousExpensesUseCase,
+        _getRecurringExpensesUseCase = getRecurringExpensesUseCase,
+        _getCurrentFactoryStatusUseCase = getCurrentFactoryStatusUseCase,
+        _getFactoryStatusHistoryUseCase = getFactoryStatusHistoryUseCase,
         _syncService = syncService;
 
-  final PersonRepository _personRepository;
-  final LaborRepository _laborRepository;
-  final ExpenseModuleRepository _materialPurchaseRepository;
-  final ExpenseModuleRepository _truckExpenseRepository;
-  final ExpenseModuleRepository _maintenanceExpenseRepository;
-  final ExpenseModuleRepository _electricityExpenseRepository;
-  final ExpenseModuleRepository _miscellaneousExpenseRepository;
-  final RecurringExpenseRepository _recurringExpenseRepository;
-  final FactoryStatusRepository _factoryStatusRepository;
+  final GetPersonsUseCase _getPersonsUseCase;
+  final GetLaborUseCase _getLaborUseCase;
+  final GetMaterialPurchasesUseCase _getMaterialPurchasesUseCase;
+  final GetTruckExpensesUseCase _getTruckExpensesUseCase;
+  final GetMaintenanceExpensesUseCase _getMaintenanceExpensesUseCase;
+  final GetElectricityExpensesUseCase _getElectricityExpensesUseCase;
+  final GetMiscellaneousExpensesUseCase _getMiscellaneousExpensesUseCase;
+  final GetRecurringExpensesUseCase _getRecurringExpensesUseCase;
+  final GetCurrentFactoryStatusUseCase _getCurrentFactoryStatusUseCase;
+  final GetFactoryStatusHistoryUseCase _getFactoryStatusHistoryUseCase;
   final SyncService _syncService;
 
   static const int _recentActivityLimit = 10;
 
   @override
   Future<DashboardData> loadDashboardData() async {
-    final List<PersonEntity> persons = await _unwrapList(
-      await _personRepository.getAll(),
-    );
-    final List<LaborEntity> labor = await _unwrapList(
-      await _laborRepository.getAll(),
-    );
+    final List<PersonEntity> persons =
+        await _unwrapList(await _getPersonsUseCase());
+    final List<LaborEntity> labor = await _unwrapList(await _getLaborUseCase());
     final int pendingSyncCount = await _syncService.getPendingSyncCount();
     final DateTime? lastSyncAt = await _syncService.getLastSuccessfulSyncAt();
 
     final List<ExpenseEntity> expenses = await _loadAllExpenses();
-    final List<RecurringExpenseEntity> recurringExpenses = await _unwrapList(
-      await _recurringExpenseRepository.getAll(),
-    );
-    final List<FactoryStatusEntity> factoryStatuses =
-        await _factoryStatusRepository.getAll();
-
-    factoryStatuses.sort(
-      (FactoryStatusEntity a, FactoryStatusEntity b) =>
-          b.updatedAt.compareTo(a.updatedAt),
-    );
+    final List<RecurringExpenseEntity> recurringExpenses =
+        await _unwrapList(await _getRecurringExpensesUseCase());
     final FactoryStatusEntity? currentStatus =
-        factoryStatuses.isEmpty ? null : factoryStatuses.first;
+        await _getCurrentFactoryStatusUseCase();
+    final List<FactoryStatusEntity> factoryStatuses =
+        await _getFactoryStatusHistoryUseCase();
 
     final List<DashboardActivityItem> recentActivities =
         _buildRecentActivities(
@@ -102,17 +101,17 @@ class DashboardRepositoryImpl implements DashboardRepository {
   Future<List<ExpenseEntity>> _loadAllExpenses() async {
     final List<ExpenseEntity> expenses = <ExpenseEntity>[];
     expenses.addAll(
-      await _unwrapList(await _materialPurchaseRepository.getAll()),
+      await _unwrapList(await _getMaterialPurchasesUseCase()),
     );
-    expenses.addAll(await _unwrapList(await _truckExpenseRepository.getAll()));
+    expenses.addAll(await _unwrapList(await _getTruckExpensesUseCase()));
     expenses.addAll(
-      await _unwrapList(await _maintenanceExpenseRepository.getAll()),
-    );
-    expenses.addAll(
-      await _unwrapList(await _electricityExpenseRepository.getAll()),
+      await _unwrapList(await _getMaintenanceExpensesUseCase()),
     );
     expenses.addAll(
-      await _unwrapList(await _miscellaneousExpenseRepository.getAll()),
+      await _unwrapList(await _getElectricityExpensesUseCase()),
+    );
+    expenses.addAll(
+      await _unwrapList(await _getMiscellaneousExpensesUseCase()),
     );
     return expenses;
   }

@@ -70,7 +70,7 @@ class FactoryStatusRepositoryImpl implements FactoryStatusRepository {
     }
   }
 
-  /// Returns the latest factory status entry, if any.
+  @override
   Future<FactoryStatusEntity?> getCurrent() async {
     final List<FactoryStatusEntity> statuses = await getAll();
     if (statuses.isEmpty) {

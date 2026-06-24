@@ -305,7 +305,7 @@ void setupLocator() {
       () => getIt<FactoryStatusRepositoryImpl>(),
     )
     ..registerLazySingleton<GetCurrentFactoryStatusUseCase>(
-      () => GetCurrentFactoryStatusUseCase(getIt<FactoryStatusRepositoryImpl>()),
+      () => GetCurrentFactoryStatusUseCase(getIt<FactoryStatusRepository>()),
     )
     ..registerLazySingleton<GetFactoryStatusHistoryUseCase>(
       () => GetFactoryStatusHistoryUseCase(getIt<FactoryStatusRepository>()),
@@ -315,15 +315,16 @@ void setupLocator() {
     )
     ..registerLazySingleton<DashboardRepository>(
       () => DashboardRepositoryImpl(
-        personRepository: getIt<PersonRepository>(),
-        laborRepository: getIt<LaborRepository>(),
-        materialPurchaseRepository: getIt<MaterialPurchaseRepository>(),
-        truckExpenseRepository: getIt<TruckExpenseRepository>(),
-        maintenanceExpenseRepository: getIt<MaintenanceExpenseRepository>(),
-        electricityExpenseRepository: getIt<ElectricityExpenseRepository>(),
-        miscellaneousExpenseRepository: getIt<MiscellaneousExpenseRepository>(),
-        recurringExpenseRepository: getIt<RecurringExpenseRepository>(),
-        factoryStatusRepository: getIt<FactoryStatusRepository>(),
+        getPersonsUseCase: getIt<GetPersonsUseCase>(),
+        getLaborUseCase: getIt<GetLaborUseCase>(),
+        getMaterialPurchasesUseCase: getIt<GetMaterialPurchasesUseCase>(),
+        getTruckExpensesUseCase: getIt<GetTruckExpensesUseCase>(),
+        getMaintenanceExpensesUseCase: getIt<GetMaintenanceExpensesUseCase>(),
+        getElectricityExpensesUseCase: getIt<GetElectricityExpensesUseCase>(),
+        getMiscellaneousExpensesUseCase: getIt<GetMiscellaneousExpensesUseCase>(),
+        getRecurringExpensesUseCase: getIt<GetRecurringExpensesUseCase>(),
+        getCurrentFactoryStatusUseCase: getIt<GetCurrentFactoryStatusUseCase>(),
+        getFactoryStatusHistoryUseCase: getIt<GetFactoryStatusHistoryUseCase>(),
         syncService: getIt<SyncService>(),
       ),
     )

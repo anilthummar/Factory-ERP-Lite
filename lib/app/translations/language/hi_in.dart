@@ -328,6 +328,13 @@ class HiIN extends AppString {
       "फ़ैक्टरी स्थिति देखने या बदलने के लिए टैप करें";
 
   @override
+  String get dashboardFactoryStatusNoNotesKey =>
+      "वर्तमान स्थिति के लिए कोई नोट नहीं";
+
+  @override
+  String get noFactoryStatusSetKey => "सेट नहीं";
+
+  @override
   String get dashboardActivityExpenseKey => "खर्च";
 
   @override

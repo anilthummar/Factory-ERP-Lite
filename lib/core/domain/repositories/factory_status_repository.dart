@@ -11,6 +11,9 @@ abstract class FactoryStatusRepository {
   /// Returns all factory status records.
   Future<List<FactoryStatusEntity>> getAll();
 
+  /// Returns the latest factory status record, or null when history is empty.
+  Future<FactoryStatusEntity?> getCurrent();
+
   /// Updates an existing factory status record.
   Future<FactoryStatusEntity> update(FactoryStatusEntity status);
 

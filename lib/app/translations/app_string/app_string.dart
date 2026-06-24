@@ -317,6 +317,12 @@ abstract class AppString {
   /// Factory status card hint when no notes exist.
   String get dashboardFactoryStatusHintKey;
 
+  /// Factory status card text when status exists but has no notes.
+  String get dashboardFactoryStatusNoNotesKey;
+
+  /// Shown when no factory status has been recorded yet.
+  String get noFactoryStatusSetKey;
+
   /// Recent activity label for one-time expenses.
   String get dashboardActivityExpenseKey;
 

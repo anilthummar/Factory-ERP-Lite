@@ -13,14 +13,6 @@ class MainNavigationPage extends StatefulWidget {
 class _MainNavigationPageState extends State<MainNavigationPage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _tabs = <Widget>[
-    DashboardTabPage(),
-    EntriesTabPage(),
-    ReportsTabPage(),
-    CalendarTabPage(),
-    ProfileTabPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final AppString strings = context.appString;
@@ -31,7 +23,13 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         backgroundColor: context.theme.colorScheme.surface,
         body: IndexedStack(
           index: _selectedIndex,
-          children: _tabs,
+          children: <Widget>[
+            DashboardTabPage(isActive: _selectedIndex == 0),
+            const EntriesTabPage(),
+            const ReportsTabPage(),
+            const CalendarTabPage(),
+            const ProfileTabPage(),
+          ],
         ),
         bottomNavigationBar: NavigationBar(
           selectedIndex: _selectedIndex,

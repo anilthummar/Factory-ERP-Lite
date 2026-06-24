@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 import '../../core/hive/hive_type_ids.dart';
@@ -62,6 +63,19 @@ class HiveManager {
       await _openMapBox(boxName);
     }
 
+    _initialized = true;
+  }
+
+  /// Opens only sync/meta boxes using a temp path — for automated sync tests.
+  @visibleForTesting
+  Future<void> initForTests(String storagePath) async {
+    if (_initialized) {
+      return;
+    }
+
+    Hive.init(storagePath);
+    await _openMapBox(HiveBoxNames.syncQueue);
+    await _openMapBox(HiveBoxNames.meta);
     _initialized = true;
   }
 
