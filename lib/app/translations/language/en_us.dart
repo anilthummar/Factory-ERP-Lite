@@ -299,4 +299,114 @@ class EnUS extends AppString {
   @override
   String get personEmptyMessageKey =>
       "Tap Add Person to create your first entry.";
+
+  @override
+  String get searchLaborKey => "Search labor...";
+
+  @override
+  String get addLaborKey => "Add Labor";
+
+  @override
+  String get laborEmptyTitleKey => "No labor records yet";
+
+  @override
+  String get laborEmptyMessageKey =>
+      "Tap Add Labor to create your first entry.";
+
+  @override
+  String get laborSkillKey => "Skill";
+
+  @override
+  String get dailyWageKey => "Daily Wage";
+
+  @override
+  String get searchExpensesKey => "Search expenses...";
+
+  @override
+  String get addExpenseKey => "Add Expense";
+
+  @override
+  String get expenseEmptyTitleKey => "No expenses yet";
+
+  @override
+  String get expenseEmptyMessageKey =>
+      "Tap Add Expense to record your first entry.";
+
+  @override
+  String get filterKey => "Filter";
+
+  @override
+  String get applyFilterKey => "Apply";
+
+  @override
+  String get clearFilterKey => "Clear";
+
+  @override
+  String get expenseTitleKey => "Title";
+
+  @override
+  String get amountKey => "Amount";
+
+  @override
+  String get dateKey => "Date";
+
+  @override
+  String get attachmentKey => "Attachment";
+
+  @override
+  String get addAttachmentKey => "Add attachment";
+
+  @override
+  String get expenseTitleRequiredKey => "Please enter a title";
+
+  @override
+  String get expenseAmountRequiredKey => "Please enter an amount";
+
+  @override
+  String get expenseDateRequiredKey => "Please select a date";
+
+  @override
+  String get searchRecurringExpensesKey => "Search recurring expenses...";
+
+  @override
+  String get addRecurringExpenseKey => "Add Recurring Expense";
+
+  @override
+  String get recurringExpenseEmptyTitleKey => "No recurring expenses yet";
+
+  @override
+  String get recurringExpenseEmptyMessageKey =>
+      "Tap Add Recurring Expense to create your first entry.";
+
+  @override
+  String get editRecurringExpenseKey => "Edit Recurring Expense";
+
+  @override
+  String get frequencyKey => "Frequency";
+
+  @override
+  String get startDateKey => "Start Date";
+
+  @override
+  String get endDateOptionalKey => "End Date (Optional)";
+
+  @override
+  String get frequencyDailyKey => "Daily";
+
+  @override
+  String get frequencyWeeklyKey => "Weekly";
+
+  @override
+  String get frequencyMonthlyKey => "Monthly";
+
+  @override
+  String get frequencyYearlyKey => "Yearly";
+
+  @override
+  String get recurringExpenseFrequencyRequiredKey =>
+      "Please select a frequency";
+
+  @override
+  String get recurringExpenseStartDateRequiredKey =>
+      "Please select a start date";
 }

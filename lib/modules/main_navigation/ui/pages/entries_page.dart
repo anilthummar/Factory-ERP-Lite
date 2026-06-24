@@ -21,44 +21,58 @@ class EntriesTabPage extends BaseResponsiveView {
       EntryModuleItem(
         title: strings.laborManagementKey,
         icon: Icons.engineering_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const LaborRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.personManagementKey,
         icon: Icons.person_outline,
         onTap: () {
-          unawaited(context.router.pushNamed(AppPaths.personManagement));
+          unawaited(context.router.push(const PersonRoute()));
         },
       ),
       EntryModuleItem(
         title: strings.materialPurchaseKey,
         icon: Icons.inventory_2_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const MaterialPurchaseRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.truckExpensesKey,
         icon: Icons.local_shipping_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const TruckExpensesRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.maintenanceExpensesKey,
         icon: Icons.build_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const MaintenanceExpensesRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.electricityExpensesKey,
         icon: Icons.bolt_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const ElectricityExpensesRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.miscExpensesKey,
         icon: Icons.receipt_long_outlined,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const MiscellaneousExpensesRoute()));
+        },
       ),
       EntryModuleItem(
         title: strings.recurringExpensesKey,
         icon: Icons.autorenew,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.push(const RecurringExpensesRoute()));
+        },
       ),
     ];
   }

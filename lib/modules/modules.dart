@@ -6,6 +6,7 @@ export 'calendar_management/calendar_management.dart';
 export 'custom_pagination/custom_pagination.dart';
 export 'dashboard/dashboard.dart';
 export 'electricity_expenses/electricity_expenses.dart';
+export 'expense/expense.dart';
 export 'factory_status/factory_status.dart';
 export 'force_update_under_maintenance/force_update_under_maintenance.dart';
 export 'labor_management/labor_management.dart';

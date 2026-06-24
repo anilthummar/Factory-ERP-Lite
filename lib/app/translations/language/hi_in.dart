@@ -301,4 +301,114 @@ class HiIN extends AppString {
   @override
   String get personEmptyMessageKey =>
       "पहली प्रविष्टि बनाने के लिए व्यक्ति जोड़ें पर टैप करें।";
+
+  @override
+  String get searchLaborKey => "श्रम खोजें...";
+
+  @override
+  String get addLaborKey => "श्रम जोड़ें";
+
+  @override
+  String get laborEmptyTitleKey => "अभी कोई श्रम रिकॉर्ड नहीं";
+
+  @override
+  String get laborEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए श्रम जोड़ें पर टैप करें।";
+
+  @override
+  String get laborSkillKey => "कौशल";
+
+  @override
+  String get dailyWageKey => "दैनिक वेतन";
+
+  @override
+  String get searchExpensesKey => "खर्च खोजें...";
+
+  @override
+  String get addExpenseKey => "खर्च जोड़ें";
+
+  @override
+  String get expenseEmptyTitleKey => "अभी कोई खर्च नहीं";
+
+  @override
+  String get expenseEmptyMessageKey =>
+      "पहली प्रविष्टि दर्ज करने के लिए खर्च जोड़ें पर टैप करें।";
+
+  @override
+  String get filterKey => "फ़िल्टर";
+
+  @override
+  String get applyFilterKey => "लागू करें";
+
+  @override
+  String get clearFilterKey => "साफ़ करें";
+
+  @override
+  String get expenseTitleKey => "शीर्षक";
+
+  @override
+  String get amountKey => "राशि";
+
+  @override
+  String get dateKey => "तारीख";
+
+  @override
+  String get attachmentKey => "संलग्नक";
+
+  @override
+  String get addAttachmentKey => "संलग्नक जोड़ें";
+
+  @override
+  String get expenseTitleRequiredKey => "कृपया शीर्षक दर्ज करें";
+
+  @override
+  String get expenseAmountRequiredKey => "कृपया राशि दर्ज करें";
+
+  @override
+  String get expenseDateRequiredKey => "कृपया तारीख चुनें";
+
+  @override
+  String get searchRecurringExpensesKey => "आवर्ती खर्च खोजें...";
+
+  @override
+  String get addRecurringExpenseKey => "आवर्ती खर्च जोड़ें";
+
+  @override
+  String get recurringExpenseEmptyTitleKey => "अभी कोई आवर्ती खर्च नहीं";
+
+  @override
+  String get recurringExpenseEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए आवर्ती खर्च जोड़ें पर टैप करें।";
+
+  @override
+  String get editRecurringExpenseKey => "आवर्ती खर्च संपादित करें";
+
+  @override
+  String get frequencyKey => "आवृत्ति";
+
+  @override
+  String get startDateKey => "प्रारंभ तिथि";
+
+  @override
+  String get endDateOptionalKey => "समाप्ति तिथि (वैकल्पिक)";
+
+  @override
+  String get frequencyDailyKey => "दैनिक";
+
+  @override
+  String get frequencyWeeklyKey => "साप्ताहिक";
+
+  @override
+  String get frequencyMonthlyKey => "मासिक";
+
+  @override
+  String get frequencyYearlyKey => "वार्षिक";
+
+  @override
+  String get recurringExpenseFrequencyRequiredKey =>
+      "कृपया आवृत्ति चुनें";
+
+  @override
+  String get recurringExpenseStartDateRequiredKey =>
+      "कृपया प्रारंभ तिथि चुनें";
 }

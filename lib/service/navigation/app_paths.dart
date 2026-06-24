@@ -11,6 +11,27 @@ abstract class AppPaths {
   /// The path for the person management list page.
   static const String personManagement = '/person-management';
 
+  /// The path for the labor management list page.
+  static const String laborManagement = '/labor-management';
+
+  /// The path for the material purchase expense list page.
+  static const String materialPurchases = '/material-purchases';
+
+  /// The path for the truck expense list page.
+  static const String truckExpenses = '/truck-expenses';
+
+  /// The path for the maintenance expense list page.
+  static const String maintenanceExpenses = '/maintenance-expenses';
+
+  /// The path for the electricity expense list page.
+  static const String electricityExpenses = '/electricity-expenses';
+
+  /// The path for the miscellaneous expense list page.
+  static const String miscellaneousExpenses = '/misc-expenses';
+
+  /// The path for the recurring expense list page.
+  static const String recurringExpenses = '/recurring-expenses';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

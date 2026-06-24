@@ -295,4 +295,109 @@ abstract class AppString {
 
   /// Empty persons list message.
   String get personEmptyMessageKey;
+
+  /// Search labor field hint.
+  String get searchLaborKey;
+
+  /// Add labor FAB label.
+  String get addLaborKey;
+
+  /// Empty labor list title.
+  String get laborEmptyTitleKey;
+
+  /// Empty labor list message.
+  String get laborEmptyMessageKey;
+
+  /// Labor skill field label.
+  String get laborSkillKey;
+
+  /// Daily wage field label.
+  String get dailyWageKey;
+
+  /// Search expenses field hint.
+  String get searchExpensesKey;
+
+  /// Add expense FAB label.
+  String get addExpenseKey;
+
+  /// Empty expenses list title.
+  String get expenseEmptyTitleKey;
+
+  /// Empty expenses list message.
+  String get expenseEmptyMessageKey;
+
+  /// Filter action label.
+  String get filterKey;
+
+  /// Apply filter button label.
+  String get applyFilterKey;
+
+  /// Clear filter button label.
+  String get clearFilterKey;
+
+  /// Expense title field label.
+  String get expenseTitleKey;
+
+  /// Expense amount field label.
+  String get amountKey;
+
+  /// Expense date field label.
+  String get dateKey;
+
+  /// Attachment section label.
+  String get attachmentKey;
+
+  /// Add attachment placeholder label.
+  String get addAttachmentKey;
+
+  /// Expense title required validation message.
+  String get expenseTitleRequiredKey;
+
+  /// Expense amount required validation message.
+  String get expenseAmountRequiredKey;
+
+  /// Expense date required validation message.
+  String get expenseDateRequiredKey;
+
+  /// Search recurring expenses field hint.
+  String get searchRecurringExpensesKey;
+
+  /// Add recurring expense FAB label.
+  String get addRecurringExpenseKey;
+
+  /// Empty recurring expenses list title.
+  String get recurringExpenseEmptyTitleKey;
+
+  /// Empty recurring expenses list message.
+  String get recurringExpenseEmptyMessageKey;
+
+  /// Edit recurring expense screen title.
+  String get editRecurringExpenseKey;
+
+  /// Recurring expense frequency field label.
+  String get frequencyKey;
+
+  /// Recurring expense start date field label.
+  String get startDateKey;
+
+  /// Recurring expense end date field label (optional).
+  String get endDateOptionalKey;
+
+  /// Daily frequency option label.
+  String get frequencyDailyKey;
+
+  /// Weekly frequency option label.
+  String get frequencyWeeklyKey;
+
+  /// Monthly frequency option label.
+  String get frequencyMonthlyKey;
+
+  /// Yearly frequency option label.
+  String get frequencyYearlyKey;
+
+  /// Frequency required validation message.
+  String get recurringExpenseFrequencyRequiredKey;
+
+  /// Start date required validation message.
+  String get recurringExpenseStartDateRequiredKey;
 }

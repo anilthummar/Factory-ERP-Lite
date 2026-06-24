@@ -39,6 +39,48 @@ class AppRouter extends RootStackRouter {
           guards: <AutoRouteGuard>[AuthGuard()],
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute<void>(
+          page: LaborRoute.page,
+          path: AppPaths.laborManagement,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: MaterialPurchaseRoute.page,
+          path: AppPaths.materialPurchases,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: TruckExpensesRoute.page,
+          path: AppPaths.truckExpenses,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: MaintenanceExpensesRoute.page,
+          path: AppPaths.maintenanceExpenses,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: ElectricityExpensesRoute.page,
+          path: AppPaths.electricityExpenses,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: MiscellaneousExpensesRoute.page,
+          path: AppPaths.miscellaneousExpenses,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
+        CustomRoute<void>(
+          page: RecurringExpensesRoute.page,
+          path: AppPaths.recurringExpenses,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
         CustomRoute<void>(path: '*', page: RouteNotFound.page),
       ];
 }
