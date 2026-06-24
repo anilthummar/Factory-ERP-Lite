@@ -8,6 +8,9 @@ abstract class AppPaths {
   /// The path for the dashboard page.
   static const String dashboard = '/dashboard';
 
+  /// The path for the person management list page.
+  static const String personManagement = '/person-management';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

@@ -286,4 +286,17 @@ class EnUS extends AppString {
 
   @override
   String get recurringExpensesKey => "Recurring Expenses";
+
+  @override
+  String get searchPersonsKey => "Search persons...";
+
+  @override
+  String get addPersonKey => "Add Person";
+
+  @override
+  String get personEmptyTitleKey => "No persons yet";
+
+  @override
+  String get personEmptyMessageKey =>
+      "Tap Add Person to create your first entry.";
 }

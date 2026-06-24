@@ -26,7 +26,9 @@ class EntriesTabPage extends BaseResponsiveView {
       EntryModuleItem(
         title: strings.personManagementKey,
         icon: Icons.person_outline,
-        onTap: () {},
+        onTap: () {
+          unawaited(context.router.pushNamed(AppPaths.personManagement));
+        },
       ),
       EntryModuleItem(
         title: strings.materialPurchaseKey,

@@ -288,4 +288,17 @@ class HiIN extends AppString {
 
   @override
   String get recurringExpensesKey => "आवर्ती खर्च";
+
+  @override
+  String get searchPersonsKey => "व्यक्ति खोजें...";
+
+  @override
+  String get addPersonKey => "व्यक्ति जोड़ें";
+
+  @override
+  String get personEmptyTitleKey => "अभी कोई व्यक्ति नहीं";
+
+  @override
+  String get personEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए व्यक्ति जोड़ें पर टैप करें।";
 }

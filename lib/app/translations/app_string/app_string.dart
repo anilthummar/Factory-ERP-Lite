@@ -283,4 +283,16 @@ abstract class AppString {
 
   /// Recurring expenses module title.
   String get recurringExpensesKey;
+
+  /// Search persons field hint.
+  String get searchPersonsKey;
+
+  /// Add person FAB label.
+  String get addPersonKey;
+
+  /// Empty persons list title.
+  String get personEmptyTitleKey;
+
+  /// Empty persons list message.
+  String get personEmptyMessageKey;
 }
