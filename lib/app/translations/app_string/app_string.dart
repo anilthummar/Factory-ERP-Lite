@@ -314,6 +314,12 @@ abstract class AppString {
   /// Dashboard overview subtitle.
   String get dashboardOverviewKey;
 
+  /// Factory status card hint when no notes exist.
+  String get dashboardFactoryStatusHintKey;
+
+  /// Recent activity label for one-time expenses.
+  String get dashboardActivityExpenseKey;
+
   /// Dashboard total expenses metric.
   String get totalExpensesKey;
 

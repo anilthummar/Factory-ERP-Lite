@@ -324,6 +324,13 @@ class HiIN extends AppString {
       "फ़ैक्टरी अवलोकन और मुख्य मेट्रिक्स एक नज़र में";
 
   @override
+  String get dashboardFactoryStatusHintKey =>
+      "फ़ैक्टरी स्थिति देखने या बदलने के लिए टैप करें";
+
+  @override
+  String get dashboardActivityExpenseKey => "खर्च";
+
+  @override
   String get totalExpensesKey => "कुल खर्च";
 
   @override

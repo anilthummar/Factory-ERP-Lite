@@ -322,6 +322,13 @@ class EnUS extends AppString {
       "Factory overview and key metrics at a glance";
 
   @override
+  String get dashboardFactoryStatusHintKey =>
+      "Tap to view or change factory status";
+
+  @override
+  String get dashboardActivityExpenseKey => "Expense";
+
+  @override
   String get totalExpensesKey => "Total Expenses";
 
   @override

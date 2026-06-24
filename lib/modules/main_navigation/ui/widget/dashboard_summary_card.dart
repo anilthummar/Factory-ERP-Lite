@@ -7,17 +7,21 @@ class DashboardSummaryCard extends StatelessWidget {
     required this.title,
     required this.value,
     required this.icon,
+    this.compactValue = false,
     super.key,
   });
 
   /// Metric label.
   final String title;
 
-  /// Metric value placeholder.
+  /// Metric value.
   final String value;
 
   /// Metric icon.
   final IconData icon;
+
+  /// Uses a smaller value style for longer text such as timestamps.
+  final bool compactValue;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +47,14 @@ class DashboardSummaryCard extends StatelessWidget {
             CustomTextLabelWidget(
               label: value,
               textAlign: TextAlign.start,
-              style: AppStyles.instance.textTheme.headlineSmall?.copyWith(
+              maxLines: compactValue ? Dimens.maxLines02 : Dimens.maxLines01,
+              overflow: TextOverflow.ellipsis,
+              style: (compactValue
+                      ? AppStyles.instance.textTheme.titleSmall
+                      : AppStyles.instance.textTheme.headlineSmall)
+                  ?.copyWith(
                 color: colorScheme.onSurface,
+                fontWeight: FontWeight.w700,
               ),
             ),
             const SizedBox(height: Dimens.space4),

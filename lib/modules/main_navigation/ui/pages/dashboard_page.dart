@@ -1,6 +1,9 @@
+import '../../../../core/domain/enums/factory_status_type.dart' as domain;
 import '../../../../core/domain/entities/dashboard_activity_item.dart';
 import '../../../../core/domain/entities/dashboard_data.dart';
 import '../../../../utils/exports.dart';
+import '../../../dashboard/ui/dashboard_activity_source_ui.dart';
+import '../../../factory_status/mapper/factory_status_ui_mapper.dart';
 
 /// Dashboard tab — factory overview and summary metrics.
 class DashboardTabPage extends StatelessWidget {
@@ -71,7 +74,9 @@ class _DashboardTabView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      body: SingleChildScrollView(
+      body: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.all(Dimens.padding16),
         child: Column(
@@ -103,49 +108,40 @@ class _DashboardTabView extends StatelessWidget {
               ),
             ],
             const SizedBox(height: Dimens.space24),
-            LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                final int columns = constraints.maxWidth >= 900
-                    ? 4
-                    : constraints.maxWidth >= 600
-                        ? 2
-                        : 2;
-                return GridView.count(
-                  crossAxisCount: columns,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: Dimens.space12,
-                  mainAxisSpacing: Dimens.space12,
-                  childAspectRatio: 1.35,
-                  children: <Widget>[
-                    DashboardSummaryCard(
-                      title: strings.totalPersonsKey,
-                      value: personsValue,
-                      icon: Icons.people_outline,
-                    ),
-                    DashboardSummaryCard(
-                      title: strings.totalLaborKey,
-                      value: laborValue,
-                      icon: Icons.groups_outlined,
-                    ),
-                    DashboardSummaryCard(
-                      title: strings.totalExpensesKey,
-                      value: expensesValue,
-                      icon: Icons.payments_outlined,
-                    ),
-                    DashboardSummaryCard(
-                      title: strings.pendingSyncKey,
-                      value: pendingSyncValue,
-                      icon: Icons.sync_outlined,
-                    ),
-                    DashboardSummaryCard(
-                      title: strings.lastSyncTimeKey,
-                      value: lastSyncValue,
-                      icon: Icons.cloud_done_outlined,
-                    ),
-                  ],
-                );
-              },
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisSpacing: Dimens.space12,
+              mainAxisSpacing: Dimens.space12,
+              childAspectRatio: 1.35,
+              children: <Widget>[
+                DashboardSummaryCard(
+                  title: strings.totalPersonsKey,
+                  value: personsValue,
+                  icon: Icons.people_outline,
+                ),
+                DashboardSummaryCard(
+                  title: strings.totalLaborKey,
+                  value: laborValue,
+                  icon: Icons.groups_outlined,
+                ),
+                DashboardSummaryCard(
+                  title: strings.totalExpensesKey,
+                  value: expensesValue,
+                  icon: Icons.payments_outlined,
+                ),
+                DashboardSummaryCard(
+                  title: strings.pendingSyncKey,
+                  value: pendingSyncValue,
+                  icon: Icons.sync_outlined,
+                ),
+              ],
+            ),
+            const SizedBox(height: Dimens.space12),
+            _LastSyncStatusCard(
+              title: strings.lastSyncTimeKey,
+              value: lastSyncValue,
             ),
             const SizedBox(height: Dimens.space24),
             Card(
@@ -207,7 +203,7 @@ class _DashboardTabView extends StatelessWidget {
                         label: data?.currentFactoryStatusNotes?.isNotEmpty ??
                                 false
                             ? data!.currentFactoryStatusNotes!
-                            : strings.dashboardModulesHintKey,
+                            : strings.dashboardFactoryStatusHintKey,
                         textAlign: TextAlign.start,
                         style: AppStyles.instance.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
@@ -255,6 +251,14 @@ class _DashboardTabView extends StatelessWidget {
                   activity.occurredAt,
                   dateFormat: DateConstants.dateTimeFormat,
                 );
+                final String activityTitle =
+                    activity.source == DashboardActivitySource.factoryStatus
+                        ? _factoryStatusActivityTitle(activity.title, strings)
+                        : activity.title;
+                final String moduleLabel = activity.source.label(strings);
+                final String subtitle = activity.subtitle.isEmpty
+                    ? '$moduleLabel • $timestamp'
+                    : '$moduleLabel • ${activity.subtitle} • $timestamp';
                 return Padding(
                   padding: const EdgeInsets.only(bottom: Dimens.space8),
                   child: Card(
@@ -265,12 +269,12 @@ class _DashboardTabView extends StatelessWidget {
                     ),
                     child: ListTile(
                       title: CustomTextLabelWidget(
-                        label: activity.title,
+                        label: activityTitle,
                         textAlign: TextAlign.start,
                         style: AppStyles.instance.textTheme.bodyMedium,
                       ),
                       subtitle: CustomTextLabelWidget(
-                        label: '${activity.subtitle} • $timestamp',
+                        label: subtitle,
                         textAlign: TextAlign.start,
                         style: AppStyles.instance.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
@@ -280,6 +284,79 @@ class _DashboardTabView extends StatelessWidget {
                   ),
                 );
               }),
+          ],
+        ),
+      ),
+      ),
+    );
+  }
+
+  String _factoryStatusActivityTitle(String rawStatus, AppString strings) {
+    try {
+      return domain.FactoryStatusType.values
+          .byName(rawStatus)
+          .toUi()
+          .label(strings);
+    } on Object {
+      return rawStatus;
+    }
+  }
+}
+
+class _LastSyncStatusCard extends StatelessWidget {
+  const _LastSyncStatusCard({
+    required this.title,
+    required this.value,
+  });
+
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = context.theme.colorScheme;
+
+    return Card(
+      elevation: Dimens.elevation0,
+      color: colorScheme.surfaceContainerLow,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Dimens.radius12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(Dimens.padding16),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.cloud_done_outlined,
+              color: colorScheme.primary,
+              size: Dimens.size28,
+            ),
+            const SizedBox(width: Dimens.space12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CustomTextLabelWidget(
+                    label: title,
+                    textAlign: TextAlign.start,
+                    style: AppStyles.instance.textTheme.labelSmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: Dimens.space4),
+                  CustomTextLabelWidget(
+                    label: value,
+                    textAlign: TextAlign.start,
+                    maxLines: Dimens.maxLines02,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppStyles.instance.textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
