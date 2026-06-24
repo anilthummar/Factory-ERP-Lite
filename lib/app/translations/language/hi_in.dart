@@ -225,10 +225,96 @@ class HiIN extends AppString {
   String get entriesPageKey => "प्रविष्टियाँ";
 
   @override
-  String get reportsPageKey => "रिपोर्ट और विश्लेषण जल्द आ रहे हैं";
+  String get reportsPageKey => "रिपोर्ट और विश्लेषण";
 
   @override
-  String get calendarPageKey => "कैलेंडर जल्द आ रहा है";
+  String get reportsDashboardSubtitleKey =>
+      "सारांश देखें और फ़ैक्टरी डेटा निर्यात करें";
+
+  @override
+  String get expenseReportsKey => "खर्च रिपोर्ट";
+
+  @override
+  String get laborReportsKey => "श्रम रिपोर्ट";
+
+  @override
+  String get personReportsKey => "व्यक्ति रिपोर्ट";
+
+  @override
+  String get monthlySummaryKey => "मासिक सारांश";
+
+  @override
+  String get searchReportsKey => "रिपोर्ट खोजें...";
+
+  @override
+  String get reportCategoryKey => "श्रेणी";
+
+  @override
+  String get reportAllCategoriesKey => "सभी श्रेणियाँ";
+
+  @override
+  String get reportFromDateKey => "प्रारंभ तिथि";
+
+  @override
+  String get reportToDateKey => "समाप्ति तिथि";
+
+  @override
+  String get exportPdfKey => "PDF निर्यात";
+
+  @override
+  String get exportExcelKey => "Excel निर्यात";
+
+  @override
+  String get reportChartPlaceholderKey =>
+      "चार्ट यहाँ दिखाई देगा";
+
+  @override
+  String get reportEmptyTitleKey => "कोई रिपोर्ट डेटा नहीं";
+
+  @override
+  String get reportEmptyMessageKey =>
+      "परिणाम देखने के लिए फ़िल्टर या तिथि सीमा बदलें।";
+
+  @override
+  String get calendarPageKey => "कैलेंडर";
+
+  @override
+  String get calendarMonthViewKey => "माह";
+
+  @override
+  String get calendarAgendaViewKey => "एजेंडा";
+
+  @override
+  String get calendarSelectedDateEventsKey => "कार्यक्रम";
+
+  @override
+  String get calendarNoEventsTitleKey => "कोई कार्यक्रम नहीं";
+
+  @override
+  String get calendarNoEventsMessageKey =>
+      "इस दिन के लिए कोई कार्यक्रम निर्धारित नहीं है।";
+
+  @override
+  String get calendarAgendaEmptyTitleKey => "इस माह कोई कार्यक्रम नहीं";
+
+  @override
+  String get calendarAgendaEmptyMessageKey =>
+      "कुछ निर्धारित करने के लिए कार्यक्रम जोड़ें पर टैप करें।";
+
+  @override
+  String get addCalendarEventKey => "कार्यक्रम जोड़ें";
+
+  @override
+  String get calendarEventRecurringExpenseKey => "आवर्ती खर्च";
+
+  @override
+  String get calendarEventFactoryEventKey => "फैक्टरी कार्यक्रम";
+
+  @override
+  String get calendarEventMaintenanceReminderKey => "रखरखाव अनुस्मारक";
+
+  @override
+  String get calendarEventHolidayKey => "अवकाश";
 
   @override
   String get profilePageKey => "प्रोफ़ाइल";
@@ -254,6 +340,51 @@ class HiIN extends AppString {
 
   @override
   String get operationalKey => "संचालन";
+
+  @override
+  String get currentStatusKey => "वर्तमान स्थिति";
+
+  @override
+  String get lastUpdatedKey => "अंतिम अपडेट";
+
+  @override
+  String get changeFactoryStatusKey => "स्थिति बदलें";
+
+  @override
+  String get viewStatusHistoryKey => "इतिहास देखें";
+
+  @override
+  String get statusHistoryKey => "स्थिति इतिहास";
+
+  @override
+  String get factoryStatusNotesKey => "टिप्पणियाँ";
+
+  @override
+  String get factoryStatusNotesEmptyKey =>
+      "वर्तमान स्थिति के लिए कोई टिप्पणी नहीं है।";
+
+  @override
+  String get factoryStatusHistoryEmptyTitleKey =>
+      "अभी कोई स्थिति इतिहास नहीं";
+
+  @override
+  String get factoryStatusHistoryEmptyMessageKey =>
+      "स्थिति परिवर्तन दर्ज होने पर यहाँ दिखाई देंगे।";
+
+  @override
+  String get factoryStatusMaintenanceKey => "रखरखाव में";
+
+  @override
+  String get factoryStatusShutdownKey => "बंद";
+
+  @override
+  String get factoryStatusPartialKey => "आंशिक संचालन";
+
+  @override
+  String get selectFactoryStatusKey => "स्थिति चुनें";
+
+  @override
+  String get factoryStatusRequiredKey => "कृपया स्थिति चुनें";
 
   @override
   String get recentActivityKey => "हाल की गतिविधि";

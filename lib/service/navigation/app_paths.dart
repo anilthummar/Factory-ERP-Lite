@@ -32,6 +32,24 @@ abstract class AppPaths {
   /// The path for the recurring expense list page.
   static const String recurringExpenses = '/recurring-expenses';
 
+  /// The path for the factory status overview page.
+  static const String factoryStatus = '/factory-status';
+
+  /// The path for the factory status history page.
+  static const String factoryStatusHistory = '/factory-status/history';
+
+  /// The path for the expense report page.
+  static const String expenseReport = '/reports/expenses';
+
+  /// The path for the labor report page.
+  static const String laborReport = '/reports/labor';
+
+  /// The path for the person report page.
+  static const String personReport = '/reports/persons';
+
+  /// The path for the monthly summary report page.
+  static const String monthlySummaryReport = '/reports/monthly-summary';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

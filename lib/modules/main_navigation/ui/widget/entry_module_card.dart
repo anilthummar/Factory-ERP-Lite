@@ -45,7 +45,6 @@ class EntryModuleCard extends StatelessWidget {
               const SizedBox(height: Dimens.space12),
               CustomTextLabelWidget(
                 label: title,
-                textAlign: TextAlign.center,
                 maxLines: Dimens.maxLines02,
                 overflow: TextOverflow.ellipsis,
                 style: AppStyles.instance.textTheme.labelSmall?.copyWith(

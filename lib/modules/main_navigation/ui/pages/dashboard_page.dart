@@ -78,56 +78,64 @@ class DashboardTabPage extends BaseResponsiveView {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimens.radius12),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(Dimens.padding16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.factory_outlined,
-                          color: colorScheme.primary,
-                        ),
-                        const SizedBox(width: Dimens.space8),
-                        Expanded(
-                          child: CustomTextLabelWidget(
-                            label: strings.factoryStatusKey,
-                            textAlign: TextAlign.start,
-                            style: AppStyles.instance.textTheme.titleSmall
-                                ?.copyWith(color: colorScheme.onSurface),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(Dimens.radius12),
+                onTap: () {
+                  unawaited(
+                    context.router.push(const FactoryStatusOverviewRoute()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimens.padding16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.factory_outlined,
+                            color: colorScheme.primary,
                           ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Dimens.padding12,
-                            vertical: Dimens.padding6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colorScheme.primaryContainer,
-                            borderRadius:
-                                BorderRadius.circular(Dimens.radius20),
-                          ),
-                          child: CustomTextLabelWidget(
-                            label: strings.operationalKey,
-                            style: AppStyles.instance.textTheme.labelSmall
-                                ?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: colorScheme.onPrimaryContainer,
+                          const SizedBox(width: Dimens.space8),
+                          Expanded(
+                            child: CustomTextLabelWidget(
+                              label: strings.factoryStatusKey,
+                              textAlign: TextAlign.start,
+                              style: AppStyles.instance.textTheme.titleSmall
+                                  ?.copyWith(color: colorScheme.onSurface),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: Dimens.space16),
-                    CustomTextLabelWidget(
-                      label: strings.dashboardModulesHintKey,
-                      textAlign: TextAlign.start,
-                      style: AppStyles.instance.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Dimens.padding12,
+                              vertical: Dimens.padding6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: colorScheme.primaryContainer,
+                              borderRadius:
+                                  BorderRadius.circular(Dimens.radius20),
+                            ),
+                            child: CustomTextLabelWidget(
+                              label: strings.operationalKey,
+                              style: AppStyles.instance.textTheme.labelSmall
+                                  ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: colorScheme.onPrimaryContainer,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: Dimens.space16),
+                      CustomTextLabelWidget(
+                        label: strings.dashboardModulesHintKey,
+                        textAlign: TextAlign.start,
+                        style: AppStyles.instance.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

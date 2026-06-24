@@ -224,8 +224,89 @@ abstract class AppString {
   /// Reports page placeholder.
   String get reportsPageKey;
 
+  /// Reports dashboard subtitle.
+  String get reportsDashboardSubtitleKey;
+
+  /// Expense reports screen title.
+  String get expenseReportsKey;
+
+  /// Labor reports screen title.
+  String get laborReportsKey;
+
+  /// Person reports screen title.
+  String get personReportsKey;
+
+  /// Monthly summary report screen title.
+  String get monthlySummaryKey;
+
+  /// Search reports field hint.
+  String get searchReportsKey;
+
+  /// Report category filter label.
+  String get reportCategoryKey;
+
+  /// All categories filter option.
+  String get reportAllCategoriesKey;
+
+  /// Report date range from label.
+  String get reportFromDateKey;
+
+  /// Report date range to label.
+  String get reportToDateKey;
+
+  /// Export PDF button label.
+  String get exportPdfKey;
+
+  /// Export Excel button label.
+  String get exportExcelKey;
+
+  /// Chart placeholder message.
+  String get reportChartPlaceholderKey;
+
+  /// Report empty state title.
+  String get reportEmptyTitleKey;
+
+  /// Report empty state message.
+  String get reportEmptyMessageKey;
+
   /// Calendar page placeholder.
   String get calendarPageKey;
+
+  /// Calendar month view toggle label.
+  String get calendarMonthViewKey;
+
+  /// Calendar agenda view toggle label.
+  String get calendarAgendaViewKey;
+
+  /// Selected date events section title.
+  String get calendarSelectedDateEventsKey;
+
+  /// No events on selected date title.
+  String get calendarNoEventsTitleKey;
+
+  /// No events on selected date message.
+  String get calendarNoEventsMessageKey;
+
+  /// Calendar agenda empty title.
+  String get calendarAgendaEmptyTitleKey;
+
+  /// Calendar agenda empty message.
+  String get calendarAgendaEmptyMessageKey;
+
+  /// Add calendar event FAB label.
+  String get addCalendarEventKey;
+
+  /// Recurring expense calendar event type label.
+  String get calendarEventRecurringExpenseKey;
+
+  /// Factory event calendar event type label.
+  String get calendarEventFactoryEventKey;
+
+  /// Maintenance reminder calendar event type label.
+  String get calendarEventMaintenanceReminderKey;
+
+  /// Holiday calendar event type label.
+  String get calendarEventHolidayKey;
 
   /// Profile page placeholder.
   String get profilePageKey;
@@ -250,6 +331,48 @@ abstract class AppString {
 
   /// Factory operational status label.
   String get operationalKey;
+
+  /// Current factory status label.
+  String get currentStatusKey;
+
+  /// Last updated timestamp label.
+  String get lastUpdatedKey;
+
+  /// Change factory status button label.
+  String get changeFactoryStatusKey;
+
+  /// View full status history action label.
+  String get viewStatusHistoryKey;
+
+  /// Status history screen title.
+  String get statusHistoryKey;
+
+  /// Factory status notes section title.
+  String get factoryStatusNotesKey;
+
+  /// Empty factory status notes message.
+  String get factoryStatusNotesEmptyKey;
+
+  /// Status history empty title.
+  String get factoryStatusHistoryEmptyTitleKey;
+
+  /// Status history empty message.
+  String get factoryStatusHistoryEmptyMessageKey;
+
+  /// Under maintenance factory status label.
+  String get factoryStatusMaintenanceKey;
+
+  /// Shut down factory status label.
+  String get factoryStatusShutdownKey;
+
+  /// Partial operations factory status label.
+  String get factoryStatusPartialKey;
+
+  /// Select factory status field label.
+  String get selectFactoryStatusKey;
+
+  /// Factory status required validation message.
+  String get factoryStatusRequiredKey;
 
   /// Recent activity section title.
   String get recentActivityKey;

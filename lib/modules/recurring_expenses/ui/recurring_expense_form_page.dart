@@ -273,9 +273,8 @@ class _FrequencyField extends FormField<RecurringExpenseFrequency> {
     required AppString strings,
     required String requiredMessage,
     required ValueChanged<RecurringExpenseFrequency?> onChanged,
-    RecurringExpenseFrequency? initialValue,
+    super.initialValue,
   }) : super(
-          initialValue: initialValue,
           validator: (RecurringExpenseFrequency? value) {
             if (value == null) {
               return requiredMessage;

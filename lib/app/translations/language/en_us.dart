@@ -223,10 +223,96 @@ class EnUS extends AppString {
   String get entriesPageKey => "Entries";
 
   @override
-  String get reportsPageKey => "Reports & analytics coming soon";
+  String get reportsPageKey => "Reports & Analytics";
 
   @override
-  String get calendarPageKey => "Calendar coming soon";
+  String get reportsDashboardSubtitleKey =>
+      "View summaries and export factory data";
+
+  @override
+  String get expenseReportsKey => "Expense Reports";
+
+  @override
+  String get laborReportsKey => "Labor Reports";
+
+  @override
+  String get personReportsKey => "Person Reports";
+
+  @override
+  String get monthlySummaryKey => "Monthly Summary";
+
+  @override
+  String get searchReportsKey => "Search reports...";
+
+  @override
+  String get reportCategoryKey => "Category";
+
+  @override
+  String get reportAllCategoriesKey => "All Categories";
+
+  @override
+  String get reportFromDateKey => "From Date";
+
+  @override
+  String get reportToDateKey => "To Date";
+
+  @override
+  String get exportPdfKey => "Export PDF";
+
+  @override
+  String get exportExcelKey => "Export Excel";
+
+  @override
+  String get reportChartPlaceholderKey =>
+      "Chart visualization will appear here";
+
+  @override
+  String get reportEmptyTitleKey => "No report data";
+
+  @override
+  String get reportEmptyMessageKey =>
+      "Adjust filters or date range to view results.";
+
+  @override
+  String get calendarPageKey => "Calendar";
+
+  @override
+  String get calendarMonthViewKey => "Month";
+
+  @override
+  String get calendarAgendaViewKey => "Agenda";
+
+  @override
+  String get calendarSelectedDateEventsKey => "Events";
+
+  @override
+  String get calendarNoEventsTitleKey => "No events";
+
+  @override
+  String get calendarNoEventsMessageKey =>
+      "No events scheduled for this day.";
+
+  @override
+  String get calendarAgendaEmptyTitleKey => "No events this month";
+
+  @override
+  String get calendarAgendaEmptyMessageKey =>
+      "Tap Add Event to schedule something.";
+
+  @override
+  String get addCalendarEventKey => "Add Event";
+
+  @override
+  String get calendarEventRecurringExpenseKey => "Recurring Expense";
+
+  @override
+  String get calendarEventFactoryEventKey => "Factory Event";
+
+  @override
+  String get calendarEventMaintenanceReminderKey => "Maintenance Reminder";
+
+  @override
+  String get calendarEventHolidayKey => "Holiday";
 
   @override
   String get profilePageKey => "Profile";
@@ -252,6 +338,49 @@ class EnUS extends AppString {
 
   @override
   String get operationalKey => "Operational";
+
+  @override
+  String get currentStatusKey => "Current Status";
+
+  @override
+  String get lastUpdatedKey => "Last Updated";
+
+  @override
+  String get changeFactoryStatusKey => "Change Status";
+
+  @override
+  String get viewStatusHistoryKey => "View History";
+
+  @override
+  String get statusHistoryKey => "Status History";
+
+  @override
+  String get factoryStatusNotesKey => "Notes";
+
+  @override
+  String get factoryStatusNotesEmptyKey => "No notes added for the current status.";
+
+  @override
+  String get factoryStatusHistoryEmptyTitleKey => "No status history yet";
+
+  @override
+  String get factoryStatusHistoryEmptyMessageKey =>
+      "Status changes will appear here once recorded.";
+
+  @override
+  String get factoryStatusMaintenanceKey => "Under Maintenance";
+
+  @override
+  String get factoryStatusShutdownKey => "Shut Down";
+
+  @override
+  String get factoryStatusPartialKey => "Partial Operations";
+
+  @override
+  String get selectFactoryStatusKey => "Select Status";
+
+  @override
+  String get factoryStatusRequiredKey => "Please select a status";
 
   @override
   String get recentActivityKey => "Recent Activity";
