@@ -1,6 +1,6 @@
 import '../../../../utils/exports.dart';
 
-/// PDF and Excel export action buttons (UI placeholders).
+/// PDF and Excel export action buttons.
 class ReportExportActions extends StatelessWidget {
   /// Creates [ReportExportActions].
   const ReportExportActions({

@@ -14,6 +14,14 @@ class MonthlySummaryReportPage extends StatelessWidget {
       pageTitle: strings.monthlySummaryKey,
       searchHint: strings.searchReportsKey,
       filterConfig: ReportFilterUiConfig.monthly(strings),
+      onExportPdf: () => runReportPdfExport(
+        context,
+        exportAction: getIt<ExportMonthlySummaryPdfUseCase>().call,
+      ),
+      onExportExcel: () => runReportExcelExport(
+        context,
+        exportAction: getIt<ExportMonthlySummaryExcelUseCase>().call,
+      ),
       summaryCards: <ReportSummaryCard>[
         ReportSummaryCard(
           title: strings.totalExpensesKey,

@@ -53,6 +53,9 @@ abstract class AppPaths {
   /// Hidden developer path for sync diagnostics.
   static const String syncDiagnostics = '/dev/sync-diagnostics';
 
+  /// Backup and restore settings page.
+  static const String backupRestore = '/settings/backup-restore';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

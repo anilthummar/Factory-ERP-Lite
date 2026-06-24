@@ -123,6 +123,12 @@ class AppRouter extends RootStackRouter {
           guards: <AutoRouteGuard>[AuthGuard()],
           transitionsBuilder: TransitionsBuilders.fadeIn,
         ),
+        CustomRoute<void>(
+          page: BackupRestoreRoute.page,
+          path: AppPaths.backupRestore,
+          guards: <AutoRouteGuard>[AuthGuard()],
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        ),
         CustomRoute<void>(path: '*', page: RouteNotFound.page),
       ];
 }

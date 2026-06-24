@@ -257,8 +257,14 @@ abstract class AppString {
   /// Export PDF button label.
   String get exportPdfKey;
 
+  /// Shown after a PDF is saved and shared successfully.
+  String get pdfExportSuccessKey;
+
   /// Export Excel button label.
   String get exportExcelKey;
+
+  /// Shown after an Excel file is saved and shared successfully.
+  String get excelExportSuccessKey;
 
   /// Chart placeholder message.
   String get reportChartPlaceholderKey;
@@ -379,6 +385,39 @@ abstract class AppString {
 
   /// Refresh diagnostics action label.
   String get syncDiagnosticsRefreshKey;
+
+  /// Backup & restore screen title.
+  String get backupRestoreTitleKey;
+
+  /// Backup overview card title.
+  String get backupRestoreOverviewKey;
+
+  /// Total records subtitle on backup screen.
+  String get backupRestoreTotalRecordsKey;
+
+  /// JSON backup export button label.
+  String get backupRestoreJsonExportKey;
+
+  /// JSON backup restore button label.
+  String get backupRestoreJsonImportKey;
+
+  /// Google Sheets backup button label.
+  String get backupRestoreGoogleSheetsKey;
+
+  /// Open Google Sheets link label.
+  String get backupRestoreOpenSheetsKey;
+
+  /// Restore confirmation dialog title.
+  String get backupRestoreConfirmTitleKey;
+
+  /// Restore confirmation dialog message.
+  String get backupRestoreConfirmMessageKey;
+
+  /// Restore confirmation action label.
+  String get backupRestoreConfirmActionKey;
+
+  /// Profile entry for backup & restore.
+  String get backupRestoreProfileEntryKey;
 
   /// Factory status section title.
   String get factoryStatusKey;

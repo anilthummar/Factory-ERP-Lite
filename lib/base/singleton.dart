@@ -395,6 +395,131 @@ void setupLocator() {
     ..registerLazySingleton<RetrySyncUseCase>(
       () => RetrySyncUseCase(getIt<SyncDiagnosticsRepository>()),
     )
+    ..registerLazySingleton<ReportDataRepository>(
+      () => ReportDataRepository(
+        getPersonsUseCase: getIt<GetPersonsUseCase>(),
+        getLaborUseCase: getIt<GetLaborUseCase>(),
+        getMaterialPurchasesUseCase: getIt<GetMaterialPurchasesUseCase>(),
+        getTruckExpensesUseCase: getIt<GetTruckExpensesUseCase>(),
+        getMaintenanceExpensesUseCase: getIt<GetMaintenanceExpensesUseCase>(),
+        getElectricityExpensesUseCase: getIt<GetElectricityExpensesUseCase>(),
+        getMiscellaneousExpensesUseCase: getIt<GetMiscellaneousExpensesUseCase>(),
+        getRecurringExpensesUseCase: getIt<GetRecurringExpensesUseCase>(),
+        syncService: getIt<SyncService>(),
+      ),
+    )
+    ..registerLazySingleton<PdfExportService>(PdfExportService.new)
+    ..registerLazySingleton<ExpenseReportPdfTemplate>(
+      ExpenseReportPdfTemplate.new,
+    )
+    ..registerLazySingleton<LaborReportPdfTemplate>(LaborReportPdfTemplate.new)
+    ..registerLazySingleton<PersonReportPdfTemplate>(
+      PersonReportPdfTemplate.new,
+    )
+    ..registerLazySingleton<MonthlySummaryPdfTemplate>(
+      MonthlySummaryPdfTemplate.new,
+    )
+    ..registerLazySingleton<ExportExpenseReportPdfUseCase>(
+      () => ExportExpenseReportPdfUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<PdfExportService>(),
+        getIt<ExpenseReportPdfTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportLaborReportPdfUseCase>(
+      () => ExportLaborReportPdfUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<PdfExportService>(),
+        getIt<LaborReportPdfTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportPersonReportPdfUseCase>(
+      () => ExportPersonReportPdfUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<PdfExportService>(),
+        getIt<PersonReportPdfTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportMonthlySummaryPdfUseCase>(
+      () => ExportMonthlySummaryPdfUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<PdfExportService>(),
+        getIt<MonthlySummaryPdfTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExcelExportService>(ExcelExportService.new)
+    ..registerLazySingleton<ExpenseReportExcelTemplate>(
+      ExpenseReportExcelTemplate.new,
+    )
+    ..registerLazySingleton<LaborReportExcelTemplate>(
+      LaborReportExcelTemplate.new,
+    )
+    ..registerLazySingleton<PersonReportExcelTemplate>(
+      PersonReportExcelTemplate.new,
+    )
+    ..registerLazySingleton<MonthlySummaryExcelTemplate>(
+      MonthlySummaryExcelTemplate.new,
+    )
+    ..registerLazySingleton<ExportExpenseReportExcelUseCase>(
+      () => ExportExpenseReportExcelUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<ExcelExportService>(),
+        getIt<ExpenseReportExcelTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportLaborReportExcelUseCase>(
+      () => ExportLaborReportExcelUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<ExcelExportService>(),
+        getIt<LaborReportExcelTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportPersonReportExcelUseCase>(
+      () => ExportPersonReportExcelUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<ExcelExportService>(),
+        getIt<PersonReportExcelTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<ExportMonthlySummaryExcelUseCase>(
+      () => ExportMonthlySummaryExcelUseCase(
+        getIt<ReportDataRepository>(),
+        getIt<ExcelExportService>(),
+        getIt<MonthlySummaryExcelTemplate>(),
+      ),
+    )
+    ..registerLazySingleton<BackupLocalDataSource>(
+      () => BackupLocalDataSourceImpl(hiveManager: getIt<HiveManager>()),
+    )
+    ..registerLazySingleton<JsonBackupService>(
+      () => JsonBackupService(localDataSource: getIt<BackupLocalDataSource>()),
+    )
+    ..registerLazySingleton<BackupFileService>(BackupFileService.new)
+    ..registerLazySingleton<GoogleSheetsBackupService>(
+      () => GoogleSheetsBackupService(
+        localDataSource: getIt<BackupLocalDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<BackupRepository>(
+      () => BackupRepositoryImpl(
+        localDataSource: getIt<BackupLocalDataSource>(),
+        jsonBackupService: getIt<JsonBackupService>(),
+        backupFileService: getIt<BackupFileService>(),
+        googleSheetsBackupService: getIt<GoogleSheetsBackupService>(),
+      ),
+    )
+    ..registerLazySingleton<GetBackupOverviewUseCase>(
+      () => GetBackupOverviewUseCase(getIt<BackupRepository>()),
+    )
+    ..registerLazySingleton<CreateJsonBackupUseCase>(
+      () => CreateJsonBackupUseCase(getIt<BackupRepository>()),
+    )
+    ..registerLazySingleton<RestoreJsonBackupUseCase>(
+      () => RestoreJsonBackupUseCase(getIt<BackupRepository>()),
+    )
+    ..registerLazySingleton<BackupToGoogleSheetsUseCase>(
+      () => BackupToGoogleSheetsUseCase(getIt<BackupRepository>()),
+    )
     ..registerLazySingleton<RegExpressions>(RegExpressions.new)
     ..registerSingleton<ForceUpdateUnderMaintenanceBloc>(
         ForceUpdateUnderMaintenanceBloc());

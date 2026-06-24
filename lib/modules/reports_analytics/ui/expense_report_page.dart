@@ -14,6 +14,14 @@ class ExpenseReportPage extends StatelessWidget {
       pageTitle: strings.expenseReportsKey,
       searchHint: strings.searchReportsKey,
       filterConfig: ReportFilterUiConfig.expense(strings),
+      onExportPdf: () => runReportPdfExport(
+        context,
+        exportAction: getIt<ExportExpenseReportPdfUseCase>().call,
+      ),
+      onExportExcel: () => runReportExcelExport(
+        context,
+        exportAction: getIt<ExportExpenseReportExcelUseCase>().call,
+      ),
       summaryCards: <ReportSummaryCard>[
         ReportSummaryCard(
           title: strings.totalExpensesKey,

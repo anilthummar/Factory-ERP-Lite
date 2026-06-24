@@ -2,10 +2,12 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 
 // ERP modules (foundation — implement per feature)
 export 'attachments/attachments.dart';
+export 'backup_restore/backup_restore.dart';
 export 'calendar_management/calendar_management.dart';
 export 'custom_pagination/custom_pagination.dart';
 export 'dashboard/dashboard.dart';
 export 'electricity_expenses/electricity_expenses.dart';
+export 'excel_export/excel_export.dart';
 export 'expense/expense.dart';
 export 'factory_status/factory_status.dart';
 export 'force_update_under_maintenance/force_update_under_maintenance.dart';
@@ -18,6 +20,7 @@ export 'material_purchases/material_purchases.dart';
 export 'miscellaneous_expenses/miscellaneous_expenses.dart';
 export 'page_not_found/page_not_found.dart';
 export 'person_management/person_management.dart';
+export 'pdf_export/pdf_export.dart';
 export 'recurring_expenses/recurring_expenses.dart';
 export 'reports_analytics/reports_analytics.dart';
 export 'splash/splash.dart';

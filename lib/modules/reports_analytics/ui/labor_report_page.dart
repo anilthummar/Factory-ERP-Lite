@@ -14,6 +14,14 @@ class LaborReportPage extends StatelessWidget {
       pageTitle: strings.laborReportsKey,
       searchHint: strings.searchReportsKey,
       filterConfig: ReportFilterUiConfig.labor(strings),
+      onExportPdf: () => runReportPdfExport(
+        context,
+        exportAction: getIt<ExportLaborReportPdfUseCase>().call,
+      ),
+      onExportExcel: () => runReportExcelExport(
+        context,
+        exportAction: getIt<ExportLaborReportExcelUseCase>().call,
+      ),
       summaryCards: <ReportSummaryCard>[
         ReportSummaryCard(
           title: strings.activeLaborKey,

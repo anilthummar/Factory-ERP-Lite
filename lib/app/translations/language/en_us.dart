@@ -260,7 +260,13 @@ class EnUS extends AppString {
   String get exportPdfKey => "Export PDF";
 
   @override
+  String get pdfExportSuccessKey => "PDF exported successfully";
+
+  @override
   String get exportExcelKey => "Export Excel";
+
+  @override
+  String get excelExportSuccessKey => "Excel exported successfully";
 
   @override
   String get reportChartPlaceholderKey =>
@@ -387,6 +393,40 @@ class EnUS extends AppString {
 
   @override
   String get syncDiagnosticsRefreshKey => "Refresh";
+
+  @override
+  String get backupRestoreTitleKey => "Backup & Restore";
+
+  @override
+  String get backupRestoreOverviewKey => "Local Data Overview";
+
+  @override
+  String get backupRestoreTotalRecordsKey => "Total records stored offline";
+
+  @override
+  String get backupRestoreJsonExportKey => "Export JSON Backup";
+
+  @override
+  String get backupRestoreJsonImportKey => "Restore JSON Backup";
+
+  @override
+  String get backupRestoreGoogleSheetsKey => "Backup to Google Sheets";
+
+  @override
+  String get backupRestoreOpenSheetsKey => "Open Google Sheet";
+
+  @override
+  String get backupRestoreConfirmTitleKey => "Restore backup?";
+
+  @override
+  String get backupRestoreConfirmMessageKey =>
+      "This will replace all local factory data with the selected backup file.";
+
+  @override
+  String get backupRestoreConfirmActionKey => "Restore";
+
+  @override
+  String get backupRestoreProfileEntryKey => "Backup & Restore";
 
   @override
   String get factoryStatusKey => "Factory Status";

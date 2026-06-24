@@ -40,40 +40,63 @@ class _ProfileTabPageState extends State<ProfileTabPage> {
           textAlign: TextAlign.start,
         ),
       ),
-      body: Center(
-        child: Padding(
+      body: CustomResponsiveContent(
+        child: ListView(
           padding: const EdgeInsets.all(Dimens.space24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              GestureDetector(
-                onTap: _onAvatarTap,
-                child: CircleAvatar(
-                  radius: Dimens.radius34,
-                  backgroundColor: colorScheme.primaryContainer,
-                  child: Icon(
-                    Icons.person_outline,
-                    size: Dimens.size40,
-                    color: colorScheme.onPrimaryContainer,
+          children: <Widget>[
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: _onAvatarTap,
+                  child: CircleAvatar(
+                    radius: Dimens.radius34,
+                    backgroundColor: colorScheme.primaryContainer,
+                    child: Icon(
+                      Icons.person_outline,
+                      size: Dimens.size40,
+                      color: colorScheme.onPrimaryContainer,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: Dimens.space16),
-              CustomTextLabelWidget(
-                label: context.appString.profilePageKey,
-                style: AppStyles.instance.textTheme.titleMedium?.copyWith(
-                  color: colorScheme.onSurface,
+                const SizedBox(height: Dimens.space16),
+                CustomTextLabelWidget(
+                  label: context.appString.profilePageKey,
+                  style: AppStyles.instance.textTheme.titleMedium?.copyWith(
+                    color: colorScheme.onSurface,
+                  ),
                 ),
-              ),
-              const SizedBox(height: Dimens.space8),
-              CustomTextLabelWidget(
-                label: context.appString.profileSettingsHintKey,
-                style: AppStyles.instance.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
+                const SizedBox(height: Dimens.space8),
+                CustomTextLabelWidget(
+                  label: context.appString.profileSettingsHintKey,
+                  style: AppStyles.instance.textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(height: Dimens.space24),
+            Card(
+              elevation: Dimens.elevation0,
+              color: colorScheme.surfaceContainerLow,
+              child: ListTile(
+                leading: Icon(
+                  Icons.backup_outlined,
+                  color: colorScheme.primary,
+                ),
+                title: CustomTextLabelWidget(
+                  label: context.appString.backupRestoreProfileEntryKey,
+                  textAlign: TextAlign.start,
+                ),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  unawaited(
+                    context.router.push(const BackupRestoreRoute()),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

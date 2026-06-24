@@ -262,7 +262,14 @@ class HiIN extends AppString {
   String get exportPdfKey => "PDF निर्यात";
 
   @override
+  String get pdfExportSuccessKey => "PDF सफलतापूर्वक निर्यात किया गया";
+
+  @override
   String get exportExcelKey => "Excel निर्यात";
+
+  @override
+  String get excelExportSuccessKey =>
+      "Excel सफलतापूर्वक निर्यात किया गया";
 
   @override
   String get reportChartPlaceholderKey =>
@@ -390,6 +397,40 @@ class HiIN extends AppString {
 
   @override
   String get syncDiagnosticsRefreshKey => "रीफ़्रेश";
+
+  @override
+  String get backupRestoreTitleKey => "बैकअप और पुनर्स्थापना";
+
+  @override
+  String get backupRestoreOverviewKey => "स्थानीय डेटा अवलोकन";
+
+  @override
+  String get backupRestoreTotalRecordsKey => "ऑफ़लाइन संग्रहीत कुल रिकॉर्ड";
+
+  @override
+  String get backupRestoreJsonExportKey => "JSON बैकअप निर्यात";
+
+  @override
+  String get backupRestoreJsonImportKey => "JSON बैकअप पुनर्स्थापित";
+
+  @override
+  String get backupRestoreGoogleSheetsKey => "Google Sheets में बैकअप";
+
+  @override
+  String get backupRestoreOpenSheetsKey => "Google Sheet खोलें";
+
+  @override
+  String get backupRestoreConfirmTitleKey => "बैकअप पुनर्स्थापित करें?";
+
+  @override
+  String get backupRestoreConfirmMessageKey =>
+      "यह सभी स्थानीय फ़ैक्टरी डेटा को चयनित बैकअप फ़ाइल से बदल देगा।";
+
+  @override
+  String get backupRestoreConfirmActionKey => "पुनर्स्थापित करें";
+
+  @override
+  String get backupRestoreProfileEntryKey => "बैकअप और पुनर्स्थापना";
 
   @override
   String get factoryStatusKey => "फ़ैक्टरी स्थिति";

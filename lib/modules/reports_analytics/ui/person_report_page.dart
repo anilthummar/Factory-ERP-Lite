@@ -14,6 +14,14 @@ class PersonReportPage extends StatelessWidget {
       pageTitle: strings.personReportsKey,
       searchHint: strings.searchReportsKey,
       filterConfig: ReportFilterUiConfig.person(strings),
+      onExportPdf: () => runReportPdfExport(
+        context,
+        exportAction: getIt<ExportPersonReportPdfUseCase>().call,
+      ),
+      onExportExcel: () => runReportExcelExport(
+        context,
+        exportAction: getIt<ExportPersonReportExcelUseCase>().call,
+      ),
       summaryCards: <ReportSummaryCard>[
         ReportSummaryCard(
           title: strings.personManagementKey,
