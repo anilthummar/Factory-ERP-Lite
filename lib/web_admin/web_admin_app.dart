@@ -1,4 +1,5 @@
 import '../utils/exports.dart';
+import 'auth/web_admin_auth_gate.dart';
 import 'shell/web_admin_shell.dart';
 
 /// Root widget for the Factory ERP Lite web admin panel.
@@ -12,7 +13,9 @@ class WebAdminApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Factory ERP Lite Admin',
       theme: MyAppTheme.instance.theme,
-      home: const WebAdminShell(),
+      home: const WebAdminAuthGate(
+        child: WebAdminShell(),
+      ),
     );
   }
 }

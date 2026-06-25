@@ -83,21 +83,38 @@ void setupLocator() {
     ..registerLazySingleton<OfflineFirstSyncSupport>(
       () => OfflineFirstSyncSupport(getIt<SyncCoordinator>()),
     )
-    ..registerLazySingleton<FlutterLocalNotificationService>(
-      FlutterLocalNotificationService.new,
-    )
-    ..registerLazySingleton<ReminderSchedulerService>(
-      () => ReminderSchedulerService(
-        notificationService: getIt<FlutterLocalNotificationService>(),
+    ..registerLazySingleton<NotificationService>(NotificationService.new)
+    ..registerLazySingleton<NotificationRepository>(
+      () => NotificationRepositoryImpl(
         getCalendarEventsUseCase: getIt<GetCalendarEventsUseCase>(),
       ),
     )
-    ..registerLazySingleton<ScheduleRemindersUseCase>(
-      () => ScheduleRemindersUseCase(getIt<ReminderSchedulerService>()),
+    ..registerLazySingleton<InitializeNotificationsUseCase>(
+      () => InitializeNotificationsUseCase(getIt<NotificationService>()),
     )
-    ..registerLazySingleton<ShowSyncFailedNotificationUseCase>(
-      () => ShowSyncFailedNotificationUseCase(
-        getIt<FlutterLocalNotificationService>(),
+    ..registerLazySingleton<RefreshScheduledRemindersUseCase>(
+      () => RefreshScheduledRemindersUseCase(
+        getIt<NotificationService>(),
+        getIt<NotificationRepository>(),
+      ),
+    )
+    ..registerLazySingleton<CancelNotificationUseCase>(
+      () => CancelNotificationUseCase(getIt<NotificationService>()),
+    )
+    ..registerLazySingleton<UpdateNotificationUseCase>(
+      () => UpdateNotificationUseCase(getIt<NotificationService>()),
+    )
+    ..registerLazySingleton<ShowSyncFailureNotificationUseCase>(
+      () => ShowSyncFailureNotificationUseCase(getIt<NotificationService>()),
+    )
+    ..registerLazySingleton<NotificationBloc>(
+      () => NotificationBloc(
+        initializeNotificationsUseCase:
+            getIt<InitializeNotificationsUseCase>(),
+        refreshScheduledRemindersUseCase:
+            getIt<RefreshScheduledRemindersUseCase>(),
+        cancelNotificationUseCase: getIt<CancelNotificationUseCase>(),
+        updateNotificationUseCase: getIt<UpdateNotificationUseCase>(),
       ),
     )
     ..registerLazySingleton<SyncService>(
@@ -105,8 +122,8 @@ void setupLocator() {
         hiveManager: getIt<HiveManager>(),
         syncEngine: getIt<SyncEngine>(),
         queueRepository: getIt<SyncQueueRepository>(),
-        showSyncFailedNotificationUseCase:
-            getIt<ShowSyncFailedNotificationUseCase>(),
+        showSyncFailureNotificationUseCase:
+            getIt<ShowSyncFailureNotificationUseCase>(),
       ),
     )
     ..registerLazySingleton<PersonLocalDataSource>(

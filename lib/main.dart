@@ -1,4 +1,5 @@
 import 'package:sentry_flutter/sentry_flutter.dart';
+
 import '../../../utils/exports.dart';
 
 ///When app is in background this method will be call
@@ -6,8 +7,7 @@ import '../../../utils/exports.dart';
 Future<void> firebaseBackground(RemoteMessage message) async {
   DebugLog.instance
       .i("FCM Background Message : ${message.data} ${message.notification}");
-  await AwesomeNotificationManager.instance
-      .showNotification(payload: message.data);
+  await firebaseBackgroundNotificationHandler(message);
 }
 
 /// Entry point of the application.

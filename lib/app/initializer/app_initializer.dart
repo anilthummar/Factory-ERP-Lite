@@ -47,8 +47,8 @@ class AppInitializer {
       await getIt<FirebaseService>().configureFirestore();
       await getIt<HiveManager>().init();
       getIt<SyncService>().startListening();
-      await getIt<FlutterLocalNotificationService>().init();
-      await getIt<ScheduleRemindersUseCase>()();
+      await getIt<InitializeNotificationsUseCase>()();
+      await getIt<RefreshScheduledRemindersUseCase>()();
       await NotificationManager.instance.init();
       await _initStorage();
       _initScreenPreference();

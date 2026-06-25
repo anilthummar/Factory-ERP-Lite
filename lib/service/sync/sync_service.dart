@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../hive/hive_manager.dart';
-import '../../modules/reminders/domain/usecases/show_sync_failed_notification_use_case.dart';
+import '../../modules/notifications/domain/usecases/notification_use_cases.dart';
 import 'queue/sync_queue_repository.dart';
 import 'sync_config.dart';
 import 'sync_engine.dart';
@@ -16,18 +16,18 @@ class SyncService {
     required SyncEngine syncEngine,
     required SyncQueueRepository queueRepository,
     Connectivity? connectivity,
-    ShowSyncFailedNotificationUseCase? showSyncFailedNotificationUseCase,
+    ShowSyncFailureNotificationUseCase? showSyncFailureNotificationUseCase,
   })  : _hiveManager = hiveManager,
         _syncEngine = syncEngine,
         _queueRepository = queueRepository,
         _connectivity = connectivity ?? Connectivity(),
-        _showSyncFailedNotificationUseCase = showSyncFailedNotificationUseCase;
+        _showSyncFailureNotificationUseCase = showSyncFailureNotificationUseCase;
 
   final HiveManager _hiveManager;
   final SyncEngine _syncEngine;
   final SyncQueueRepository _queueRepository;
   final Connectivity _connectivity;
-  final ShowSyncFailedNotificationUseCase? _showSyncFailedNotificationUseCase;
+  final ShowSyncFailureNotificationUseCase? _showSyncFailureNotificationUseCase;
 
   StreamSubscription<ConnectivityResult>? _subscription;
   Timer? _backgroundTimer;
@@ -63,7 +63,7 @@ class SyncService {
 
     final SyncEngineReport report = await _syncEngine.processPending();
     if (report.failedCount > 0) {
-      await _showSyncFailedNotificationUseCase?.call(report.failedCount);
+      await _showSyncFailureNotificationUseCase?.call(report.failedCount);
     }
     return report;
   }
