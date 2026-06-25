@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../hive/hive_manager.dart';
+import '../../modules/reminders/domain/usecases/show_sync_failed_notification_use_case.dart';
 import 'queue/sync_queue_repository.dart';
 import 'sync_config.dart';
 import 'sync_engine.dart';
@@ -15,15 +16,18 @@ class SyncService {
     required SyncEngine syncEngine,
     required SyncQueueRepository queueRepository,
     Connectivity? connectivity,
+    ShowSyncFailedNotificationUseCase? showSyncFailedNotificationUseCase,
   })  : _hiveManager = hiveManager,
         _syncEngine = syncEngine,
         _queueRepository = queueRepository,
-        _connectivity = connectivity ?? Connectivity();
+        _connectivity = connectivity ?? Connectivity(),
+        _showSyncFailedNotificationUseCase = showSyncFailedNotificationUseCase;
 
   final HiveManager _hiveManager;
   final SyncEngine _syncEngine;
   final SyncQueueRepository _queueRepository;
   final Connectivity _connectivity;
+  final ShowSyncFailedNotificationUseCase? _showSyncFailedNotificationUseCase;
 
   StreamSubscription<ConnectivityResult>? _subscription;
   Timer? _backgroundTimer;
@@ -52,12 +56,16 @@ class SyncService {
   }
 
   /// Processes all pending and retry-eligible failed items in the sync queue.
-  Future<SyncEngineReport> processPendingSync() {
+  Future<SyncEngineReport> processPendingSync() async {
     if (!_hiveManager.isInitialized) {
-      return Future<SyncEngineReport>.value(const SyncEngineReport());
+      return const SyncEngineReport();
     }
 
-    return _syncEngine.processPending();
+    final SyncEngineReport report = await _syncEngine.processPending();
+    if (report.failedCount > 0) {
+      await _showSyncFailedNotificationUseCase?.call(report.failedCount);
+    }
+    return report;
   }
 
   /// Retries failed sync queue items when connectivity is available.

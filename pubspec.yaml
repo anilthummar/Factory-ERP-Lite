@@ -72,6 +72,8 @@ dependencies:
 
   # Notifications
   awesome_notifications: ^0.10.1
+  flutter_local_notifications: ^19.0.0
+  timezone: ^0.10.0
 
   # Observability
   sentry_flutter: ^8.4.0
@@ -98,10 +100,6 @@ dependencies:
   # Reports — Excel (.xlsx) export & share
   excel: ^4.0.6
   share_plus: ^10.1.4
-
-  # Backup — Google Sheets export
-  googleapis: ^13.2.0
-  extension_google_sign_in_as_googleapis_auth: ^2.0.12
 
 dev_dependencies:
   flutter_test:

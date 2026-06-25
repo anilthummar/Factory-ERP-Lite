@@ -430,6 +430,9 @@ class HiIN extends AppString {
   String get backupRestoreConfirmActionKey => "पुनर्स्थापित करें";
 
   @override
+  String get backupRestoreValidationSummaryKey => "बैकअप में शामिल:";
+
+  @override
   String get backupRestoreProfileEntryKey => "बैकअप और पुनर्स्थापना";
 
   @override

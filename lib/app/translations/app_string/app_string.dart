@@ -416,6 +416,9 @@ abstract class AppString {
   /// Restore confirmation action label.
   String get backupRestoreConfirmActionKey;
 
+  /// Summary label shown after backup validation.
+  String get backupRestoreValidationSummaryKey;
+
   /// Profile entry for backup & restore.
   String get backupRestoreProfileEntryKey;
 

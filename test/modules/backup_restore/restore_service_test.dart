@@ -1,11 +1,12 @@
 import 'package:factory_erp_lite/modules/backup_restore/datasource/backup_local_data_source.dart';
 import 'package:factory_erp_lite/modules/backup_restore/domain/models/backup_manifest.dart';
-import 'package:factory_erp_lite/modules/backup_restore/service/json_backup_service.dart';
+import 'package:factory_erp_lite/modules/backup_restore/domain/models/backup_validation_result.dart';
+import 'package:factory_erp_lite/modules/backup_restore/service/restore_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _FakeBackupLocalDataSource implements BackupLocalDataSource {
   @override
-  Future<Map<String, dynamic>> exportAllModules() async {
+  Future<Map<String, dynamic>> exportModules() async {
     return <String, dynamic>{
       'person_management': <Map<String, dynamic>>[
         <String, dynamic>{
@@ -21,7 +22,10 @@ class _FakeBackupLocalDataSource implements BackupLocalDataSource {
   }
 
   @override
-  Future<void> restoreAllModules(Map<String, dynamic> modules) async {}
+  Future<void> restoreModules(
+    Map<String, dynamic> modules, {
+    BackupProgressCallback? onProgress,
+  }) async {}
 
   @override
   Future<Map<String, int>> recordCounts() async {
@@ -30,8 +34,8 @@ class _FakeBackupLocalDataSource implements BackupLocalDataSource {
 }
 
 void main() {
-  test('json backup service encodes and validates backup payload', () {
-    final JsonBackupService service = JsonBackupService(
+  test('restore service validates supported backup payload', () {
+    final RestoreService service = RestoreService(
       localDataSource: _FakeBackupLocalDataSource(),
     );
 
@@ -46,10 +50,24 @@ void main() {
       },
     };
 
-    final String json = service.encode(payload);
-    final Map<String, dynamic> decoded = service.decode(json);
+    final BackupValidationResult result = service.validatePayload(payload);
 
-    expect(decoded['formatVersion'], BackupManifest.currentVersion);
-    expect(service.countRecords(decoded), 1);
+    expect(result.isValid, isTrue);
+    expect(result.totalRecords, 1);
+  });
+
+  test('restore service rejects unsupported app id', () {
+    final RestoreService service = RestoreService(
+      localDataSource: _FakeBackupLocalDataSource(),
+    );
+
+    final BackupValidationResult result = service.validatePayload(<String, dynamic>{
+      'formatVersion': BackupManifest.currentVersion,
+      'app': 'other_app',
+      'modules': <String, dynamic>{},
+    });
+
+    expect(result.isValid, isFalse);
+    expect(result.errors, isNotEmpty);
   });
 }

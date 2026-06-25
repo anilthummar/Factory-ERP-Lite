@@ -10,12 +10,12 @@ class BackupRestorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<BackupRestoreBloc>(
-      create: (BuildContext context) => BackupRestoreBloc(
+    return BlocProvider<BackupBloc>(
+      create: (BuildContext context) => BackupBloc(
         getBackupOverviewUseCase: getIt<GetBackupOverviewUseCase>(),
-        createJsonBackupUseCase: getIt<CreateJsonBackupUseCase>(),
-        restoreJsonBackupUseCase: getIt<RestoreJsonBackupUseCase>(),
-        backupToGoogleSheetsUseCase: getIt<BackupToGoogleSheetsUseCase>(),
+        exportLocalJsonBackupUseCase: getIt<ExportLocalJsonBackupUseCase>(),
+        validateBackupFileUseCase: getIt<ValidateBackupFileUseCase>(),
+        restoreLocalJsonBackupUseCase: getIt<RestoreLocalJsonBackupUseCase>(),
       ),
       child: const _BackupRestoreView(),
     );
@@ -25,7 +25,7 @@ class BackupRestorePage extends StatelessWidget {
 class _BackupRestoreView extends StatelessWidget {
   const _BackupRestoreView();
 
-  Future<void> _pickAndRestore(BuildContext context) async {
+  Future<void> _pickBackupFile(BuildContext context) async {
     final FilePickerResult? result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: <String>['json'],
@@ -38,15 +38,35 @@ class _BackupRestoreView extends StatelessWidget {
       return;
     }
 
+    context.read<BackupBloc>().add(
+          BackupValidateRequested(result.files.single.path!),
+        );
+  }
+
+  Future<void> _confirmRestore(BuildContext context, String filePath) async {
     final bool confirmed = await showDialog<bool>(
           context: context,
           builder: (BuildContext dialogContext) {
+            final BackupState state = context.read<BackupBloc>().state;
+            final BackupValidationResult? validation = state.validation;
+            final String summary = validation == null
+                ? ''
+                : validation.recordCountsByModule.entries
+                    .where((MapEntry<String, int> entry) => entry.value > 0)
+                    .map(
+                      (MapEntry<String, int> entry) =>
+                          '${BackupManifest.moduleLabels[entry.key] ?? entry.key}: ${entry.value}',
+                    )
+                    .join('\n');
+
             return AlertDialog(
               title: CustomTextLabelWidget(
                 label: context.appString.backupRestoreConfirmTitleKey,
               ),
               content: CustomTextLabelWidget(
-                label: context.appString.backupRestoreConfirmMessageKey,
+                label: '${context.appString.backupRestoreConfirmMessageKey}\n\n'
+                    '${context.appString.backupRestoreValidationSummaryKey}\n'
+                    '${validation?.totalRecords ?? 0} records\n$summary',
                 textAlign: TextAlign.start,
               ),
               actions: <Widget>[
@@ -72,9 +92,7 @@ class _BackupRestoreView extends StatelessWidget {
       return;
     }
 
-    context.read<BackupRestoreBloc>().add(
-          BackupRestoreJsonImportRequested(result.files.single.path!),
-        );
+    context.read<BackupBloc>().add(BackupRestoreRequested(filePath));
   }
 
   @override
@@ -90,20 +108,25 @@ class _BackupRestoreView extends StatelessWidget {
           textAlign: TextAlign.start,
         ),
       ),
-      body: BlocConsumer<BackupRestoreBloc, BackupRestoreState>(
-        listener: (BuildContext context, BackupRestoreState state) {
-          if (state.status == BackupRestoreStatus.failure &&
+      body: BlocConsumer<BackupBloc, BackupState>(
+        listener: (BuildContext context, BackupState state) {
+          if (state.status == BackupStatus.failure &&
               state.errorMessage != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errorMessage!)),
             );
           }
+
+          if (state.status == BackupStatus.awaitingConfirmation &&
+              state.pendingRestorePath != null) {
+            unawaited(_confirmRestore(context, state.pendingRestorePath!));
+          }
         },
-        builder: (BuildContext context, BackupRestoreState state) {
-          final bool isBusy = state.status == BackupRestoreStatus.loading ||
-              state.status == BackupRestoreStatus.exportingJson ||
-              state.status == BackupRestoreStatus.restoringJson ||
-              state.status == BackupRestoreStatus.exportingSheets;
+        builder: (BuildContext context, BackupState state) {
+          final bool isBusy = state.status == BackupStatus.loading ||
+              state.status == BackupStatus.exporting ||
+              state.status == BackupStatus.validating ||
+              state.status == BackupStatus.restoring;
 
           return CustomResponsiveContent(
             child: ListView(
@@ -129,15 +152,27 @@ class _BackupRestoreView extends StatelessWidget {
                   ),
                   const SizedBox(height: Dimens.space16),
                 ],
+                if (state.progress != null) ...<Widget>[
+                  LinearProgressIndicator(value: state.progress!.fraction),
+                  const SizedBox(height: Dimens.space8),
+                  CustomTextLabelWidget(
+                    label: state.progress!.stage,
+                    textAlign: TextAlign.start,
+                    style: AppStyles.instance.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: Dimens.space16),
+                ],
                 CustomButtonWidget(
                   text: strings.backupRestoreJsonExportKey,
                   backgroundColor: colorScheme.primary,
                   onClick: isBusy
                       ? null
                       : () {
-                          context.read<BackupRestoreBloc>().add(
-                                const BackupRestoreJsonExportRequested(),
-                              );
+                          context
+                              .read<BackupBloc>()
+                              .add(const BackupExportRequested());
                         },
                   textStyle:
                       AppStyles.instance.textTheme.labelMedium?.copyWith(
@@ -148,46 +183,12 @@ class _BackupRestoreView extends StatelessWidget {
                 CustomButtonWidget(
                   text: strings.backupRestoreJsonImportKey,
                   backgroundColor: colorScheme.secondaryContainer,
-                  onClick: isBusy
-                      ? null
-                      : () => _pickAndRestore(context),
+                  onClick: isBusy ? null : () => _pickBackupFile(context),
                   textStyle:
                       AppStyles.instance.textTheme.labelMedium?.copyWith(
                     color: colorScheme.onSecondaryContainer,
                   ),
                 ),
-                const SizedBox(height: Dimens.space12),
-                CustomButtonWidget(
-                  text: strings.backupRestoreGoogleSheetsKey,
-                  backgroundColor: colorScheme.tertiaryContainer,
-                  onClick: isBusy
-                      ? null
-                      : () {
-                          context.read<BackupRestoreBloc>().add(
-                                const BackupRestoreGoogleSheetsRequested(),
-                              );
-                        },
-                  textStyle:
-                      AppStyles.instance.textTheme.labelMedium?.copyWith(
-                    color: colorScheme.onTertiaryContainer,
-                  ),
-                ),
-                if (state.lastSheetsUrl != null) ...<Widget>[
-                  const SizedBox(height: Dimens.space12),
-                  TextButton(
-                    onPressed: () {
-                      unawaited(
-                        launchUrl(
-                          Uri.parse(state.lastSheetsUrl!),
-                          mode: LaunchMode.externalApplication,
-                        ),
-                      );
-                    },
-                    child: CustomTextLabelWidget(
-                      label: strings.backupRestoreOpenSheetsKey,
-                    ),
-                  ),
-                ],
                 if (isBusy) ...<Widget>[
                   const SizedBox(height: Dimens.space24),
                   const Center(child: CircularProgressIndicator()),

@@ -426,6 +426,9 @@ class EnUS extends AppString {
   String get backupRestoreConfirmActionKey => "Restore";
 
   @override
+  String get backupRestoreValidationSummaryKey => "Backup contains:";
+
+  @override
   String get backupRestoreProfileEntryKey => "Backup & Restore";
 
   @override

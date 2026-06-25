@@ -83,11 +83,30 @@ void setupLocator() {
     ..registerLazySingleton<OfflineFirstSyncSupport>(
       () => OfflineFirstSyncSupport(getIt<SyncCoordinator>()),
     )
+    ..registerLazySingleton<FlutterLocalNotificationService>(
+      FlutterLocalNotificationService.new,
+    )
+    ..registerLazySingleton<ReminderSchedulerService>(
+      () => ReminderSchedulerService(
+        notificationService: getIt<FlutterLocalNotificationService>(),
+        getCalendarEventsUseCase: getIt<GetCalendarEventsUseCase>(),
+      ),
+    )
+    ..registerLazySingleton<ScheduleRemindersUseCase>(
+      () => ScheduleRemindersUseCase(getIt<ReminderSchedulerService>()),
+    )
+    ..registerLazySingleton<ShowSyncFailedNotificationUseCase>(
+      () => ShowSyncFailedNotificationUseCase(
+        getIt<FlutterLocalNotificationService>(),
+      ),
+    )
     ..registerLazySingleton<SyncService>(
       () => SyncService(
         hiveManager: getIt<HiveManager>(),
         syncEngine: getIt<SyncEngine>(),
         queueRepository: getIt<SyncQueueRepository>(),
+        showSyncFailedNotificationUseCase:
+            getIt<ShowSyncFailedNotificationUseCase>(),
       ),
     )
     ..registerLazySingleton<PersonLocalDataSource>(
@@ -491,34 +510,23 @@ void setupLocator() {
     ..registerLazySingleton<BackupLocalDataSource>(
       () => BackupLocalDataSourceImpl(hiveManager: getIt<HiveManager>()),
     )
-    ..registerLazySingleton<JsonBackupService>(
-      () => JsonBackupService(localDataSource: getIt<BackupLocalDataSource>()),
+    ..registerLazySingleton<BackupService>(
+      () => BackupService(localDataSource: getIt<BackupLocalDataSource>()),
     )
-    ..registerLazySingleton<BackupFileService>(BackupFileService.new)
-    ..registerLazySingleton<GoogleSheetsBackupService>(
-      () => GoogleSheetsBackupService(
-        localDataSource: getIt<BackupLocalDataSource>(),
-      ),
-    )
-    ..registerLazySingleton<BackupRepository>(
-      () => BackupRepositoryImpl(
-        localDataSource: getIt<BackupLocalDataSource>(),
-        jsonBackupService: getIt<JsonBackupService>(),
-        backupFileService: getIt<BackupFileService>(),
-        googleSheetsBackupService: getIt<GoogleSheetsBackupService>(),
-      ),
+    ..registerLazySingleton<RestoreService>(
+      () => RestoreService(localDataSource: getIt<BackupLocalDataSource>()),
     )
     ..registerLazySingleton<GetBackupOverviewUseCase>(
-      () => GetBackupOverviewUseCase(getIt<BackupRepository>()),
+      () => GetBackupOverviewUseCase(getIt<BackupLocalDataSource>()),
     )
-    ..registerLazySingleton<CreateJsonBackupUseCase>(
-      () => CreateJsonBackupUseCase(getIt<BackupRepository>()),
+    ..registerLazySingleton<ExportLocalJsonBackupUseCase>(
+      () => ExportLocalJsonBackupUseCase(getIt<BackupService>()),
     )
-    ..registerLazySingleton<RestoreJsonBackupUseCase>(
-      () => RestoreJsonBackupUseCase(getIt<BackupRepository>()),
+    ..registerLazySingleton<ValidateBackupFileUseCase>(
+      () => ValidateBackupFileUseCase(getIt<RestoreService>()),
     )
-    ..registerLazySingleton<BackupToGoogleSheetsUseCase>(
-      () => BackupToGoogleSheetsUseCase(getIt<BackupRepository>()),
+    ..registerLazySingleton<RestoreLocalJsonBackupUseCase>(
+      () => RestoreLocalJsonBackupUseCase(getIt<RestoreService>()),
     )
     ..registerLazySingleton<RegExpressions>(RegExpressions.new)
     ..registerSingleton<ForceUpdateUnderMaintenanceBloc>(
