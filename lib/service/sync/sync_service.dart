@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../hive/hive_manager.dart';
 import '../../modules/notifications/domain/usecases/notification_use_cases.dart';
+import '../hive/hive_manager.dart';
 import 'queue/sync_queue_repository.dart';
 import 'sync_config.dart';
 import 'sync_engine.dart';
