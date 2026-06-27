@@ -574,6 +574,16 @@ class HiIN extends AppString {
   String get addLaborKey => "श्रम जोड़ें";
 
   @override
+  String get editLaborKey => "श्रम संपादित करें";
+
+  @override
+  String get deleteLaborKey => "हटाएं";
+
+  @override
+  String get deleteLaborConfirmKey =>
+      "क्या इस श्रम रिकॉर्ड को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
   String get laborEmptyTitleKey => "अभी कोई श्रम रिकॉर्ड नहीं";
 
   @override
@@ -657,6 +667,13 @@ class HiIN extends AppString {
 
   @override
   String get editRecurringExpenseKey => "आवर्ती खर्च संपादित करें";
+
+  @override
+  String get deleteRecurringExpenseKey => "हटाएं";
+
+  @override
+  String get deleteRecurringExpenseConfirmKey =>
+      "क्या इस आवर्ती खर्च को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
 
   @override
   String get frequencyKey => "आवृत्ति";

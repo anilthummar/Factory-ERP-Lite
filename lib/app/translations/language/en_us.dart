@@ -568,6 +568,16 @@ class EnUS extends AppString {
   String get addLaborKey => "Add Labor";
 
   @override
+  String get editLaborKey => "Edit Labor";
+
+  @override
+  String get deleteLaborKey => "Delete";
+
+  @override
+  String get deleteLaborConfirmKey =>
+      "Delete this labor record? This cannot be undone.";
+
+  @override
   String get laborEmptyTitleKey => "No labor records yet";
 
   @override
@@ -651,6 +661,13 @@ class EnUS extends AppString {
 
   @override
   String get editRecurringExpenseKey => "Edit Recurring Expense";
+
+  @override
+  String get deleteRecurringExpenseKey => "Delete";
+
+  @override
+  String get deleteRecurringExpenseConfirmKey =>
+      "Delete this recurring expense? This cannot be undone.";
 
   @override
   String get frequencyKey => "Frequency";

@@ -51,7 +51,7 @@ class _DashboardTabViewState extends State<_DashboardTabView> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, DashboardState state) {
         return RefreshIndicator(
-          onRefresh: () async {
+          onRefresh: () => pullRemoteBeforeLocalRefresh(() async {
             context
                 .read<DashboardBloc>()
                 .add(const DashboardRefreshRequested());
@@ -60,7 +60,7 @@ class _DashboardTabViewState extends State<_DashboardTabView> {
                       next.status == DashboardStatus.success ||
                       next.status == DashboardStatus.failure,
                 );
-          },
+          }),
           child: _buildBody(context, state),
         );
       },

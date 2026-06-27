@@ -554,6 +554,15 @@ abstract class AppString {
   /// Add labor FAB label.
   String get addLaborKey;
 
+  /// Edit labor screen title.
+  String get editLaborKey;
+
+  /// Delete labor action label.
+  String get deleteLaborKey;
+
+  /// Delete labor confirmation message.
+  String get deleteLaborConfirmKey;
+
   /// Empty labor list title.
   String get laborEmptyTitleKey;
 
@@ -634,6 +643,12 @@ abstract class AppString {
 
   /// Edit recurring expense screen title.
   String get editRecurringExpenseKey;
+
+  /// Delete recurring expense action label.
+  String get deleteRecurringExpenseKey;
+
+  /// Delete recurring expense confirmation message.
+  String get deleteRecurringExpenseConfirmKey;
 
   /// Recurring expense frequency field label.
   String get frequencyKey;

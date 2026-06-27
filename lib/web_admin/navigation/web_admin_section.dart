@@ -5,6 +5,12 @@ enum WebAdminSection {
   /// Dashboard overview.
   dashboard,
 
+  /// Factory operating status.
+  factoryStatus,
+
+  /// File attachments library.
+  attachments,
+
   /// Person management.
   persons,
 
@@ -24,6 +30,8 @@ enum WebAdminSection {
   String get label {
     return switch (this) {
       WebAdminSection.dashboard => 'Dashboard',
+      WebAdminSection.factoryStatus => 'Factory Status',
+      WebAdminSection.attachments => 'Attachments',
       WebAdminSection.persons => 'Persons',
       WebAdminSection.labor => 'Labor',
       WebAdminSection.expenses => 'Expenses',
@@ -36,6 +44,8 @@ enum WebAdminSection {
   IconData get icon {
     return switch (this) {
       WebAdminSection.dashboard => Icons.dashboard_outlined,
+      WebAdminSection.factoryStatus => Icons.factory_outlined,
+      WebAdminSection.attachments => Icons.attach_file_outlined,
       WebAdminSection.persons => Icons.people_outline,
       WebAdminSection.labor => Icons.engineering_outlined,
       WebAdminSection.expenses => Icons.receipt_long_outlined,
@@ -48,6 +58,8 @@ enum WebAdminSection {
   IconData get selectedIcon {
     return switch (this) {
       WebAdminSection.dashboard => Icons.dashboard,
+      WebAdminSection.factoryStatus => Icons.factory,
+      WebAdminSection.attachments => Icons.attach_file,
       WebAdminSection.persons => Icons.people,
       WebAdminSection.labor => Icons.engineering,
       WebAdminSection.expenses => Icons.receipt_long,

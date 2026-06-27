@@ -51,14 +51,16 @@ class _RecurringExpensesPageViewState extends State<_RecurringExpensesPageView> 
   }
 
   Future<void> _onRefresh() async {
-    final RecurringExpenseBloc bloc = context.read<RecurringExpenseBloc>();
-    final Future<CrudState<RecurringExpenseEntity>> nextState = bloc.stream
-        .skip(1)
-        .firstWhere(
-          (CrudState<RecurringExpenseEntity> state) => !state.isLoading,
-        );
-    bloc.add(const RecurringExpenseRefreshRequested());
-    await nextState;
+    await pullRemoteBeforeLocalRefresh(() async {
+      final RecurringExpenseBloc bloc = context.read<RecurringExpenseBloc>();
+      final Future<CrudState<RecurringExpenseEntity>> nextState = bloc.stream
+          .skip(1)
+          .firstWhere(
+            (CrudState<RecurringExpenseEntity> state) => !state.isLoading,
+          );
+      bloc.add(const RecurringExpenseRefreshRequested());
+      await nextState;
+    });
   }
 
   void _openForm({RecurringExpenseEntity? expense}) {
@@ -117,6 +119,44 @@ class _RecurringExpensesPageViewState extends State<_RecurringExpensesPageView> 
     );
   }
 
+  Future<void> _confirmDelete(RecurringExpenseEntity expense) async {
+    final AppString strings = context.appString;
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: CustomTextLabelWidget(
+            label: expense.title,
+            textAlign: TextAlign.start,
+          ),
+          content: CustomTextLabelWidget(
+            label: strings.deleteRecurringExpenseConfirmKey,
+            textAlign: TextAlign.start,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(strings.cancelKey),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(
+                strings.deleteRecurringExpenseKey,
+                style: TextStyle(color: context.theme.colorScheme.error),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed == true && mounted) {
+      context
+          .read<RecurringExpenseBloc>()
+          .add(RecurringExpenseDeleteRequested(expense.id));
+    }
+  }
+
   List<RecurringExpenseCardData> _mapExpenses(
     List<RecurringExpenseEntity> expenses,
     AppString strings,
@@ -133,6 +173,7 @@ class _RecurringExpensesPageViewState extends State<_RecurringExpensesPageView> 
                 ? null
                 : dateToString(expense.endDate!),
             onTap: () => _openForm(expense: expense),
+            onDelete: () => unawaited(_confirmDelete(expense)),
           ),
         )
         .toList(growable: false);

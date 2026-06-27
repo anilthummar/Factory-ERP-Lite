@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -52,6 +53,27 @@ class AttachmentStorageRemoteDataSource {
     final Reference reference = _resolvedStorage.ref().child(storagePath);
     final SettableMetadata metadata = SettableMetadata(contentType: contentType);
     await reference.putFile(file, metadata);
+    final String downloadUrl = await reference.getDownloadURL();
+
+    return AttachmentUploadResult(
+      downloadUrl: downloadUrl,
+      storagePath: storagePath,
+    );
+  }
+
+  /// Uploads [bytes] to Firebase Storage at [storagePath].
+  Future<AttachmentUploadResult> uploadBytes({
+    required Uint8List bytes,
+    required String storagePath,
+    required String contentType,
+  }) async {
+    if (!_firebaseService.isInitialized) {
+      throw StateError('Firebase is not initialized.');
+    }
+
+    final Reference reference = _resolvedStorage.ref().child(storagePath);
+    final SettableMetadata metadata = SettableMetadata(contentType: contentType);
+    await reference.putData(bytes, metadata);
     final String downloadUrl = await reference.getDownloadURL();
 
     return AttachmentUploadResult(

@@ -3,6 +3,7 @@ import '../../../core/domain/entities/dashboard_data.dart';
 import '../../../core/domain/enums/factory_status_type.dart' as domain;
 import '../../../modules/dashboard/ui/dashboard_activity_source_ui.dart';
 import '../../../utils/exports.dart';
+import '../widgets/admin_centered_status_panel.dart';
 import '../widgets/admin_metric_card.dart';
 import '../widgets/admin_simple_bar_chart.dart';
 
@@ -70,25 +71,42 @@ class _DashboardBody extends StatelessWidget {
         state.status == DashboardStatus.loading && data == null;
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (state.status == DashboardStatus.failure && data == null) {
-      return Center(
-        child: Text(state.errorMessage ?? strings.somethingWentWrongKey),
+      return const SizedBox.expand(
+        child: Center(child: CircularProgressIndicator()),
       );
     }
 
-    final String lastSync = data?.lastSyncAt == null
+    if (state.status == DashboardStatus.failure && data == null) {
+      return AdminCenteredStatusPanel(
+        icon: Icons.error_outline,
+        message: state.errorMessage ?? strings.somethingWentWrongKey,
+        actionLabel: strings.syncDiagnosticsRefreshKey,
+        onAction: () {
+          context.read<DashboardBloc>().add(const DashboardLoadRequested());
+        },
+      );
+    }
+
+    if (data == null) {
+      return AdminCenteredStatusPanel(
+        message: strings.somethingWentWrongKey,
+        actionLabel: strings.syncDiagnosticsRefreshKey,
+        onAction: () {
+          context.read<DashboardBloc>().add(const DashboardLoadRequested());
+        },
+      );
+    }
+
+    final String lastSync = data.lastSyncAt == null
         ? strings.neverSyncedKey
         : dateToString(
-            data!.lastSyncAt!,
+            data.lastSyncAt!,
             dateFormat: DateConstants.dateTimeFormat,
           );
 
-    final bool hasFactoryStatus = data?.currentFactoryStatus != null;
+    final bool hasFactoryStatus = data.currentFactoryStatus != null;
     final String factoryStatusLabel = hasFactoryStatus
-        ? data!.currentFactoryStatus!.toUi().label(strings)
+        ? data.currentFactoryStatus!.toUi().label(strings)
         : strings.noFactoryStatusSetKey;
 
     return LayoutBuilder(
@@ -121,22 +139,22 @@ class _DashboardBody extends StatelessWidget {
                 children: <Widget>[
                   AdminMetricCard(
                     label: strings.totalPersonsKey,
-                    value: '${data?.totalPersons ?? 0}',
+                    value: '${data.totalPersons}',
                     icon: Icons.people_outline,
                   ),
                   AdminMetricCard(
                     label: strings.totalLaborKey,
-                    value: '${data?.totalLabor ?? 0}',
+                    value: '${data.totalLabor}',
                     icon: Icons.engineering_outlined,
                   ),
                   AdminMetricCard(
                     label: strings.totalExpensesKey,
-                    value: '${data?.totalExpenses ?? 0}',
+                    value: '${data.totalExpenses}',
                     icon: Icons.receipt_long_outlined,
                   ),
                   AdminMetricCard(
                     label: strings.pendingSyncKey,
-                    value: '${data?.pendingSyncCount ?? 0}',
+                    value: '${data.pendingSyncCount}',
                     icon: Icons.sync_outlined,
                     subtitle: '${strings.lastSyncTimeKey}: $lastSync',
                   ),
@@ -148,8 +166,8 @@ class _DashboardBody extends StatelessWidget {
                   final bool sideBySide = inner.maxWidth >= 1000;
                   final Widget factoryCard = _FactoryStatusCard(
                     label: factoryStatusLabel,
-                    notes: data?.currentFactoryStatusNotes,
-                    updatedAt: data?.factoryStatusUpdatedAt,
+                    notes: data.currentFactoryStatusNotes,
+                    updatedAt: data.factoryStatusUpdatedAt,
                     hasStatus: hasFactoryStatus,
                   );
                   final Widget chart = AdminSimpleBarChart(
@@ -157,19 +175,19 @@ class _DashboardBody extends StatelessWidget {
                     entries: <AdminBarChartEntry>[
                       AdminBarChartEntry(
                         label: strings.totalPersonsKey,
-                        value: data?.totalPersons ?? 0,
+                        value: data.totalPersons,
                       ),
                       AdminBarChartEntry(
                         label: strings.totalLaborKey,
-                        value: data?.totalLabor ?? 0,
+                        value: data.totalLabor,
                       ),
                       AdminBarChartEntry(
                         label: strings.totalExpensesKey,
-                        value: data?.totalExpenses ?? 0,
+                        value: data.totalExpenses,
                       ),
                       AdminBarChartEntry(
                         label: strings.pendingSyncKey,
-                        value: data?.pendingSyncCount ?? 0,
+                        value: data.pendingSyncCount,
                       ),
                     ],
                   );
@@ -202,7 +220,7 @@ class _DashboardBody extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 12),
-              if (data == null || data.recentActivities.isEmpty)
+              if (data.recentActivities.isEmpty)
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(24),

@@ -24,3 +24,4 @@ export 'sync_pull_engine.dart';
 export 'sync_handler_bootstrap.dart';
 export 'sync_module_registry.dart';
 export 'sync_service.dart';
+export 'sync_refresh_helper.dart';

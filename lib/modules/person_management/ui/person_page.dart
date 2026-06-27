@@ -46,12 +46,14 @@ class _PersonPageViewState extends State<_PersonPageView> {
   }
 
   Future<void> _onRefresh() async {
-    final PersonBloc bloc = context.read<PersonBloc>();
-    final Future<CrudState<PersonEntity>> nextState = bloc.stream
-        .skip(1)
-        .firstWhere((CrudState<PersonEntity> state) => !state.isLoading);
-    bloc.add(const PersonRefreshRequested());
-    await nextState;
+    await pullRemoteBeforeLocalRefresh(() async {
+      final PersonBloc bloc = context.read<PersonBloc>();
+      final Future<CrudState<PersonEntity>> nextState = bloc.stream
+          .skip(1)
+          .firstWhere((CrudState<PersonEntity> state) => !state.isLoading);
+      bloc.add(const PersonRefreshRequested());
+      await nextState;
+    });
   }
 
   void _onAddPerson() {

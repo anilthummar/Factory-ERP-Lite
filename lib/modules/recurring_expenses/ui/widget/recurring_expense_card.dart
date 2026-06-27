@@ -11,6 +11,7 @@ class RecurringExpenseCardData {
     required this.startDate,
     this.endDate,
     this.onTap,
+    this.onDelete,
   });
 
   /// Unique recurring expense identifier.
@@ -33,6 +34,9 @@ class RecurringExpenseCardData {
 
   /// Card tap callback placeholder.
   final VoidCallback? onTap;
+
+  /// Delete action callback.
+  final VoidCallback? onDelete;
 }
 
 /// Recurring expense list card built on [CustomEntityListCard].
@@ -48,6 +52,7 @@ class RecurringExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppString strings = context.appString;
     final ColorScheme colorScheme = context.theme.colorScheme;
     final String subtitle = expense.endDate == null
         ? '${expense.frequency} · ${expense.startDate}'
@@ -66,16 +71,57 @@ class RecurringExpenseCard extends StatelessWidget {
       title: expense.title,
       subtitle: subtitle,
       onTap: expense.onTap,
-      trailing: CustomTextLabelWidget(
-        label: expense.amount,
-        textAlign: TextAlign.end,
-        maxLines: Dimens.maxLines01,
-        overflow: TextOverflow.ellipsis,
-        style: AppStyles.instance.textTheme.titleSmall?.copyWith(
-          fontWeight: FontWeight.w700,
-          color: colorScheme.onSurface,
-        ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          CustomTextLabelWidget(
+            label: expense.amount,
+            textAlign: TextAlign.end,
+            maxLines: Dimens.maxLines01,
+            overflow: TextOverflow.ellipsis,
+            style: AppStyles.instance.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: colorScheme.onSurface,
+            ),
+          ),
+          if (expense.onDelete != null)
+            PopupMenuButton<_RecurringExpenseCardAction>(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(
+                minWidth: Dimens.size40,
+                minHeight: Dimens.size40,
+              ),
+              onSelected: (_RecurringExpenseCardAction action) {
+                switch (action) {
+                  case _RecurringExpenseCardAction.edit:
+                    expense.onTap?.call();
+                  case _RecurringExpenseCardAction.delete:
+                    expense.onDelete?.call();
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return <PopupMenuEntry<_RecurringExpenseCardAction>>[
+                  PopupMenuItem<_RecurringExpenseCardAction>(
+                    value: _RecurringExpenseCardAction.edit,
+                    child: Text(strings.editRecurringExpenseKey),
+                  ),
+                  PopupMenuItem<_RecurringExpenseCardAction>(
+                    value: _RecurringExpenseCardAction.delete,
+                    child: Text(
+                      strings.deleteRecurringExpenseKey,
+                      style: TextStyle(color: colorScheme.error),
+                    ),
+                  ),
+                ];
+              },
+            ),
+        ],
       ),
     );
   }
+}
+
+enum _RecurringExpenseCardAction {
+  edit,
+  delete,
 }

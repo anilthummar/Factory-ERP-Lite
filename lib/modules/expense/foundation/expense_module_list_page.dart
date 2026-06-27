@@ -48,12 +48,14 @@ class _ExpenseModuleListView extends StatefulWidget {
 
 class _ExpenseModuleListViewState extends State<_ExpenseModuleListView> {
   Future<void> _onRefresh() async {
-    final ExpenseModuleBloc bloc = context.read<ExpenseModuleBloc>();
-    final Future<CrudState<ExpenseEntity>> nextState = bloc.stream
-        .skip(1)
-        .firstWhere((CrudState<ExpenseEntity> state) => !state.isLoading);
-    bloc.add(const ExpenseModuleRefreshRequested());
-    await nextState;
+    await pullRemoteBeforeLocalRefresh(() async {
+      final ExpenseModuleBloc bloc = context.read<ExpenseModuleBloc>();
+      final Future<CrudState<ExpenseEntity>> nextState = bloc.stream
+          .skip(1)
+          .firstWhere((CrudState<ExpenseEntity> state) => !state.isLoading);
+      bloc.add(const ExpenseModuleRefreshRequested());
+      await nextState;
+    });
   }
 
   void _onAdd() {

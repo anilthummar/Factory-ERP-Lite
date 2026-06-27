@@ -49,12 +49,14 @@ class _LaborPageViewState extends State<_LaborPageView> {
   }
 
   Future<void> _onRefresh() async {
-    final LaborBloc bloc = context.read<LaborBloc>();
-    final Future<CrudState<LaborEntity>> nextState = bloc.stream
-        .skip(1)
-        .firstWhere((CrudState<LaborEntity> state) => !state.isLoading);
-    bloc.add(const LaborRefreshRequested());
-    await nextState;
+    await pullRemoteBeforeLocalRefresh(() async {
+      final LaborBloc bloc = context.read<LaborBloc>();
+      final Future<CrudState<LaborEntity>> nextState = bloc.stream
+          .skip(1)
+          .firstWhere((CrudState<LaborEntity> state) => !state.isLoading);
+      bloc.add(const LaborRefreshRequested());
+      await nextState;
+    });
   }
 
   void _openForm({LaborEntity? labor}) {
@@ -105,6 +107,42 @@ class _LaborPageViewState extends State<_LaborPageView> {
     );
   }
 
+  Future<void> _confirmDelete(LaborEntity labor) async {
+    final AppString strings = context.appString;
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: CustomTextLabelWidget(
+            label: labor.name,
+            textAlign: TextAlign.start,
+          ),
+          content: CustomTextLabelWidget(
+            label: strings.deleteLaborConfirmKey,
+            textAlign: TextAlign.start,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: Text(strings.cancelKey),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: Text(
+                strings.deleteLaborKey,
+                style: TextStyle(color: context.theme.colorScheme.error),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed == true && mounted) {
+      context.read<LaborBloc>().add(LaborDeleteRequested(labor.id));
+    }
+  }
+
   List<LaborCardData> _mapLabor(List<LaborEntity> records) {
     return records
         .map(
@@ -115,6 +153,7 @@ class _LaborPageViewState extends State<_LaborPageView> {
             skill: labor.skill,
             dailyWage: labor.dailyWage.toStringAsFixed(2),
             onTap: () => _openForm(labor: labor),
+            onDelete: () => unawaited(_confirmDelete(labor)),
           ),
         )
         .toList(growable: false);

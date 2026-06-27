@@ -1,7 +1,9 @@
 import '../auth/web_admin_auth_gate.dart';
 import '../navigation/web_admin_section.dart';
+import '../pages/attachments_admin_page.dart';
 import '../pages/dashboard_admin_page.dart';
 import '../pages/expenses_admin_page.dart';
+import '../pages/factory_status_admin_page.dart';
 import '../pages/labor_admin_page.dart';
 import '../pages/persons_admin_page.dart';
 import '../pages/reports_admin_page.dart';
@@ -150,11 +152,17 @@ class _WebAdminShellState extends State<WebAdminShell> {
       WebAdminSection.dashboard => DashboardAdminPage(
           refreshTick: refreshTick,
         ),
+      WebAdminSection.factoryStatus => FactoryStatusAdminPage(
+          refreshTick: refreshTick,
+        ),
+      WebAdminSection.attachments => AttachmentsAdminPage(
+          refreshTick: refreshTick,
+        ),
       WebAdminSection.persons => PersonsAdminPage(refreshTick: refreshTick),
       WebAdminSection.labor => LaborAdminPage(refreshTick: refreshTick),
       WebAdminSection.expenses => ExpensesAdminPage(refreshTick: refreshTick),
       WebAdminSection.reports => ReportsAdminPage(refreshTick: refreshTick),
-      WebAdminSection.settings => const SettingsAdminPage(),
+      WebAdminSection.settings => SettingsAdminPage(refreshTick: refreshTick),
     };
   }
 }
