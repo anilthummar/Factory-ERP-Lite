@@ -1,27 +1,83 @@
 import '../../../utils/exports.dart';
+import 'exports_admin_page.dart';
 
-/// Web admin reports hub with export actions.
-class ReportsAdminPage extends StatelessWidget {
+/// Reports hub with PDF/Excel actions and export download center.
+class ReportsAdminPage extends StatefulWidget {
   /// Creates [ReportsAdminPage].
-  const ReportsAdminPage({super.key});
+  const ReportsAdminPage({this.refreshTick = 0, super.key});
+
+  /// Parent shell refresh counter.
+  final int refreshTick;
+
+  @override
+  State<ReportsAdminPage> createState() => _ReportsAdminPageState();
+}
+
+class _ReportsAdminPageState extends State<ReportsAdminPage>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+          child: TabBar(
+            controller: _tabController,
+            tabs: const <Tab>[
+              Tab(text: 'Reports'),
+              Tab(text: 'Export Center'),
+            ],
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              _ReportsTab(key: ValueKey<int>(widget.refreshTick)),
+              ExportsAdminPage(key: ValueKey<int>(widget.refreshTick)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ReportsTab extends StatelessWidget {
+  const _ReportsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(Dimens.padding16),
+      padding: const EdgeInsets.all(24),
       children: <Widget>[
         Text(
           'Reports',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        const SizedBox(height: Dimens.space8),
+        const SizedBox(height: 8),
         Text(
-          'Live reports from shared repositories and use cases',
+          'Generate PDF and Excel reports from live Hive data',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
         ),
-        const SizedBox(height: Dimens.space16),
+        const SizedBox(height: 20),
         _ReportTile(
           icon: Icons.receipt_long_outlined,
           title: 'Expense Report',
@@ -85,6 +141,7 @@ class _ReportTileState extends State<_ReportTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: Icon(widget.icon),
         title: Text(widget.title),
@@ -92,14 +149,15 @@ class _ReportTileState extends State<_ReportTile> {
             ? const Text('Exporting...')
             : const Text('PDF and Excel export available'),
         trailing: Wrap(
-          spacing: Dimens.space8,
+          spacing: 8,
           children: <Widget>[
-            TextButton(
-              onPressed: _busy ? null : () => _run(widget.onExportPdf),
+            FilledButton.tonal(
+              onPressed: _busy ? null : () => unawaited(_run(widget.onExportPdf)),
               child: const Text('PDF'),
             ),
-            TextButton(
-              onPressed: _busy ? null : () => _run(widget.onExportExcel),
+            FilledButton.tonal(
+              onPressed:
+                  _busy ? null : () => unawaited(_run(widget.onExportExcel)),
               child: const Text('Excel'),
             ),
           ],

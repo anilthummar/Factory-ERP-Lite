@@ -1,6 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 import '../../../core/sync/sync_queue_item.dart';
+import '../../../service/firebase/domain/firebase_health_check_result.dart';
+import '../../../service/firebase/firebase_health_check_service.dart';
 import '../../../service/sync/queue/sync_queue_repository.dart';
 import '../../../service/sync/sync_service.dart';
 import '../domain/entities/sync_diagnostics_data.dart';
@@ -12,11 +16,14 @@ class SyncDiagnosticsRepositoryImpl implements SyncDiagnosticsRepository {
   SyncDiagnosticsRepositoryImpl({
     required SyncQueueRepository queueRepository,
     required SyncService syncService,
+    required FirebaseHealthCheckService firebaseHealthCheckService,
   })  : _queueRepository = queueRepository,
-        _syncService = syncService;
+        _syncService = syncService,
+        _firebaseHealthCheckService = firebaseHealthCheckService;
 
   final SyncQueueRepository _queueRepository;
   final SyncService _syncService;
+  final FirebaseHealthCheckService _firebaseHealthCheckService;
 
   @override
   Future<SyncDiagnosticsData> loadDiagnostics() async {
@@ -36,6 +43,8 @@ class SyncDiagnosticsRepositoryImpl implements SyncDiagnosticsRepository {
     final DateTime? lastSyncAt = await _syncService.getLastSuccessfulSyncAt();
     final ConnectivityResult connectivityStatus =
         await _syncService.getConnectivityStatus();
+    final FirebaseHealthCheckResult firebaseHealth =
+        await _firebaseHealthCheckService.run();
 
     return SyncDiagnosticsData(
       pendingQueueCount: pendingQueueCount,
@@ -43,6 +52,7 @@ class SyncDiagnosticsRepositoryImpl implements SyncDiagnosticsRepository {
       lastSyncAt: lastSyncAt,
       connectivityStatus: connectivityStatus,
       isOnline: _syncService.isOnline(connectivityStatus),
+      firebaseHealth: firebaseHealth,
     );
   }
 

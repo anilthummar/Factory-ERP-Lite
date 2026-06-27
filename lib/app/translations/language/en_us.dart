@@ -395,6 +395,30 @@ class EnUS extends AppString {
   String get syncDiagnosticsRefreshKey => "Refresh";
 
   @override
+  String get syncDiagnosticsFirebaseStatusKey => "Firebase Status";
+
+  @override
+  String get syncDiagnosticsAuthStatusKey => "Auth Status";
+
+  @override
+  String get syncDiagnosticsFirestoreStatusKey => "Firestore Status";
+
+  @override
+  String get syncDiagnosticsStorageStatusKey => "Storage Status";
+
+  @override
+  String get syncDiagnosticsStatusOkKey => "OK";
+
+  @override
+  String get syncDiagnosticsStatusFailedKey => "Failed";
+
+  @override
+  String get syncDiagnosticsStatusNotSignedInKey => "Not signed in";
+
+  @override
+  String get syncDiagnosticsStatusSkippedOfflineKey => "Skipped (offline)";
+
+  @override
   String get backupRestoreTitleKey => "Backup & Restore";
 
   @override

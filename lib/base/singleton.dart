@@ -45,6 +45,18 @@ void setupLocator() {
     ..registerLazySingleton<FirebaseService>(
       () => FirebaseService(getIt<DefaultFirebaseOptions>()),
     )
+    ..registerLazySingleton<FirestoreCollectionBootstrapService>(
+      () => FirestoreCollectionBootstrapService(
+        firebaseService: getIt<FirebaseService>(),
+      ),
+    )
+    ..registerLazySingleton<FirebaseHealthCheckService>(
+      () => FirebaseHealthCheckService(
+        firebaseService: getIt<FirebaseService>(),
+        syncService: getIt<SyncService>(),
+        bootstrapService: getIt<FirestoreCollectionBootstrapService>(),
+      ),
+    )
     ..registerLazySingleton<HiveManager>(() => HiveManager.instance)
     ..registerLazySingleton<SyncQueueLocalDataSource>(
       SyncQueueLocalDataSourceImpl.new,
@@ -59,6 +71,11 @@ void setupLocator() {
         firebaseService: getIt<FirebaseService>(),
       ),
     )
+    ..registerLazySingleton<FirestoreSyncPullDataSource>(
+      () => FirestoreSyncPullDataSource(
+        firebaseService: getIt<FirebaseService>(),
+      ),
+    )
     ..registerLazySingleton<SyncHandlerRegistry>(
       () => createDefaultSyncHandlerRegistry(
         hiveManager: getIt<HiveManager>(),
@@ -69,6 +86,14 @@ void setupLocator() {
       () => SyncEngine(
         queueRepository: getIt<SyncQueueRepository>(),
         remoteDataSource: getIt<SyncRemoteDataSource>(),
+        handlerRegistry: getIt<SyncHandlerRegistry>(),
+        hiveManager: getIt<HiveManager>(),
+        debugLog: getIt<DebugLog>(),
+      ),
+    )
+    ..registerLazySingleton<SyncPullEngine>(
+      () => SyncPullEngine(
+        pullDataSource: getIt<FirestoreSyncPullDataSource>(),
         handlerRegistry: getIt<SyncHandlerRegistry>(),
         hiveManager: getIt<HiveManager>(),
         debugLog: getIt<DebugLog>(),
@@ -122,6 +147,7 @@ void setupLocator() {
         hiveManager: getIt<HiveManager>(),
         syncEngine: getIt<SyncEngine>(),
         queueRepository: getIt<SyncQueueRepository>(),
+        pullEngine: getIt<SyncPullEngine>(),
         showSyncFailureNotificationUseCase:
             getIt<ShowSyncFailureNotificationUseCase>(),
       ),
@@ -423,6 +449,7 @@ void setupLocator() {
       () => SyncDiagnosticsRepositoryImpl(
         queueRepository: getIt<SyncQueueRepository>(),
         syncService: getIt<SyncService>(),
+        firebaseHealthCheckService: getIt<FirebaseHealthCheckService>(),
       ),
     )
     ..registerLazySingleton<GetSyncDiagnosticsUseCase>(

@@ -1,7 +1,6 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-
-import '../domain/entities/sync_diagnostics_data.dart';
 import '../../../../utils/exports.dart';
+
+import '../../../../service/firebase/domain/firebase_health_check_result.dart';
 
 /// Hidden developer screen for inspecting offline sync health.
 @RoutePage()
@@ -42,6 +41,66 @@ class _SyncDiagnosticsView extends StatelessWidget {
     };
   }
 
+  String _firebaseStatusLabel(
+    AppString strings,
+    FirebaseHealthCheckResult health,
+  ) {
+    return health.isFirebaseInitialized
+        ? strings.syncDiagnosticsStatusOkKey
+        : strings.syncDiagnosticsStatusFailedKey;
+  }
+
+  String _authStatusLabel(
+    AppString strings,
+    FirebaseHealthCheckResult health,
+  ) {
+    if (!health.isFirebaseInitialized) {
+      return strings.syncDiagnosticsStatusFailedKey;
+    }
+    if (!health.isAuthenticated) {
+      return strings.syncDiagnosticsStatusNotSignedInKey;
+    }
+    return health.userEmail ?? strings.syncDiagnosticsStatusOkKey;
+  }
+
+  String _firestoreStatusLabel(
+    AppString strings,
+    FirebaseHealthCheckResult health,
+  ) {
+    if (!health.isOnline || !health.isAuthenticated) {
+      return strings.syncDiagnosticsStatusSkippedOfflineKey;
+    }
+    if (health.canReadFirestore && health.canWriteFirestore) {
+      return strings.syncDiagnosticsStatusOkKey;
+    }
+    return health.firestoreWriteError ??
+        health.firestoreReadError ??
+        strings.syncDiagnosticsStatusFailedKey;
+  }
+
+  String _storageStatusLabel(
+    AppString strings,
+    FirebaseHealthCheckResult health,
+  ) {
+    if (!health.isOnline || !health.isAuthenticated) {
+      return strings.syncDiagnosticsStatusSkippedOfflineKey;
+    }
+    return health.canAccessStorage
+        ? strings.syncDiagnosticsStatusOkKey
+        : health.storageError ?? strings.syncDiagnosticsStatusFailedKey;
+  }
+
+  Color? _statusColor(
+    ColorScheme colorScheme, {
+    required bool isHealthy,
+    required bool isSkipped,
+  }) {
+    if (isSkipped) {
+      return colorScheme.onSurfaceVariant;
+    }
+    return isHealthy ? colorScheme.primary : colorScheme.error;
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppString strings = context.appString;
@@ -71,6 +130,7 @@ class _SyncDiagnosticsView extends StatelessWidget {
           final bool isBusy = state.status == SyncDiagnosticsStatus.loading ||
               state.status == SyncDiagnosticsStatus.retrying;
           final SyncDiagnosticsData? data = state.data;
+          final FirebaseHealthCheckResult? health = data?.firebaseHealth;
 
           if (state.status == SyncDiagnosticsStatus.loading && data == null) {
             return const Center(child: CircularProgressIndicator());
@@ -96,6 +156,69 @@ class _SyncDiagnosticsView extends StatelessWidget {
                   ),
                   const SizedBox(height: Dimens.space16),
                 ],
+                _DiagnosticsMetricCard(
+                  title: strings.syncDiagnosticsFirebaseStatusKey,
+                  value: health == null
+                      ? '—'
+                      : _firebaseStatusLabel(strings, health),
+                  icon: Icons.local_fire_department_outlined,
+                  valueColor: health == null
+                      ? null
+                      : _statusColor(
+                          colorScheme,
+                          isHealthy: health.isFirebaseInitialized,
+                          isSkipped: false,
+                        ),
+                ),
+                const SizedBox(height: Dimens.space12),
+                _DiagnosticsMetricCard(
+                  title: strings.syncDiagnosticsAuthStatusKey,
+                  value: health == null
+                      ? '—'
+                      : _authStatusLabel(strings, health),
+                  icon: Icons.verified_user_outlined,
+                  valueColor: health == null
+                      ? null
+                      : _statusColor(
+                          colorScheme,
+                          isHealthy: health.isAuthenticated,
+                          isSkipped: false,
+                        ),
+                ),
+                const SizedBox(height: Dimens.space12),
+                _DiagnosticsMetricCard(
+                  title: strings.syncDiagnosticsFirestoreStatusKey,
+                  value: health == null
+                      ? '—'
+                      : _firestoreStatusLabel(strings, health),
+                  icon: Icons.cloud_outlined,
+                  valueColor: health == null
+                      ? null
+                      : _statusColor(
+                          colorScheme,
+                          isHealthy:
+                              health.canReadFirestore && health.canWriteFirestore,
+                          isSkipped:
+                              !health.isOnline || !health.isAuthenticated,
+                        ),
+                ),
+                const SizedBox(height: Dimens.space12),
+                _DiagnosticsMetricCard(
+                  title: strings.syncDiagnosticsStorageStatusKey,
+                  value: health == null
+                      ? '—'
+                      : _storageStatusLabel(strings, health),
+                  icon: Icons.storage_outlined,
+                  valueColor: health == null
+                      ? null
+                      : _statusColor(
+                          colorScheme,
+                          isHealthy: health.canAccessStorage,
+                          isSkipped:
+                              !health.isOnline || !health.isAuthenticated,
+                        ),
+                ),
+                const SizedBox(height: Dimens.space24),
                 _DiagnosticsMetricCard(
                   title: strings.syncDiagnosticsPendingQueueKey,
                   value: '${data?.pendingQueueCount ?? 0}',

@@ -1,6 +1,6 @@
 import '../../../utils/exports.dart';
 
-/// Web admin export center for all report formats.
+/// Download center for PDF and Excel exports.
 class ExportsAdminPage extends StatelessWidget {
   /// Creates [ExportsAdminPage].
   const ExportsAdminPage({super.key});
@@ -8,53 +8,140 @@ class ExportsAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(Dimens.padding16),
+      padding: const EdgeInsets.all(24),
       children: <Widget>[
         Text(
           'Export Center',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        const SizedBox(height: Dimens.space8),
+        const SizedBox(height: 8),
         Text(
-          'Download PDF and Excel reports using the same mobile export pipeline',
+          'Download reports using the same export pipeline as mobile',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
         ),
-        const SizedBox(height: Dimens.space16),
-        _ExportButton(
-          label: 'Expense Report — PDF',
-          onPressed: () => getIt<ExportExpenseReportPdfUseCase>()(),
+        const SizedBox(height: 20),
+        const _ExportSection(
+          title: 'PDF Exports',
+          icon: Icons.picture_as_pdf_outlined,
+          exports: <_ExportAction>[
+            _ExportAction(
+              label: 'Expense Report',
+              run: _exportExpensePdf,
+            ),
+            _ExportAction(
+              label: 'Labor Report',
+              run: _exportLaborPdf,
+            ),
+            _ExportAction(
+              label: 'Person Report',
+              run: _exportPersonPdf,
+            ),
+            _ExportAction(
+              label: 'Monthly Summary',
+              run: _exportMonthlyPdf,
+            ),
+          ],
         ),
-        _ExportButton(
-          label: 'Expense Report — Excel',
-          onPressed: () => getIt<ExportExpenseReportExcelUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Labor Report — PDF',
-          onPressed: () => getIt<ExportLaborReportPdfUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Labor Report — Excel',
-          onPressed: () => getIt<ExportLaborReportExcelUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Person Report — PDF',
-          onPressed: () => getIt<ExportPersonReportPdfUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Person Report — Excel',
-          onPressed: () => getIt<ExportPersonReportExcelUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Monthly Summary — PDF',
-          onPressed: () => getIt<ExportMonthlySummaryPdfUseCase>()(),
-        ),
-        _ExportButton(
-          label: 'Monthly Summary — Excel',
-          onPressed: () => getIt<ExportMonthlySummaryExcelUseCase>()(),
+        const SizedBox(height: 16),
+        const _ExportSection(
+          title: 'Excel Exports',
+          icon: Icons.table_chart_outlined,
+          exports: <_ExportAction>[
+            _ExportAction(
+              label: 'Expense Report',
+              run: _exportExpenseExcel,
+            ),
+            _ExportAction(
+              label: 'Labor Report',
+              run: _exportLaborExcel,
+            ),
+            _ExportAction(
+              label: 'Person Report',
+              run: _exportPersonExcel,
+            ),
+            _ExportAction(
+              label: 'Monthly Summary',
+              run: _exportMonthlyExcel,
+            ),
+          ],
         ),
       ],
+    );
+  }
+
+  static Future<void> _exportExpensePdf() =>
+      getIt<ExportExpenseReportPdfUseCase>()();
+
+  static Future<void> _exportExpenseExcel() =>
+      getIt<ExportExpenseReportExcelUseCase>()();
+
+  static Future<void> _exportLaborPdf() =>
+      getIt<ExportLaborReportPdfUseCase>()();
+
+  static Future<void> _exportLaborExcel() =>
+      getIt<ExportLaborReportExcelUseCase>()();
+
+  static Future<void> _exportPersonPdf() =>
+      getIt<ExportPersonReportPdfUseCase>()();
+
+  static Future<void> _exportPersonExcel() =>
+      getIt<ExportPersonReportExcelUseCase>()();
+
+  static Future<void> _exportMonthlyPdf() =>
+      getIt<ExportMonthlySummaryPdfUseCase>()();
+
+  static Future<void> _exportMonthlyExcel() =>
+      getIt<ExportMonthlySummaryExcelUseCase>()();
+}
+
+class _ExportAction {
+  const _ExportAction({required this.label, required this.run});
+
+  final String label;
+  final Future<void> Function() run;
+}
+
+class _ExportSection extends StatelessWidget {
+  const _ExportSection({
+    required this.title,
+    required this.icon,
+    required this.exports,
+  });
+
+  final String title;
+  final IconData icon;
+  final List<_ExportAction> exports;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(icon),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ...exports.map(
+              (_ExportAction action) => _ExportButton(
+                label: action.label,
+                onPressed: action.run,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -78,21 +165,25 @@ class _ExportButtonState extends State<_ExportButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: Dimens.space12),
-      child: FilledButton(
-        onPressed: _busy
-            ? null
-            : () async {
-                setState(() => _busy = true);
-                try {
-                  await widget.onPressed();
-                } finally {
-                  if (mounted) {
-                    setState(() => _busy = false);
+      padding: const EdgeInsets.only(bottom: 8),
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(widget.label),
+        trailing: FilledButton(
+          onPressed: _busy
+              ? null
+              : () async {
+                  setState(() => _busy = true);
+                  try {
+                    await widget.onPressed();
+                  } finally {
+                    if (mounted) {
+                      setState(() => _busy = false);
+                    }
                   }
-                }
-              },
-        child: Text(_busy ? 'Exporting...' : widget.label),
+                },
+          child: Text(_busy ? 'Exporting...' : 'Download'),
+        ),
       ),
     );
   }

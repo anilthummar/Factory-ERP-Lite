@@ -386,6 +386,30 @@ abstract class AppString {
   /// Refresh diagnostics action label.
   String get syncDiagnosticsRefreshKey;
 
+  /// Firebase initialization status on diagnostics screen.
+  String get syncDiagnosticsFirebaseStatusKey;
+
+  /// Auth status on diagnostics screen.
+  String get syncDiagnosticsAuthStatusKey;
+
+  /// Firestore status on diagnostics screen.
+  String get syncDiagnosticsFirestoreStatusKey;
+
+  /// Storage status on diagnostics screen.
+  String get syncDiagnosticsStorageStatusKey;
+
+  /// Healthy / OK status label.
+  String get syncDiagnosticsStatusOkKey;
+
+  /// Failed status label.
+  String get syncDiagnosticsStatusFailedKey;
+
+  /// Not signed in status label.
+  String get syncDiagnosticsStatusNotSignedInKey;
+
+  /// Skipped because offline status label.
+  String get syncDiagnosticsStatusSkippedOfflineKey;
+
   /// Backup & restore screen title.
   String get backupRestoreTitleKey;
 

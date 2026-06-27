@@ -399,6 +399,30 @@ class HiIN extends AppString {
   String get syncDiagnosticsRefreshKey => "रीफ़्रेश";
 
   @override
+  String get syncDiagnosticsFirebaseStatusKey => "Firebase स्थिति";
+
+  @override
+  String get syncDiagnosticsAuthStatusKey => "प्रमाणीकरण स्थिति";
+
+  @override
+  String get syncDiagnosticsFirestoreStatusKey => "Firestore स्थिति";
+
+  @override
+  String get syncDiagnosticsStorageStatusKey => "Storage स्थिति";
+
+  @override
+  String get syncDiagnosticsStatusOkKey => "ठीक";
+
+  @override
+  String get syncDiagnosticsStatusFailedKey => "विफल";
+
+  @override
+  String get syncDiagnosticsStatusNotSignedInKey => "साइन इन नहीं";
+
+  @override
+  String get syncDiagnosticsStatusSkippedOfflineKey => "छोड़ा गया (ऑफलाइन)";
+
+  @override
   String get backupRestoreTitleKey => "बैकअप और पुनर्स्थापना";
 
   @override

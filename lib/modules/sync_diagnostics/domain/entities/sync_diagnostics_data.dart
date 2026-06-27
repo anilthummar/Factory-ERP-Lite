@@ -1,6 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../service/firebase/domain/firebase_health_check_result.dart';
+
 /// Sync diagnostics snapshot for the developer screen.
 class SyncDiagnosticsData extends Equatable {
   /// Creates [SyncDiagnosticsData].
@@ -9,6 +11,7 @@ class SyncDiagnosticsData extends Equatable {
     required this.failedQueueCount,
     required this.connectivityStatus,
     required this.isOnline,
+    required this.firebaseHealth,
     this.lastSyncAt,
   });
 
@@ -27,6 +30,9 @@ class SyncDiagnosticsData extends Equatable {
   /// Whether the device can reach the network.
   final bool isOnline;
 
+  /// Firebase, auth, Firestore, and Storage health probes.
+  final FirebaseHealthCheckResult firebaseHealth;
+
   @override
   List<Object?> get props => <Object?>[
         pendingQueueCount,
@@ -34,5 +40,6 @@ class SyncDiagnosticsData extends Equatable {
         lastSyncAt,
         connectivityStatus,
         isOnline,
+        firebaseHealth,
       ];
 }

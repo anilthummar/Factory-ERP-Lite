@@ -78,7 +78,9 @@ class NotificationService {
       return;
     }
 
-    await _messaging.getToken(vapidKey: kIsWeb ? configVapidKey : null);
+    if (!kIsWeb || configVapidKey.isNotEmpty) {
+      await _messaging.getToken(vapidKey: kIsWeb ? configVapidKey : null);
+    }
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       final String title =
@@ -122,6 +124,10 @@ class NotificationService {
 
   /// Schedules a local notification from [item].
   Future<void> schedule(ScheduledNotificationItem item) async {
+    if (kIsWeb) {
+      return;
+    }
+
     await _ensureLocalReady();
 
     final tz.TZDateTime when =
@@ -145,7 +151,12 @@ class NotificationService {
   Future<void> cancel(int id) => _plugin.cancel(id);
 
   /// Cancels all scheduled and displayed notifications.
-  Future<void> cancelAll() => _plugin.cancelAll();
+  Future<void> cancelAll() async {
+    if (kIsWeb) {
+      return;
+    }
+    await _plugin.cancelAll();
+  }
 
   /// Replaces an existing scheduled notification.
   Future<void> update(ScheduledNotificationItem item) async {

@@ -7,6 +7,7 @@ import '../hive/hive_manager.dart';
 import 'queue/sync_queue_repository.dart';
 import 'sync_config.dart';
 import 'sync_engine.dart';
+import 'sync_pull_engine.dart';
 
 /// Listens for connectivity changes and triggers [SyncEngine] retries.
 class SyncService {
@@ -15,17 +16,20 @@ class SyncService {
     required HiveManager hiveManager,
     required SyncEngine syncEngine,
     required SyncQueueRepository queueRepository,
+    SyncPullEngine? pullEngine,
     Connectivity? connectivity,
     ShowSyncFailureNotificationUseCase? showSyncFailureNotificationUseCase,
   })  : _hiveManager = hiveManager,
         _syncEngine = syncEngine,
         _queueRepository = queueRepository,
+        _pullEngine = pullEngine,
         _connectivity = connectivity ?? Connectivity(),
         _showSyncFailureNotificationUseCase = showSyncFailureNotificationUseCase;
 
   final HiveManager _hiveManager;
   final SyncEngine _syncEngine;
   final SyncQueueRepository _queueRepository;
+  final SyncPullEngine? _pullEngine;
   final Connectivity _connectivity;
   final ShowSyncFailureNotificationUseCase? _showSyncFailureNotificationUseCase;
 
@@ -71,6 +75,43 @@ class SyncService {
   /// Retries failed sync queue items when connectivity is available.
   Future<SyncEngineReport> retryFailedSync() {
     return processPendingSync();
+  }
+
+  /// Pulls Firestore data into Hive, then pushes any pending local changes.
+  Future<SyncPullReport> pullFromRemote({bool pushAfterPull = true}) async {
+    if (!_hiveManager.isInitialized || _pullEngine == null) {
+      return const SyncPullReport();
+    }
+
+    final ConnectivityResult connectivity = await getConnectivityStatus();
+    if (!_isOnline(connectivity)) {
+      return const SyncPullReport();
+    }
+
+    final SyncPullReport pullReport = await _pullEngine!.pullAllModules();
+    if (pushAfterPull) {
+      await processPendingSync();
+    }
+    return pullReport;
+  }
+
+  /// Returns when the last Firestore pull completed, if recorded.
+  Future<DateTime?> getLastRemotePullAt() async {
+    if (!_hiveManager.isInitialized) {
+      return null;
+    }
+
+    final Map<dynamic, dynamic>? entry =
+        _hiveManager.meta.get(SyncConfig.lastRemotePullAtKey);
+    if (entry == null) {
+      return null;
+    }
+
+    final Object? raw = entry[SyncConfig.lastRemotePullAtKey];
+    if (raw is int) {
+      return DateTime.fromMillisecondsSinceEpoch(raw);
+    }
+    return null;
   }
 
   /// Returns the number of queue items waiting for sync or retry.

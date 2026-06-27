@@ -43,16 +43,20 @@ class AppInitializer {
       await SentryService.instance.init();
       await _getPackageAndDeviceInfo();
       await DebugLog.instance.init();
+      await _initStorage();
       await getIt<FirebaseService>().init();
       await getIt<FirebaseService>().configureFirestore();
       await getIt<HiveManager>().init();
       getIt<SyncService>().startListening();
-      await getIt<InitializeNotificationsUseCase>()();
-      await getIt<RefreshScheduledRemindersUseCase>()();
-      await NotificationManager.instance.init();
-      await _initStorage();
-      _initScreenPreference();
-      _setStatusBarTheme();
+      if (!kIsWeb) {
+        await getIt<InitializeNotificationsUseCase>()();
+        await getIt<RefreshScheduledRemindersUseCase>()();
+        await NotificationManager.instance.init();
+      }
+      if (!kIsWeb) {
+        _initScreenPreference();
+        _setStatusBarTheme();
+      }
     } catch (err) {
       DebugLog.instance.e(err.toString());
       rethrow;

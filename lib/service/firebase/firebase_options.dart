@@ -27,6 +27,7 @@ class DefaultFirebaseOptions {
           appId: configAndroidAppId,
           messagingSenderId: configMessagingSenderId,
           projectId: configProjectId,
+          storageBucket: configStorageBucket,
         );
       case TargetPlatform.iOS:
         return FirebaseOptions(
@@ -34,6 +35,7 @@ class DefaultFirebaseOptions {
           appId: configIosAppId,
           messagingSenderId: configMessagingSenderId,
           projectId: configProjectId,
+          storageBucket: configStorageBucket,
         );
       case TargetPlatform.macOS:
       case TargetPlatform.fuchsia:

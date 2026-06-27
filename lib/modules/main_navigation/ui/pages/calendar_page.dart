@@ -37,6 +37,73 @@ class _CalendarTabPageState extends State<CalendarTabPage> {
     );
   }
 
+  Future<void> _onAddEvent(BuildContext context) async {
+    final AppString strings = context.appString;
+
+    final CalendarEventType? type = await showModalBottomSheet<CalendarEventType>(
+      context: context,
+      builder: (BuildContext sheetContext) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.autorenew),
+                title: CustomTextLabelWidget(
+                  label: strings.calendarEventRecurringExpenseKey,
+                ),
+                onTap: () => Navigator.pop(
+                  sheetContext,
+                  CalendarEventType.recurringExpense,
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.build_outlined),
+                title: CustomTextLabelWidget(
+                  label: strings.calendarEventMaintenanceReminderKey,
+                ),
+                onTap: () => Navigator.pop(
+                  sheetContext,
+                  CalendarEventType.maintenanceReminder,
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.factory_outlined),
+                title: CustomTextLabelWidget(
+                  label: strings.calendarEventFactoryEventKey,
+                ),
+                onTap: () => Navigator.pop(
+                  sheetContext,
+                  CalendarEventType.factoryEvent,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (!context.mounted || type == null) {
+      return;
+    }
+
+    final Future<dynamic> navigation = switch (type) {
+      CalendarEventType.recurringExpense =>
+        context.router.push(const RecurringExpensesRoute()),
+      CalendarEventType.maintenanceReminder =>
+        context.router.push(const MaintenanceExpensesRoute()),
+      CalendarEventType.factoryEvent =>
+        context.router.push(const FactoryStatusOverviewRoute()),
+      CalendarEventType.holiday => Future<void>.value(),
+    };
+
+    await navigation;
+    if (!context.mounted) {
+      return;
+    }
+    _loadEventsForCurrentYear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CalendarBloc>.value(
@@ -45,6 +112,7 @@ class _CalendarTabPageState extends State<CalendarTabPage> {
         builder: (BuildContext context, CalendarBlocState state) {
           return CalendarPage(
             events: state.events,
+            onAddEvent: () => unawaited(_onAddEvent(context)),
           );
         },
       ),

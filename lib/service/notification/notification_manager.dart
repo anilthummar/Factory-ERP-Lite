@@ -1,4 +1,4 @@
-import '../../main.dart';
+import '../../modules/notifications/service/notification_background_handler.dart';
 import '../../utils/exports.dart';
 
 /// Manages FCM background handler registration and token retrieval.
@@ -12,16 +12,22 @@ class NotificationManager {
   ///
   /// Foreground FCM and local scheduling are handled by [NotificationService].
   Future<void> init() async {
-    _registerBackgroundHandler();
+    if (!kIsWeb) {
+      _registerBackgroundHandler();
+    }
     await _getToken();
     await _logInitialMessage();
   }
 
   void _registerBackgroundHandler() {
-    FirebaseMessaging.onBackgroundMessage(firebaseBackground);
+    FirebaseMessaging.onBackgroundMessage(firebaseBackgroundNotificationHandler);
   }
 
   Future<void> _getToken({int maxRetries = 3}) async {
+    if (kIsWeb && configVapidKey.isEmpty) {
+      return;
+    }
+
     try {
       final String? token = await FirebaseMessaging.instance.getToken(
         vapidKey: kIsWeb ? configVapidKey : null,
