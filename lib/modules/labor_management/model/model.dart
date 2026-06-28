@@ -1,1 +1,1 @@
-// Foundation placeholder — implement in feature phase.
+export 'local/labor_hive_model.dart';

@@ -1,1 +1,1 @@
-// Foundation placeholder — implement in feature phase.
+export 'attachment_repository_impl.dart';

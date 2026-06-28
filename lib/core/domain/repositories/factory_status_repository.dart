@@ -1,0 +1,27 @@
+import '../entities/factory_status_entity.dart';
+
+/// Contract for factory status data access (domain layer only).
+abstract class FactoryStatusRepository {
+  /// Persists a new factory status record.
+  Future<FactoryStatusEntity> create(FactoryStatusEntity status);
+
+  /// Returns a factory status record by [id], or null if not found.
+  Future<FactoryStatusEntity?> getById(String id);
+
+  /// Returns all factory status records.
+  Future<List<FactoryStatusEntity>> getAll();
+
+  /// Returns the latest factory status record, or null when history is empty.
+  Future<FactoryStatusEntity?> getCurrent();
+
+  /// Appends a new status change to history (offline-first, sync pending).
+  Future<FactoryStatusEntity> changeStatus({
+    required FactoryStatusEntity status,
+  });
+
+  /// Updates an existing factory status record.
+  Future<FactoryStatusEntity> update(FactoryStatusEntity status);
+
+  /// Deletes a factory status record by [id].
+  Future<void> delete(String id);
+}

@@ -170,4 +170,684 @@ class HiIN extends AppString {
   @override
   String get dashboardModulesHintKey =>
       "ERP मॉड्यूल लागू होने पर यहां दिखाई देंगे।";
+
+  @override
+  String get createAccountKey => "खाता बनाएं";
+
+  @override
+  String get enterEmailToSignUpKey =>
+      "इस ऐप के लिए साइन अप करने हेतु अपना ईमेल दर्ज करें";
+
+  @override
+  String get emailPlaceholderKey => "email@domain.com";
+
+  @override
+  String get continueKey => "जारी रखें";
+
+  @override
+  String get orKey => "या";
+
+  @override
+  String get continueWithGoogleKey => "Google के साथ जारी रखें";
+
+  @override
+  String get continueWithAppleKey => "Apple के साथ जारी रखें";
+
+  @override
+  String get termsAgreementPrefixKey =>
+      "जारी रखें पर क्लिक करके, आप हमारी ";
+
+  @override
+  String get termsOfServiceKey => "सेवा की शर्तों";
+
+  @override
+  String get termsAndKey => " और ";
+
+  @override
+  String get privacyPolicyKey => "गोपनीयता नीति";
+
+  @override
+  String get navDashboardKey => "डैशबोर्ड";
+
+  @override
+  String get navEntriesKey => "प्रविष्टियाँ";
+
+  @override
+  String get navReportsKey => "रिपोर्ट";
+
+  @override
+  String get navCalendarKey => "कैलेंडर";
+
+  @override
+  String get navProfileKey => "प्रोफ़ाइल";
+
+  @override
+  String get entriesPageKey => "प्रविष्टियाँ";
+
+  @override
+  String get reportsPageKey => "रिपोर्ट और विश्लेषण";
+
+  @override
+  String get reportsDashboardSubtitleKey =>
+      "सारांश देखें और फ़ैक्टरी डेटा निर्यात करें";
+
+  @override
+  String get expenseReportsKey => "खर्च रिपोर्ट";
+
+  @override
+  String get laborReportsKey => "श्रम रिपोर्ट";
+
+  @override
+  String get personReportsKey => "व्यक्ति रिपोर्ट";
+
+  @override
+  String get monthlySummaryKey => "मासिक सारांश";
+
+  @override
+  String get searchReportsKey => "रिपोर्ट खोजें...";
+
+  @override
+  String get reportCategoryKey => "श्रेणी";
+
+  @override
+  String get reportAllCategoriesKey => "सभी श्रेणियाँ";
+
+  @override
+  String get reportFromDateKey => "प्रारंभ तिथि";
+
+  @override
+  String get reportToDateKey => "समाप्ति तिथि";
+
+  @override
+  String get exportPdfKey => "PDF निर्यात";
+
+  @override
+  String get pdfExportSuccessKey => "PDF सफलतापूर्वक निर्यात किया गया";
+
+  @override
+  String get exportExcelKey => "Excel निर्यात";
+
+  @override
+  String get excelExportSuccessKey =>
+      "Excel सफलतापूर्वक निर्यात किया गया";
+
+  @override
+  String get reportChartPlaceholderKey =>
+      "चार्ट यहाँ दिखाई देगा";
+
+  @override
+  String get reportEmptyTitleKey => "कोई रिपोर्ट डेटा नहीं";
+
+  @override
+  String get reportEmptyMessageKey =>
+      "परिणाम देखने के लिए फ़िल्टर या तिथि सीमा बदलें।";
+
+  @override
+  String get calendarPageKey => "कैलेंडर";
+
+  @override
+  String get calendarMonthViewKey => "माह";
+
+  @override
+  String get calendarAgendaViewKey => "एजेंडा";
+
+  @override
+  String get calendarSelectedDateEventsKey => "कार्यक्रम";
+
+  @override
+  String get calendarNoEventsTitleKey => "कोई कार्यक्रम नहीं";
+
+  @override
+  String get calendarNoEventsMessageKey =>
+      "इस दिन के लिए कोई कार्यक्रम निर्धारित नहीं है।";
+
+  @override
+  String get calendarAgendaEmptyTitleKey => "इस माह कोई कार्यक्रम नहीं";
+
+  @override
+  String get calendarAgendaEmptyMessageKey =>
+      "कुछ निर्धारित करने के लिए कार्यक्रम जोड़ें पर टैप करें।";
+
+  @override
+  String get addCalendarEventKey => "कार्यक्रम जोड़ें";
+
+  @override
+  String get calendarEventRecurringExpenseKey => "आवर्ती खर्च";
+
+  @override
+  String get calendarEventFactoryEventKey => "फैक्टरी कार्यक्रम";
+
+  @override
+  String get calendarEventMaintenanceReminderKey => "रखरखाव अनुस्मारक";
+
+  @override
+  String get calendarEventHolidayKey => "अवकाश";
+
+  @override
+  String get profilePageKey => "प्रोफ़ाइल";
+
+  @override
+  String get dashboardOverviewKey =>
+      "फ़ैक्टरी अवलोकन और मुख्य मेट्रिक्स एक नज़र में";
+
+  @override
+  String get dashboardFactoryStatusHintKey =>
+      "फ़ैक्टरी स्थिति देखने या बदलने के लिए टैप करें";
+
+  @override
+  String get dashboardFactoryStatusNoNotesKey =>
+      "वर्तमान स्थिति के लिए कोई नोट नहीं";
+
+  @override
+  String get noFactoryStatusSetKey => "सेट नहीं";
+
+  @override
+  String get dashboardActivityExpenseKey => "खर्च";
+
+  @override
+  String get totalExpensesKey => "कुल खर्च";
+
+  @override
+  String get totalPersonsKey => "कुल व्यक्ति";
+
+  @override
+  String get totalLaborKey => "कुल श्रम";
+
+  @override
+  String get activeLaborKey => "सक्रिय श्रम";
+
+  @override
+  String get materialsKey => "सामग्री";
+
+  @override
+  String get pendingSyncKey => "लंबित सिंक";
+
+  @override
+  String get lastSyncTimeKey => "अंतिम सिंक";
+
+  @override
+  String get neverSyncedKey => "कभी नहीं";
+
+  @override
+  String get syncDiagnosticsTitleKey => "सिंक डायग्नोस्टिक्स";
+
+  @override
+  String get syncDiagnosticsPendingQueueKey => "लंबित कतार";
+
+  @override
+  String get syncDiagnosticsFailedQueueKey => "विफल कतार";
+
+  @override
+  String get syncDiagnosticsConnectivityKey => "कनेक्टिविटी";
+
+  @override
+  String get syncDiagnosticsOnlineKey => "ऑनलाइन";
+
+  @override
+  String get syncDiagnosticsOfflineKey => "ऑफलाइन";
+
+  @override
+  String get syncDiagnosticsBluetoothKey => "ब्लूटूथ";
+
+  @override
+  String get syncDiagnosticsVpnKey => "VPN";
+
+  @override
+  String get syncDiagnosticsRetryKey => "सिंक पुनः प्रयास";
+
+  @override
+  String get syncDiagnosticsRefreshKey => "रीफ़्रेश";
+
+  @override
+  String get syncDiagnosticsFirebaseStatusKey => "Firebase स्थिति";
+
+  @override
+  String get syncDiagnosticsAuthStatusKey => "प्रमाणीकरण स्थिति";
+
+  @override
+  String get syncDiagnosticsFirestoreStatusKey => "Firestore स्थिति";
+
+  @override
+  String get syncDiagnosticsStorageStatusKey => "Storage स्थिति";
+
+  @override
+  String get syncDiagnosticsStatusOkKey => "ठीक";
+
+  @override
+  String get syncDiagnosticsStatusFailedKey => "विफल";
+
+  @override
+  String get syncDiagnosticsStatusNotSignedInKey => "साइन इन नहीं";
+
+  @override
+  String get syncDiagnosticsStatusSkippedOfflineKey => "छोड़ा गया (ऑफलाइन)";
+
+  @override
+  String get backupRestoreTitleKey => "बैकअप और पुनर्स्थापना";
+
+  @override
+  String get backupRestoreOverviewKey => "स्थानीय डेटा अवलोकन";
+
+  @override
+  String get backupRestoreTotalRecordsKey => "ऑफ़लाइन संग्रहीत कुल रिकॉर्ड";
+
+  @override
+  String get backupRestoreJsonExportKey => "JSON बैकअप निर्यात";
+
+  @override
+  String get backupRestoreJsonImportKey => "JSON बैकअप पुनर्स्थापित";
+
+  @override
+  String get backupRestoreGoogleSheetsKey => "Google Sheets में बैकअप";
+
+  @override
+  String get backupRestoreOpenSheetsKey => "Google Sheet खोलें";
+
+  @override
+  String get backupRestoreConfirmTitleKey => "बैकअप पुनर्स्थापित करें?";
+
+  @override
+  String get backupRestoreConfirmMessageKey =>
+      "यह सभी स्थानीय फ़ैक्टरी डेटा को चयनित बैकअप फ़ाइल से बदल देगा।";
+
+  @override
+  String get backupRestoreConfirmActionKey => "पुनर्स्थापित करें";
+
+  @override
+  String get backupRestoreValidationSummaryKey => "बैकअप में शामिल:";
+
+  @override
+  String get backupRestoreProfileEntryKey => "बैकअप और पुनर्स्थापना";
+
+  @override
+  String get factoryStatusKey => "फ़ैक्टरी स्थिति";
+
+  @override
+  String get operationalKey => "संचालन";
+
+  @override
+  String get currentStatusKey => "वर्तमान स्थिति";
+
+  @override
+  String get lastUpdatedKey => "अंतिम अपडेट";
+
+  @override
+  String get changeFactoryStatusKey => "स्थिति बदलें";
+
+  @override
+  String get viewStatusHistoryKey => "इतिहास देखें";
+
+  @override
+  String get statusHistoryKey => "स्थिति इतिहास";
+
+  @override
+  String get factoryStatusNotesKey => "टिप्पणियाँ";
+
+  @override
+  String get factoryStatusNotesEmptyKey =>
+      "वर्तमान स्थिति के लिए कोई टिप्पणी नहीं है।";
+
+  @override
+  String get factoryStatusHistoryEmptyTitleKey =>
+      "अभी कोई स्थिति इतिहास नहीं";
+
+  @override
+  String get factoryStatusHistoryEmptyMessageKey =>
+      "स्थिति परिवर्तन दर्ज होने पर यहाँ दिखाई देंगे।";
+
+  @override
+  String get factoryStatusMaintenanceKey => "रखरखाव में";
+
+  @override
+  String get factoryStatusShutdownKey => "बंद";
+
+  @override
+  String get factoryStatusPartialKey => "आंशिक संचालन";
+
+  @override
+  String get selectFactoryStatusKey => "स्थिति चुनें";
+
+  @override
+  String get factoryStatusRequiredKey => "कृपया स्थिति चुनें";
+
+  @override
+  String get recentActivityKey => "हाल की गतिविधि";
+
+  @override
+  String get noRecentActivityKey => "अभी कोई हाल की गतिविधि नहीं";
+
+  @override
+  String get profileSettingsHintKey =>
+      "खाता और सेटिंग्स यहाँ दिखाई देंगी";
+
+  @override
+  String get laborManagementKey => "श्रम प्रबंधन";
+
+  @override
+  String get personManagementKey => "व्यक्ति प्रबंधन";
+
+  @override
+  String get materialPurchaseKey => "सामग्री खरीद";
+
+  @override
+  String get truckExpensesKey => "ट्रक खर्च";
+
+  @override
+  String get maintenanceExpensesKey => "रखरखाव खर्च";
+
+  @override
+  String get electricityExpensesKey => "बिजली खर्च";
+
+  @override
+  String get miscExpensesKey => "विविध खर्च";
+
+  @override
+  String get recurringExpensesKey => "आवर्ती खर्च";
+
+  @override
+  String get searchPersonsKey => "व्यक्ति खोजें...";
+
+  @override
+  String get addPersonKey => "व्यक्ति जोड़ें";
+
+  @override
+  String get editPersonKey => "व्यक्ति संपादित करें";
+
+  @override
+  String get deletePersonKey => "हटाएं";
+
+  @override
+  String get deletePersonConfirmKey =>
+      "क्या इस व्यक्ति को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
+  String get personEmptyTitleKey => "अभी कोई व्यक्ति नहीं";
+
+  @override
+  String get personEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए व्यक्ति जोड़ें पर टैप करें।";
+
+  @override
+  String get searchLaborKey => "श्रम खोजें...";
+
+  @override
+  String get addLaborKey => "श्रम जोड़ें";
+
+  @override
+  String get editLaborKey => "श्रम संपादित करें";
+
+  @override
+  String get deleteLaborKey => "हटाएं";
+
+  @override
+  String get deleteLaborConfirmKey =>
+      "क्या इस श्रम रिकॉर्ड को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
+  String get laborEmptyTitleKey => "अभी कोई श्रम रिकॉर्ड नहीं";
+
+  @override
+  String get laborEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए श्रम जोड़ें पर टैप करें।";
+
+  @override
+  String get laborSkillKey => "कौशल";
+
+  @override
+  String get dailyWageKey => "दैनिक वेतन";
+
+  @override
+  String get searchExpensesKey => "खर्च खोजें...";
+
+  @override
+  String get addExpenseKey => "खर्च जोड़ें";
+
+  @override
+  String get expenseEmptyTitleKey => "अभी कोई खर्च नहीं";
+
+  @override
+  String get expenseEmptyMessageKey =>
+      "पहली प्रविष्टि दर्ज करने के लिए खर्च जोड़ें पर टैप करें।";
+
+  @override
+  String get filterKey => "फ़िल्टर";
+
+  @override
+  String get applyFilterKey => "लागू करें";
+
+  @override
+  String get clearFilterKey => "साफ़ करें";
+
+  @override
+  String get expenseTitleKey => "शीर्षक";
+
+  @override
+  String get amountKey => "राशि";
+
+  @override
+  String get dateKey => "तारीख";
+
+  @override
+  String get attachmentKey => "संलग्नक";
+
+  @override
+  String get addAttachmentKey => "संलग्नक जोड़ें";
+
+  @override
+  String get unsupportedAttachmentTypeKey =>
+      "केवल JPG, PNG और PDF फ़ाइलें समर्थित हैं";
+
+  @override
+  String get expenseTitleRequiredKey => "कृपया शीर्षक दर्ज करें";
+
+  @override
+  String get expenseAmountRequiredKey => "कृपया राशि दर्ज करें";
+
+  @override
+  String get expenseAmountInvalidKey => "कृपया मान्य राशि दर्ज करें";
+
+  @override
+  String get selectDateKey => "तारीख चुनने के लिए टैप करें";
+
+  @override
+  String get expenseDateRequiredKey => "कृपया तारीख चुनें";
+
+  @override
+  String get searchRecurringExpensesKey => "आवर्ती खर्च खोजें...";
+
+  @override
+  String get addRecurringExpenseKey => "आवर्ती खर्च जोड़ें";
+
+  @override
+  String get recurringExpenseEmptyTitleKey => "अभी कोई आवर्ती खर्च नहीं";
+
+  @override
+  String get recurringExpenseEmptyMessageKey =>
+      "पहली प्रविष्टि बनाने के लिए आवर्ती खर्च जोड़ें पर टैप करें।";
+
+  @override
+  String get editRecurringExpenseKey => "आवर्ती खर्च संपादित करें";
+
+  @override
+  String get deleteRecurringExpenseKey => "हटाएं";
+
+  @override
+  String get deleteRecurringExpenseConfirmKey =>
+      "क्या इस आवर्ती खर्च को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
+  String get frequencyKey => "आवृत्ति";
+
+  @override
+  String get startDateKey => "प्रारंभ तिथि";
+
+  @override
+  String get endDateOptionalKey => "समाप्ति तिथि (वैकल्पिक)";
+
+  @override
+  String get frequencyDailyKey => "दैनिक";
+
+  @override
+  String get frequencyWeeklyKey => "साप्ताहिक";
+
+  @override
+  String get frequencyMonthlyKey => "मासिक";
+
+  @override
+  String get frequencyYearlyKey => "वार्षिक";
+
+  @override
+  String get recurringExpenseFrequencyRequiredKey =>
+      "कृपया आवृत्ति चुनें";
+
+  @override
+  String get recurringExpenseStartDateRequiredKey =>
+      "कृपया प्रारंभ तिथि चुनें";
+
+  @override
+  String get recordsExplorerTitleKey => "रिकॉर्ड एक्सप्लोरर";
+
+  @override
+  String get recordsExplorerSubtitleKey =>
+      "सभी मॉड्यूल में रिकॉर्ड खोजें, फ़िल्टर करें और निर्यात करें";
+
+  @override
+  String get recordsExplorerSearchHintKey =>
+      "नाम, मोबाइल, खर्च, नोट्स खोजें...";
+
+  @override
+  String get recordsExplorerNoRecordsKey => "कोई रिकॉर्ड नहीं मिला";
+
+  @override
+  String get recordsExplorerClearFiltersKey => "फ़िल्टर साफ़ करें";
+
+  @override
+  String get recordsExplorerFiltersKey => "फ़िल्टर";
+
+  @override
+  String get recordsExplorerTotalRecordsKey => "कुल रिकॉर्ड";
+
+  @override
+  String get recordsExplorerTotalAmountKey => "कुल राशि";
+
+  @override
+  String get recordsExplorerAverageAmountKey => "औसत राशि";
+
+  @override
+  String get recordsExplorerHighestAmountKey => "सर्वोच्च राशि";
+
+  @override
+  String get recordsExplorerLowestAmountKey => "न्यूनतम राशि";
+
+  @override
+  String get recordsExplorerCategoryKey => "श्रेणी";
+
+  @override
+  String get recordsExplorerViewKey => "देखें";
+
+  @override
+  String get recordsExplorerEditKey => "संपादित करें";
+
+  @override
+  String get recordsExplorerDeleteKey => "हटाएं";
+
+  @override
+  String get recordsExplorerShareKey => "साझा करें";
+
+  @override
+  String get recordsExplorerDeleteConfirmKey =>
+      "क्या इस रिकॉर्ड को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
+  String get recordsExplorerExportPdfKey => "PDF निर्यात";
+
+  @override
+  String get recordsExplorerExportExcelKey => "Excel निर्यात";
+
+  @override
+  String get recordsExplorerDateFilterKey => "तिथि";
+
+  @override
+  String get recordsExplorerDateAllKey => "सभी";
+
+  @override
+  String get recordsExplorerDateTodayKey => "आज";
+
+  @override
+  String get recordsExplorerDateYesterdayKey => "कल";
+
+  @override
+  String get recordsExplorerDateThisWeekKey => "इस सप्ताह";
+
+  @override
+  String get recordsExplorerDateThisMonthKey => "इस माह";
+
+  @override
+  String get recordsExplorerDateLastMonthKey => "पिछला माह";
+
+  @override
+  String get recordsExplorerDateCustomKey => "कस्टम";
+
+  @override
+  String get recordsExplorerSortKey => "क्रमबद्ध करें";
+
+  @override
+  String get recordsExplorerAmountFilterKey => "राशि";
+
+  @override
+  String get recordsExplorerMinAmountKey => "न्यूनतम राशि";
+
+  @override
+  String get recordsExplorerMaxAmountKey => "अधिकतम राशि";
+
+  @override
+  String get recordsExplorerSyncFilterKey => "सिंक स्थिति";
+
+  @override
+  String get recordsExplorerSortDateDescKey => "तिथि (नवीनतम)";
+
+  @override
+  String get recordsExplorerSortDateAscKey => "तिथि (पुरानी)";
+
+  @override
+  String get recordsExplorerSortAmountDescKey => "राशि (उच्च → निम्न)";
+
+  @override
+  String get recordsExplorerSortAmountAscKey => "राशि (निम्न → उच्च)";
+
+  @override
+  String get recordsExplorerSortNameAscKey => "नाम (A → Z)";
+
+  @override
+  String get recordsExplorerModulePersonKey => "व्यक्ति";
+
+  @override
+  String get recordsExplorerModuleLaborKey => "श्रम";
+
+  @override
+  String get recordsExplorerModuleMaterialKey => "सामग्री";
+
+  @override
+  String get recordsExplorerModuleTruckKey => "ट्रक";
+
+  @override
+  String get recordsExplorerModuleMaintenanceKey => "रखरखाव";
+
+  @override
+  String get recordsExplorerModuleElectricityKey => "बिजली";
+
+  @override
+  String get recordsExplorerModuleMiscKey => "विविध";
+
+  @override
+  String get recordsExplorerModuleRecurringKey => "आवर्ती";
+
+  @override
+  String get recordsExplorerModuleFactoryKey => "फ़ैक्टरी";
+
+  @override
+  String get recordsExplorerModuleCalendarKey => "कैलेंडर";
+
+  @override
+  String get recordsExplorerQuickActionKey => "रिकॉर्ड एक्सप्लोरर";
 }

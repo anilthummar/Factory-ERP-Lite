@@ -1,6 +1,5 @@
 ---
-description: Factory ERP Lite Development Rules
-globs: ["lib/**/*.dart"]
+description: 
 alwaysApply: true
 ---
 
@@ -58,5 +57,15 @@ For new features:
 
 * Use existing feature as template.
 * Maintain folder consistency (`bloc/`, `model/`, `repository/`, `ui/`).
+
+UI & Import Conventions (mandatory):
+
+* Feature UI lives under `ui/` (`ui/<feature>_page.dart`, `ui/widget/`) — never `presentation/`.
+* Import via `utils/exports.dart` barrel — never deep relative paths like `../../../../app/core/...`.
+* Use `Dimens` for spacing, padding, radius, font sizes — no magic numbers.
+* Reuse existing widgets: `CustomTextLabelWidget`, `CustomButtonWidget`, `CustomTextFormFieldWidget`, `CustomDivider`, etc.
+* Use `AppStyles.instance.textTheme` and `context.appThemeColors` for colors/styles — no hardcoded hex.
+* Use `Assets` / `SvgGenImage` for images — no raw asset path strings when generated assets exist.
+* Do not create feature-local layout token files if `Dimens` already covers the value.
 
 Output concise responses to minimize token usage.

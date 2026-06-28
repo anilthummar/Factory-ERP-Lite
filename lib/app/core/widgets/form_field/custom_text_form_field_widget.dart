@@ -98,6 +98,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   /// The style for the floating label.
   final TextStyle? floatingStyle;
 
+  /// Optional content padding override.
+  final EdgeInsetsGeometry? contentPadding;
+
   /// The callback function for when text is submitted.
   final Function(String)? onTextSubmit;
 
@@ -159,6 +162,7 @@ class CustomTextFormFieldWidget extends StatelessWidget {
     this.suffixIconSize,
     this.suffixOnClick,
     this.isValidate = false,
+    this.contentPadding,
     bool? alignLabelWithHint,
   }) : alignLabelWithHint = alignLabelWithHint ?? true;
 
@@ -185,8 +189,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
         cursorColor: AppColors.instance.lightGrayBGColor,
         obscureText: obscureText!,
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-                vertical: Dimens.padding22, horizontal: Dimens.padding10),
+            contentPadding: contentPadding ??
+                const EdgeInsets.symmetric(
+                    vertical: Dimens.padding22, horizontal: Dimens.padding10),
             alignLabelWithHint: alignLabelWithHint,
             suffixIconConstraints: suffixIconConstraints,
             prefixIconConstraints: prefixIconConstraints,

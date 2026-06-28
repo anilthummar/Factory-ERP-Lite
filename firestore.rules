@@ -1,0 +1,62 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Health probes and bootstrap sentinels (written by authenticated clients).
+    match /_meta/{document} {
+      allow read, write: if isSignedIn();
+    }
+
+    // User profile documents — owner read/write only.
+    match /users/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Factory tenant documents (multi-factory future scope).
+    match /factories/{factoryId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // ERP module collections synced from mobile and web admin.
+    match /person_management/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /labor_management/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /material_purchases/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /truck_expenses/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /maintenance_expenses/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /electricity_expenses/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /miscellaneous_expenses/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /recurring_expenses/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /factory_status/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /calendar_management/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /attachments/{document} {
+      allow read, write: if isSignedIn();
+    }
+    match /reports_analytics/{document} {
+      allow read, write: if isSignedIn();
+    }
+  }
+}

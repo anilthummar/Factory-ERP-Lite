@@ -78,6 +78,15 @@ Response Rules:
 * Prefer modifying existing code over creating duplicates.
 * Always follow ARCHITECTURE.md as the source of truth.
 
+## UI conventions (mandatory)
+
+* **Structure:** `ui/<feature>_page.dart` + `ui/widget/` — never `presentation/`.
+* **Imports:** `import '../../../utils/exports.dart';` (adjust depth) — never `../../../../app/core/...`.
+* **Spacing:** `Dimens.space*`, `Dimens.padding*`, `Dimens.radius*`, `Dimens.fontSize*` — no raw numbers.
+* **Widgets:** `CustomTextLabelWidget`, `CustomButtonWidget`, `CustomTextFormFieldWidget` — not raw `Text` / `FilledButton` / `TextField`.
+* **Theme:** `context.appThemeColors`, `AppStyles.instance.textTheme`, `AppColors` — no inline hex colors.
+* **Assets:** `Assets` / `SvgGenImage` from `gen/assets.gen.dart` — avoid hardcoded asset path strings.
+
 ## Project notes (Factory ERP Lite specific)
 
 - **Stack:** Flutter mobile + Flutter web admin; Firebase (Firestore, Auth, Storage); Hive offline; GetStorage for prefs only.

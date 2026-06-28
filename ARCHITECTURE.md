@@ -298,9 +298,40 @@ getIt
     () => FirebaseService(getIt<DefaultFirebaseOptions>()),
   )
   ..registerLazySingleton<HiveManager>(() => HiveManager.instance)
-  ..registerLazySingleton<SyncService>(
-    () => SyncService(hiveManager: getIt<HiveManager>()),
-  )
+    ..registerLazySingleton<SyncQueueLocalDataSource>(
+      SyncQueueLocalDataSourceImpl.new,
+    )
+    ..registerLazySingleton<SyncQueueRepository>(
+      () => SyncQueueRepositoryImpl(
+        localDataSource: getIt<SyncQueueLocalDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<SyncRemoteDataSource>(
+      NoOpSyncRemoteDataSource.new,
+    )
+    ..registerLazySingleton<SyncHandlerRegistry>(
+      () => createDefaultSyncHandlerRegistry(hiveManager: getIt<HiveManager>()),
+    )
+    ..registerLazySingleton<SyncEngine>(
+      () => SyncEngine(
+        queueRepository: getIt<SyncQueueRepository>(),
+        remoteDataSource: getIt<SyncRemoteDataSource>(),
+        handlerRegistry: getIt<SyncHandlerRegistry>(),
+        hiveManager: getIt<HiveManager>(),
+      ),
+    )
+    ..registerLazySingleton<SyncCoordinator>(
+      () => SyncCoordinator(
+        queueRepository: getIt<SyncQueueRepository>(),
+        syncEngine: getIt<SyncEngine>(),
+      ),
+    )
+    ..registerLazySingleton<SyncService>(
+      () => SyncService(
+        hiveManager: getIt<HiveManager>(),
+        syncEngine: getIt<SyncEngine>(),
+      ),
+    )
   ..registerSingleton<ApiClient>(ApiClient())
   ..registerLazySingleton<TabOneRepository>(TabOneRepositoryImpl.new)
   ..registerLazySingleton<CustomPaginationRepository>(
@@ -395,9 +426,14 @@ Factory ERP Lite uses **two complementary storage layers**. Do not mix their res
 |-----------|----------|------|
 | `HiveManager` | `service/hive/hive_manager.dart` | `Hive.initFlutter()`, opens all module boxes |
 | `HiveBoxNames` | `service/hive/hive_box_names.dart` | Box name constants (1:1 with ERP modules) |
-| `SyncStatus` | `app/enums/sync_status.dart` | `pending` / `synced` / `failed` |
+| `SyncStatus` | `core/enums/sync_status.dart` | `pending` / `synced` / `failed` |
 | `SyncMetadataKeys` | `core/domain/sync_metadata_keys.dart` | Shared field keys for Hive maps & Firestore docs |
-| `SyncService` | `service/sync/sync_service.dart` | Connectivity listener; triggers pending sync |
+| `SyncQueueItem` | `core/sync/sync_queue_item.dart` | Queue entry persisted in Hive `sync_queue` box |
+| `SyncEngine` | `service/sync/sync_engine.dart` | Processes queue, updates entity sync status |
+| `SyncCoordinator` | `service/sync/sync_coordinator.dart` | Repositories enqueue mutations after Hive write |
+| `SyncService` | `service/sync/sync_service.dart` | Connectivity listener; triggers `SyncEngine` |
+| `SyncModuleHandler` | `service/sync/handlers/` | Per-module Hive payload + status updates |
+| `SyncRemoteDataSource` | `service/sync/remote/` | Firestore push contract (Firebase phase) |
 
 | Concern | Convention |
 |---------|------------|
@@ -409,10 +445,33 @@ Factory ERP Lite uses **two complementary storage layers**. Do not mix their res
 | Boxes | `sync_queue`, `meta`, plus one box per ERP module (opened at bootstrap) |
 
 ```
-┌──────────┐     write      ┌──────────┐    background    ┌───────────┐
-│   Bloc   │ ────────────► │   Hive   │ ───────────────► │ Firebase  │
-└──────────┘ ◄──────────── └──────────┘ ◄──────────────── └───────────┘
-              read (local)        pending / synced / failed
+┌──────────┐   write (pending)   ┌──────────┐   enqueue    ┌────────────┐
+│   Bloc   │ ─────────────────► │   Hive   │ ───────────► │ sync_queue │
+└──────────┘ ◄───────────────── └──────────┘              └─────┬──────┘
+     read (local)                     ▲                            │
+                                      │                     SyncEngine
+                                      │ update status              │
+                                      │ pending/synced/failed      ▼
+                                      └─────────────────── Firestore (phase 10)
+```
+
+### Offline-first sync flow
+
+1. **Save → Hive first** — repository persists locally with `syncStatus = pending`.
+2. **Queue sync** — repository calls `SyncCoordinator.onLocalMutation(...)`.
+3. **Process queue** — `SyncEngine` loads payload via `SyncModuleHandler`, pushes via `SyncRemoteDataSource`.
+4. **Update sync status** — on success → `synced` + dequeue; on failure → `failed` + retry metadata.
+5. **Retry failed sync** — `SyncService` retries when connectivity returns; max attempts → dead-letter queue item.
+
+Repository integration (no UI changes):
+
+```dart
+await _localDataSource.addPerson(person);
+await _syncCoordinator.onLocalMutation(
+  module: SyncModuleType.personManagement,
+  recordId: person.id,
+  operation: SyncOperation.create,
+);
 ```
 
 ### GetStorage (app preferences — current)
@@ -545,7 +604,8 @@ dart run build_runner build --delete-conflicting-outputs
 | Folder structure | Done | `lib/modules/*`, `lib/service/hive`, `lib/service/firebase`, `lib/service/sync`, `lib/core` |
 | Firebase setup | Done | `FirebaseService`, `FirestoreCollections`, `firebase_options.dart` |
 | Hive setup | Done | `HiveManager`, `HiveBoxNames`, `SyncStatus`, `SyncMetadataKeys` |
-| Sync orchestration | Foundation | `SyncService` — module handlers added per feature |
+| Sync orchestration | Implemented | `SyncEngine`, `SyncCoordinator`, `SyncQueueRepository`, module handlers |
+| Firebase remote sync | Pending | `NoOpSyncRemoteDataSource` — replace in Firebase datasource phase |
 | ERP module implementation | Pending | 12 module folders with placeholder barrels |
 | Auth flow (Splash → Google Login → Dashboard) | Done | `AuthRepository`, `AuthGuard`, updated BLoCs |
 | GoRouter migration | Pending | `auto_route` still powers current UI |

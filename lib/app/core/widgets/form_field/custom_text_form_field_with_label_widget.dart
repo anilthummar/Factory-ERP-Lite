@@ -62,6 +62,15 @@ class CustomTextFormFieldWithLabelWidget extends StatelessWidget {
   /// The callback function for when text is submitted.
   final Function(String)? onTextSubmit;
 
+  /// The type of keyboard to show for this field.
+  final TextInputType? textInputType;
+
+  /// Input formatters applied to the text field.
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// The callback function for when the text field is tapped.
+  final GestureTapCallback? onTap;
+
   /// Creates a custom text form field widget with a label.
   const CustomTextFormFieldWithLabelWidget({
     super.key,
@@ -84,6 +93,9 @@ class CustomTextFormFieldWithLabelWidget extends StatelessWidget {
     this.suffixIconConstraints,
     this.validator,
     this.onChange,
+    this.textInputType,
+    this.inputFormatters,
+    this.onTap,
   });
 
   @override
@@ -117,6 +129,9 @@ class CustomTextFormFieldWithLabelWidget extends StatelessWidget {
           onChange: onChange,
           onTextSubmit: onTextSubmit,
           validator: validator,
+          textInputType: textInputType,
+          inputFormatters: inputFormatters,
+          onTap: onTap,
         ),
       ],
     );

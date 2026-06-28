@@ -1,1 +1,1 @@
-// Foundation placeholder — implement in feature phase.
+// Attachment UI is integrated into existing expense forms — no standalone page.
