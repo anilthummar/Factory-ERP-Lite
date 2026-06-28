@@ -676,4 +676,148 @@ abstract class AppString {
 
   /// Start date required validation message.
   String get recurringExpenseStartDateRequiredKey;
+
+  /// Records Explorer screen title.
+  String get recordsExplorerTitleKey;
+
+  /// Records Explorer subtitle.
+  String get recordsExplorerSubtitleKey;
+
+  /// Records Explorer search hint.
+  String get recordsExplorerSearchHintKey;
+
+  /// No records found message.
+  String get recordsExplorerNoRecordsKey;
+
+  /// Clear filters button label.
+  String get recordsExplorerClearFiltersKey;
+
+  /// Filters sheet title.
+  String get recordsExplorerFiltersKey;
+
+  /// Total records label.
+  String get recordsExplorerTotalRecordsKey;
+
+  /// Total amount label.
+  String get recordsExplorerTotalAmountKey;
+
+  /// Average amount label.
+  String get recordsExplorerAverageAmountKey;
+
+  /// Highest amount label.
+  String get recordsExplorerHighestAmountKey;
+
+  /// Lowest amount label.
+  String get recordsExplorerLowestAmountKey;
+
+  /// Category column label.
+  String get recordsExplorerCategoryKey;
+
+  /// View action label.
+  String get recordsExplorerViewKey;
+
+  /// Edit action label.
+  String get recordsExplorerEditKey;
+
+  /// Delete action label.
+  String get recordsExplorerDeleteKey;
+
+  /// Share action label.
+  String get recordsExplorerShareKey;
+
+  /// Delete confirmation message.
+  String get recordsExplorerDeleteConfirmKey;
+
+  /// Export filtered PDF label.
+  String get recordsExplorerExportPdfKey;
+
+  /// Export filtered Excel label.
+  String get recordsExplorerExportExcelKey;
+
+  /// Date filter section title.
+  String get recordsExplorerDateFilterKey;
+
+  /// All dates preset.
+  String get recordsExplorerDateAllKey;
+
+  /// Today preset.
+  String get recordsExplorerDateTodayKey;
+
+  /// Yesterday preset.
+  String get recordsExplorerDateYesterdayKey;
+
+  /// This week preset.
+  String get recordsExplorerDateThisWeekKey;
+
+  /// This month preset.
+  String get recordsExplorerDateThisMonthKey;
+
+  /// Last month preset.
+  String get recordsExplorerDateLastMonthKey;
+
+  /// Custom date range preset.
+  String get recordsExplorerDateCustomKey;
+
+  /// Sort section title.
+  String get recordsExplorerSortKey;
+
+  /// Amount filter section title.
+  String get recordsExplorerAmountFilterKey;
+
+  /// Minimum amount label.
+  String get recordsExplorerMinAmountKey;
+
+  /// Maximum amount label.
+  String get recordsExplorerMaxAmountKey;
+
+  /// Sync status filter section title.
+  String get recordsExplorerSyncFilterKey;
+
+  /// Sort: date descending.
+  String get recordsExplorerSortDateDescKey;
+
+  /// Sort: date ascending.
+  String get recordsExplorerSortDateAscKey;
+
+  /// Sort: amount high to low.
+  String get recordsExplorerSortAmountDescKey;
+
+  /// Sort: amount low to high.
+  String get recordsExplorerSortAmountAscKey;
+
+  /// Sort: name A-Z.
+  String get recordsExplorerSortNameAscKey;
+
+  /// Module badge: Person.
+  String get recordsExplorerModulePersonKey;
+
+  /// Module badge: Labor.
+  String get recordsExplorerModuleLaborKey;
+
+  /// Module badge: Material.
+  String get recordsExplorerModuleMaterialKey;
+
+  /// Module badge: Truck.
+  String get recordsExplorerModuleTruckKey;
+
+  /// Module badge: Maintenance.
+  String get recordsExplorerModuleMaintenanceKey;
+
+  /// Module badge: Electricity.
+  String get recordsExplorerModuleElectricityKey;
+
+  /// Module badge: Misc.
+  String get recordsExplorerModuleMiscKey;
+
+  /// Module badge: Recurring.
+  String get recordsExplorerModuleRecurringKey;
+
+  /// Module badge: Factory.
+  String get recordsExplorerModuleFactoryKey;
+
+  /// Module badge: Calendar.
+  String get recordsExplorerModuleCalendarKey;
+
+  /// Dashboard quick action label.
+  String get recordsExplorerQuickActionKey;
 }

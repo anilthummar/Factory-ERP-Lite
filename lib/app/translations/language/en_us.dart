@@ -697,4 +697,151 @@ class EnUS extends AppString {
   @override
   String get recurringExpenseStartDateRequiredKey =>
       "Please select a start date";
+
+  @override
+  String get recordsExplorerTitleKey => "Records Explorer";
+
+  @override
+  String get recordsExplorerSubtitleKey =>
+      "Search, filter, and export records across all modules";
+
+  @override
+  String get recordsExplorerSearchHintKey =>
+      "Search name, mobile, expense, notes...";
+
+  @override
+  String get recordsExplorerNoRecordsKey => "No records found";
+
+  @override
+  String get recordsExplorerClearFiltersKey => "Clear Filters";
+
+  @override
+  String get recordsExplorerFiltersKey => "Filters";
+
+  @override
+  String get recordsExplorerTotalRecordsKey => "Total Records";
+
+  @override
+  String get recordsExplorerTotalAmountKey => "Total Amount";
+
+  @override
+  String get recordsExplorerAverageAmountKey => "Average Amount";
+
+  @override
+  String get recordsExplorerHighestAmountKey => "Highest Amount";
+
+  @override
+  String get recordsExplorerLowestAmountKey => "Lowest Amount";
+
+  @override
+  String get recordsExplorerCategoryKey => "Category";
+
+  @override
+  String get recordsExplorerViewKey => "View";
+
+  @override
+  String get recordsExplorerEditKey => "Edit";
+
+  @override
+  String get recordsExplorerDeleteKey => "Delete";
+
+  @override
+  String get recordsExplorerShareKey => "Share";
+
+  @override
+  String get recordsExplorerDeleteConfirmKey =>
+      "Delete this record? This cannot be undone.";
+
+  @override
+  String get recordsExplorerExportPdfKey => "Export PDF";
+
+  @override
+  String get recordsExplorerExportExcelKey => "Export Excel";
+
+  @override
+  String get recordsExplorerDateFilterKey => "Date";
+
+  @override
+  String get recordsExplorerDateAllKey => "All";
+
+  @override
+  String get recordsExplorerDateTodayKey => "Today";
+
+  @override
+  String get recordsExplorerDateYesterdayKey => "Yesterday";
+
+  @override
+  String get recordsExplorerDateThisWeekKey => "This Week";
+
+  @override
+  String get recordsExplorerDateThisMonthKey => "This Month";
+
+  @override
+  String get recordsExplorerDateLastMonthKey => "Last Month";
+
+  @override
+  String get recordsExplorerDateCustomKey => "Custom";
+
+  @override
+  String get recordsExplorerSortKey => "Sort";
+
+  @override
+  String get recordsExplorerAmountFilterKey => "Amount";
+
+  @override
+  String get recordsExplorerMinAmountKey => "Min Amount";
+
+  @override
+  String get recordsExplorerMaxAmountKey => "Max Amount";
+
+  @override
+  String get recordsExplorerSyncFilterKey => "Sync Status";
+
+  @override
+  String get recordsExplorerSortDateDescKey => "Date (Newest)";
+
+  @override
+  String get recordsExplorerSortDateAscKey => "Date (Oldest)";
+
+  @override
+  String get recordsExplorerSortAmountDescKey => "Amount (High → Low)";
+
+  @override
+  String get recordsExplorerSortAmountAscKey => "Amount (Low → High)";
+
+  @override
+  String get recordsExplorerSortNameAscKey => "Name (A → Z)";
+
+  @override
+  String get recordsExplorerModulePersonKey => "Person";
+
+  @override
+  String get recordsExplorerModuleLaborKey => "Labor";
+
+  @override
+  String get recordsExplorerModuleMaterialKey => "Material";
+
+  @override
+  String get recordsExplorerModuleTruckKey => "Truck";
+
+  @override
+  String get recordsExplorerModuleMaintenanceKey => "Maintenance";
+
+  @override
+  String get recordsExplorerModuleElectricityKey => "Electricity";
+
+  @override
+  String get recordsExplorerModuleMiscKey => "Misc";
+
+  @override
+  String get recordsExplorerModuleRecurringKey => "Recurring";
+
+  @override
+  String get recordsExplorerModuleFactoryKey => "Factory";
+
+  @override
+  String get recordsExplorerModuleCalendarKey => "Calendar";
+
+  @override
+  String get recordsExplorerQuickActionKey => "Records Explorer";
 }

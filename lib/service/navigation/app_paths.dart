@@ -56,6 +56,9 @@ abstract class AppPaths {
   /// Backup and restore settings page.
   static const String backupRestore = '/settings/backup-restore';
 
+  /// Unified records search and export.
+  static const String recordsExplorer = '/records-explorer';
+
   /// The path for the nested tab view.
   static const String nestedTabView = 'nested_tab_view';
 

@@ -703,4 +703,151 @@ class HiIN extends AppString {
   @override
   String get recurringExpenseStartDateRequiredKey =>
       "कृपया प्रारंभ तिथि चुनें";
+
+  @override
+  String get recordsExplorerTitleKey => "रिकॉर्ड एक्सप्लोरर";
+
+  @override
+  String get recordsExplorerSubtitleKey =>
+      "सभी मॉड्यूल में रिकॉर्ड खोजें, फ़िल्टर करें और निर्यात करें";
+
+  @override
+  String get recordsExplorerSearchHintKey =>
+      "नाम, मोबाइल, खर्च, नोट्स खोजें...";
+
+  @override
+  String get recordsExplorerNoRecordsKey => "कोई रिकॉर्ड नहीं मिला";
+
+  @override
+  String get recordsExplorerClearFiltersKey => "फ़िल्टर साफ़ करें";
+
+  @override
+  String get recordsExplorerFiltersKey => "फ़िल्टर";
+
+  @override
+  String get recordsExplorerTotalRecordsKey => "कुल रिकॉर्ड";
+
+  @override
+  String get recordsExplorerTotalAmountKey => "कुल राशि";
+
+  @override
+  String get recordsExplorerAverageAmountKey => "औसत राशि";
+
+  @override
+  String get recordsExplorerHighestAmountKey => "सर्वोच्च राशि";
+
+  @override
+  String get recordsExplorerLowestAmountKey => "न्यूनतम राशि";
+
+  @override
+  String get recordsExplorerCategoryKey => "श्रेणी";
+
+  @override
+  String get recordsExplorerViewKey => "देखें";
+
+  @override
+  String get recordsExplorerEditKey => "संपादित करें";
+
+  @override
+  String get recordsExplorerDeleteKey => "हटाएं";
+
+  @override
+  String get recordsExplorerShareKey => "साझा करें";
+
+  @override
+  String get recordsExplorerDeleteConfirmKey =>
+      "क्या इस रिकॉर्ड को हटाना है? यह पूर्ववत नहीं किया जा सकता।";
+
+  @override
+  String get recordsExplorerExportPdfKey => "PDF निर्यात";
+
+  @override
+  String get recordsExplorerExportExcelKey => "Excel निर्यात";
+
+  @override
+  String get recordsExplorerDateFilterKey => "तिथि";
+
+  @override
+  String get recordsExplorerDateAllKey => "सभी";
+
+  @override
+  String get recordsExplorerDateTodayKey => "आज";
+
+  @override
+  String get recordsExplorerDateYesterdayKey => "कल";
+
+  @override
+  String get recordsExplorerDateThisWeekKey => "इस सप्ताह";
+
+  @override
+  String get recordsExplorerDateThisMonthKey => "इस माह";
+
+  @override
+  String get recordsExplorerDateLastMonthKey => "पिछला माह";
+
+  @override
+  String get recordsExplorerDateCustomKey => "कस्टम";
+
+  @override
+  String get recordsExplorerSortKey => "क्रमबद्ध करें";
+
+  @override
+  String get recordsExplorerAmountFilterKey => "राशि";
+
+  @override
+  String get recordsExplorerMinAmountKey => "न्यूनतम राशि";
+
+  @override
+  String get recordsExplorerMaxAmountKey => "अधिकतम राशि";
+
+  @override
+  String get recordsExplorerSyncFilterKey => "सिंक स्थिति";
+
+  @override
+  String get recordsExplorerSortDateDescKey => "तिथि (नवीनतम)";
+
+  @override
+  String get recordsExplorerSortDateAscKey => "तिथि (पुरानी)";
+
+  @override
+  String get recordsExplorerSortAmountDescKey => "राशि (उच्च → निम्न)";
+
+  @override
+  String get recordsExplorerSortAmountAscKey => "राशि (निम्न → उच्च)";
+
+  @override
+  String get recordsExplorerSortNameAscKey => "नाम (A → Z)";
+
+  @override
+  String get recordsExplorerModulePersonKey => "व्यक्ति";
+
+  @override
+  String get recordsExplorerModuleLaborKey => "श्रम";
+
+  @override
+  String get recordsExplorerModuleMaterialKey => "सामग्री";
+
+  @override
+  String get recordsExplorerModuleTruckKey => "ट्रक";
+
+  @override
+  String get recordsExplorerModuleMaintenanceKey => "रखरखाव";
+
+  @override
+  String get recordsExplorerModuleElectricityKey => "बिजली";
+
+  @override
+  String get recordsExplorerModuleMiscKey => "विविध";
+
+  @override
+  String get recordsExplorerModuleRecurringKey => "आवर्ती";
+
+  @override
+  String get recordsExplorerModuleFactoryKey => "फ़ैक्टरी";
+
+  @override
+  String get recordsExplorerModuleCalendarKey => "कैलेंडर";
+
+  @override
+  String get recordsExplorerQuickActionKey => "रिकॉर्ड एक्सप्लोरर";
 }

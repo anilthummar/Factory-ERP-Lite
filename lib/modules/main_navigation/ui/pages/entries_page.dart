@@ -19,6 +19,13 @@ class EntriesTabPage extends BaseResponsiveView {
 
     return <EntryModuleItem>[
       EntryModuleItem(
+        title: strings.recordsExplorerQuickActionKey,
+        icon: Icons.manage_search_outlined,
+        onTap: () {
+          unawaited(context.router.push(RecordsExplorerRoute()));
+        },
+      ),
+      EntryModuleItem(
         title: strings.laborManagementKey,
         icon: Icons.engineering_outlined,
         onTap: () {
@@ -88,6 +95,15 @@ class EntriesTabPage extends BaseResponsiveView {
           label: strings.navEntriesKey,
           textAlign: TextAlign.start,
         ),
+        actions: <Widget>[
+          IconButton(
+            tooltip: strings.recordsExplorerTitleKey,
+            onPressed: () {
+              unawaited(context.router.push(RecordsExplorerRoute()));
+            },
+            icon: const Icon(Icons.manage_search_outlined),
+          ),
+        ],
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(Dimens.padding16),

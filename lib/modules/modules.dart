@@ -22,6 +22,7 @@ export 'page_not_found/page_not_found.dart';
 export 'person_management/person_management.dart';
 export 'pdf_export/pdf_export.dart';
 export 'recurring_expenses/recurring_expenses.dart';
+export 'records_explorer/records_explorer.dart';
 export 'notifications/notifications.dart';
 export 'reports_analytics/reports_analytics.dart';
 export 'splash/splash.dart';

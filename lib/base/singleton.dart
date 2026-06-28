@@ -572,6 +572,52 @@ void setupLocator() {
     ..registerLazySingleton<RestoreLocalJsonBackupUseCase>(
       () => RestoreLocalJsonBackupUseCase(getIt<RestoreService>()),
     )
+    ..registerLazySingleton<RecordsExplorerRepository>(
+      () => RecordsExplorerRepositoryImpl(
+        getPersonsUseCase: getIt<GetPersonsUseCase>(),
+        getLaborUseCase: getIt<GetLaborUseCase>(),
+        getMaterialPurchasesUseCase: getIt<GetMaterialPurchasesUseCase>(),
+        getTruckExpensesUseCase: getIt<GetTruckExpensesUseCase>(),
+        getMaintenanceExpensesUseCase: getIt<GetMaintenanceExpensesUseCase>(),
+        getElectricityExpensesUseCase: getIt<GetElectricityExpensesUseCase>(),
+        getMiscellaneousExpensesUseCase: getIt<GetMiscellaneousExpensesUseCase>(),
+        getRecurringExpensesUseCase: getIt<GetRecurringExpensesUseCase>(),
+        getFactoryStatusHistoryUseCase: getIt<GetFactoryStatusHistoryUseCase>(),
+        getCalendarEventsUseCase: getIt<GetCalendarEventsUseCase>(),
+      ),
+    )
+    ..registerLazySingleton<SearchRecordsUseCase>(
+      () => SearchRecordsUseCase(getIt<RecordsExplorerRepository>()),
+    )
+    ..registerLazySingleton<FilterRecordsUseCase>(FilterRecordsUseCase.new)
+    ..registerLazySingleton<DeleteExplorerRecordUseCase>(
+      () => DeleteExplorerRecordUseCase(
+        deletePersonUseCase: getIt<DeletePersonUseCase>(),
+        deleteLaborUseCase: getIt<DeleteLaborUseCase>(),
+        deleteMaterialPurchaseUseCase: getIt<DeleteMaterialPurchaseUseCase>(),
+        deleteTruckExpenseUseCase: getIt<DeleteTruckExpenseUseCase>(),
+        deleteMaintenanceExpenseUseCase: getIt<DeleteMaintenanceExpenseUseCase>(),
+        deleteElectricityExpenseUseCase: getIt<DeleteElectricityExpenseUseCase>(),
+        deleteMiscellaneousExpenseUseCase:
+            getIt<DeleteMiscellaneousExpenseUseCase>(),
+        deleteRecurringExpenseUseCase: getIt<DeleteRecurringExpenseUseCase>(),
+        factoryStatusRepository: getIt<FactoryStatusRepository>(),
+      ),
+    )
+    ..registerLazySingleton<RecordsExplorerPdfTemplate>(
+      RecordsExplorerPdfTemplate.new,
+    )
+    ..registerLazySingleton<RecordsExplorerExcelTemplate>(
+      RecordsExplorerExcelTemplate.new,
+    )
+    ..registerLazySingleton<ExportFilteredRecordsUseCase>(
+      () => ExportFilteredRecordsUseCase(
+        pdfExportService: getIt<PdfExportService>(),
+        excelExportService: getIt<ExcelExportService>(),
+        pdfTemplate: getIt<RecordsExplorerPdfTemplate>(),
+        excelTemplate: getIt<RecordsExplorerExcelTemplate>(),
+      ),
+    )
     ..registerLazySingleton<RegExpressions>(RegExpressions.new)
     ..registerSingleton<ForceUpdateUnderMaintenanceBloc>(
         ForceUpdateUnderMaintenanceBloc());

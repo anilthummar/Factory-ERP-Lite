@@ -263,6 +263,61 @@ class _DashboardTabViewState extends State<_DashboardTabView> {
                 ),
               ),
               const SizedBox(height: Dimens.space24),
+              Card(
+                elevation: Dimens.elevation0,
+                color: colorScheme.primaryContainer.withValues(alpha: 0.35),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimens.radius12),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(Dimens.radius12),
+                  onTap: () {
+                    unawaited(
+                      context.router.push(RecordsExplorerRoute()),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimens.padding16),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.manage_search_outlined,
+                          color: colorScheme.primary,
+                          size: 32,
+                        ),
+                        const SizedBox(width: Dimens.space12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              CustomTextLabelWidget(
+                                label: strings.recordsExplorerQuickActionKey,
+                                textAlign: TextAlign.start,
+                                style: AppStyles.instance.textTheme.titleSmall
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                              ),
+                              const SizedBox(height: Dimens.space4),
+                              CustomTextLabelWidget(
+                                label: strings.recordsExplorerSubtitleKey,
+                                textAlign: TextAlign.start,
+                                style: AppStyles.instance.textTheme.bodySmall
+                                    ?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: Dimens.space24),
               CustomTextLabelWidget(
                 label: strings.recentActivityKey,
                 textAlign: TextAlign.start,
